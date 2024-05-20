@@ -25,13 +25,13 @@ public String getMethodName() {
     return "home/list-product";
 }
 
-//@RequestMapping("home/{x}")
-//public String requestMethodName(@PathVariable("x")String x,Model model) {
-//	
-//	model.addAttribute("pathx",x);
-//	
-//    return "home/index";
-//}
+@RequestMapping("home/{x}")
+public String requestMethodName(@PathVariable("x")String x,Model model) {
+	
+	model.addAttribute("pathx",x);
+	
+   return "home/index";
+}
 
 
 }
