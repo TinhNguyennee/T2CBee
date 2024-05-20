@@ -26,9 +26,9 @@ public String getMethodName() {
 }
 
 @RequestMapping("home/{x}")
-public String requestMethodName(@PathVariable("x")String x,Model model) {
+public String requestMethodName(@PathVariable("x1")String x,Model model) {
 	
-	model.addAttribute("pathx",x);
+	model.addAttribute("pathx1",x);
 	
    return "home/index";
 }
