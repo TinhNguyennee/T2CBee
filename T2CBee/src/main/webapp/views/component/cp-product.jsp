@@ -5,7 +5,7 @@
                        <div class="col-md-4">
                             <div class="card rounded-0">
                             <a href="${pageContext.request.contextPath}/products/productdetail">
-                                <img src="../images/product01.jpg" class="card-img-top" alt="...">
+                                <img src="/images/product01.jpg" class="card-img-top" alt="...">
                                 </a>
                                 <div class="card-body">
                                     <div class="title-head d-flex m-0">

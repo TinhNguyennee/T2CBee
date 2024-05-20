@@ -11,27 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-@GetMapping("home/index")
-public String home() {
-    return "home/index";
-}
-@GetMapping("home/cart")
-public String cart() {
-    return "home/cart";
-}
+	@GetMapping("home/{path}")
+	public String home(@PathVariable("path") String path, Model model) {
+	    model.addAttribute("path", path);
+	    return "home/index";
+	}
 
-@GetMapping("home/listproduct")
-public String getMethodName() {
-    return "home/list-product";
-}
+	@RequestMapping("{x}")
+	public String requestMethodName(@PathVariable("x") String x, Model model) {
+	    model.addAttribute("path", x);
+	    return "home/index";
+	}
 
-@RequestMapping("home/{x}")
-public String requestMethodName(@PathVariable("x1")String x,Model model) {
-	
-	model.addAttribute("pathx1",x);
-	
-   return "home/index";
-}
 
 
 }

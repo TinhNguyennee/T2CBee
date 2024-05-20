@@ -14,5 +14,14 @@ public class ProductsController {
 	public String ProductDetail() {
 		return "products/ProductDetail";
 	}
+	@GetMapping("products/cart")
+	public String cart() {
+	    return "products/cart";
+	}
+
+	@GetMapping("products/listproduct")
+	public String getMethodName() {
+	    return "products/list-product";
+	}
 	
 }
