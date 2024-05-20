@@ -1,11 +1,7 @@
 package com.T2CBee.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 
 
 
@@ -25,13 +21,6 @@ public String getMethodName() {
     return "home/list-product";
 }
 
-@RequestMapping("home/{x}")
-public String requestMethodName(@PathVariable("x1")String x,Model model) {
-	
-	model.addAttribute("pathx1",x);
-	
-   return "home/index";
-}
 
 
 }

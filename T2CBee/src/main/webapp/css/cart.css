@@ -1,0 +1,31 @@
+.bi-trash {
+    font-size: 20px;
+}
+
+.bi-trash:hover {
+    color: #ee4343;
+}
+
+.bi-plus, 
+.bi-dash-lg {
+    color: #333;
+}
+
+.total-btn button {
+    border: 1px solid #656565;
+}
+
+.total-btn button:hover {
+    border: 1px solid #ee4343 !important;
+}
+
+.total-btn-active {
+    background: #ee4343 !important;
+    border: 1px solid #ee4343 !important;
+    color: #fff;
+}
+
+.total-btn-active:hover {
+    color: #ee4343;
+    background-color: transparent !important;
+}
