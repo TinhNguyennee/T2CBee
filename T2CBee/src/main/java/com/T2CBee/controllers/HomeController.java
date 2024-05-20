@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
-
 @Controller
 public class HomeController {
-	@GetMapping("home/{path}")
+	@GetMapping("home/index")
 	public String home(@PathVariable("path") String path, Model model) {
 	    model.addAttribute("path", path);
 	    return "home/index";

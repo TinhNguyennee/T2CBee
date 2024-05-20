@@ -135,7 +135,7 @@
                                 aria-labelledby="dropdownMenuButton1">
                                 <input type="text" class="form-control border-0 shadow-none" placeholder="Search...">
                         </div>
-                        <i class=" bi bi-bag pe-3"></i>
+                       <a href="${pageContext.request.contextPath}/products/cart" class="text-secondary"> <i class=" bi bi-bag pe-3"></i> </a>
                         <a href="${pageContext.request.contextPath}/profile/information" class="text-secondary"> <i class="bi bi-person-circle pe-3"></i></a>
                     </div>
 
