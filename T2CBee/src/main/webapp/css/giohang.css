@@ -1,0 +1,148 @@
+.page-cart>* {
+    text-transform: none;
+}
+
+.info-product {
+    width: calc(100% - 130px);
+}
+
+.img-product img {
+    width: 100px !important;
+    height: 100%;
+    vertical-align: middle;
+
+}
+
+.group-button {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 576px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: small;
+    }
+
+    .total-text {
+        text-align: end;
+    }
+
+    .btn-5 {
+
+        margin: 5px;
+
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+
+    }
+
+    .mobile {
+        flex-direction: column;
+    }
+
+    .mobile-hide>* {
+        display: none;
+    }
+
+}
+
+input[type=number] {
+    width: 3em;
+    padding: .5em;
+    border: 1px solid #dcdcdc;
+    border-radius: 0;
+    text-align: center;
+    color: #080003;
+    appearance: textfield;
+    margin: 0;
+
+    &::-webkit-inner-spin-button {
+        opacity: 1;
+        background: red;
+    }
+}
+
+/* tbody tr {
+    display: flex;
+    align-items: center;
+} */
+
+td {
+    text-align: start;
+    /* Căn giữa nội dung trong từng ô */
+    vertical-align: middle;
+    /* Căn giữa theo chiều dọc */
+}
+
+.custom-btn {
+
+    color: #fff;
+    border-radius: 0px;
+    padding: 20px 15px;
+    font-weight: 100;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+}
+
+.btn-5 {
+    font-size: 16px;
+    text-transform: none;
+    margin-bottom: 5px;
+    width: auto;
+
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    border: none;
+    background: #e1182c;
+    background: linear-gradient(0deg, rgb(255, 0, 0) 0%, #e1182c 0%, #e1182c 100%);
+}
+
+.btn-5:hover {
+    color: #f0094a;
+    background: transparent;
+    box-shadow: none;
+}
+
+.btn-5:before,
+.btn-5:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: #f0094a;
+    box-shadow:
+        -1px -1px 5px 0px #fff,
+        7px 7px 20px 0px #0003,
+        4px 4px 5px 0px #0002;
+    transition: 400ms ease all;
+}
+
+.btn-5:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+}
+
+.btn-5:hover:before,
+.btn-5:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+}

@@ -1,0 +1,70 @@
+body{
+    font-family: "Quicksand", sans-serif;
+    box-sizing: border-box  ;
+}
+
+
+.profile-top{
+
+background-image: url('../img/backgroud-black.png');
+height: 300px;
+
+}
+
+.shadow{
+    border: 1px 1px 1px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.none-underline{
+    text-decoration: none;
+}
+
+.card-3-items-inline {
+    /* flex: 1 0 calc(33.333% - 1rem); */
+    width: calc(33.333% - 1rem);;
+    box-sizing: border-box;
+  }
+
+.card-2-items-inline {
+    /* flex: 1 0 calc(33.333% - 1rem); */
+    width: calc(50% - 1rem);;
+    box-sizing: border-box;
+  }
+  
+
+.fs14px{
+    font-size: 14px;
+}
+
+.fs15px{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+.bold{
+    font-weight: bold;
+}
+
+
+
+
+
+/* cái này vip pro bmt hahaha */
+
+.list-hover {
+    padding-left: 10px; /* Khoảng cách giữa border và văn bản */
+    position: relative; /* Cần thiết để định vị độ dày của margin */
+}
+
+.list-hover:hover::before {
+    content: ""; /* Tạo một pseudo-element */
+    position: absolute; /* Đảm bảo nó đặt trên phần tử cha */
+    left: 0px; /* Di chuyển đường viền về bên trái */
+    top: 0; /* Giữ đường viền ở cùng một vị trí như văn bản */
+    height: 100%; /* Kéo đường viền ra cả chiều cao của phần tử */
+    width: 2px; /* Độ dày của đường viền */
+    background-color: black; /* Màu sắc của đường viền */
+}

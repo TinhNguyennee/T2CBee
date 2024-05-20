@@ -1,0 +1,129 @@
+body {
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 8px;
+    font-weight: 100;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+.container {
+    background-color: rgb(255, 255, 255);
+    padding: 0px 20px 0px 20px;
+border: 1px solid rgb(200, 200, 200);
+    border-radius: 4px;
+}
+
+form.input-voucher::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+@media (max-width: 900px) {
+    .row.row-re {
+        flex-direction: column-reverse;
+    }
+}
+
+.btn-red {
+    background-color: #ef3d36;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #f1f1f1;
+    border: 1px solid rgb(255, 255, 255);
+
+}
+
+.btn-apply {
+    background-color: #f95c57;
+    float: left;
+    width: 30%;
+    padding: 5px;
+    margin-left: 5%;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+form.input-voucher input[type=text] {
+    border-radius: 4px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    padding: .5em .8em;
+    border: 1px #d9d9d9 solid;
+    background-color: #fff;
+    color: #333;
+}
+
+h3 {
+    font-size: 1.15rem !important;
+    margin-bottom: 10px;
+}
+
+.form-radio {
+    border: 1px #d9d9d9 solid;
+    padding: .5em .8em;
+    border-radius: 4px;
+
+}
+
+.vertical-bar {
+   
+    /* min-height: 700px; */
+    border-left: 1px solid #d9d9d9;
+    background-image: linear-gradient(to right, rgb(244, 244, 244), rgb(255, 255, 255));
+}
+
+
+.product-thumbnail__wrapper img {
+    width: 50px;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+.product__description {
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+.product__description__property,
+.discount-tag--name {
+    font-size: 0.8em;
+    color: #6a6969;
+}
+
+td>* {
+    margin: auto 20px;
+}
+
+.product__quantity {
+    width: 30px;
+    padding: 0px 25px;
+}
+
+.table-total-checkout tr:nth-child(n) td:nth-child(1) {
+    text-align: start;
+    min-width: 300px;
+}
+
+.table-total-checkout tr:nth-child(n) td:nth-child(2) {
+    text-align: end;
+
+}
+.total-product-price{
+    font-size: 1.8em;
+    color: #ef3d36;
+}
+.btn-order{
+    font-size: 1.5em;
+    min-width: 200px;
+}
+
+.btn-red:hover{
+    background-color: #e11227;
+}
