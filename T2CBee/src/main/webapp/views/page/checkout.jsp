@@ -30,9 +30,9 @@
                         <div class="col-lg-6 col-md-12 col-sm-12 pe-4  ">
                             <h3>Vận chuyển</h3>
                             <div class="form-radio mb-3">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1">
-                                <label class="form-check-label ms-2 " for="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="vanchuyenrdo"
+                                    id="vanchuyenrdo">
+                                <label class="form-check-label ms-2 " for="vanchuyenrdo">
                                     <span class="text-start"> Giao hàng tận nơi</span> <span class="text-start"> (Miễn
                                         phí)</span>
                                 </label>
@@ -40,9 +40,9 @@
 
                             <h3>Thanh toán</h3>
                             <div class="form-radio d-flex text-wrap ">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1">
-                                <label class="form-check-label ms-2 " for="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="thanhtoanrdo"
+                                    id="thanhtoanrdo">
+                                <label class="form-check-label ms-2 " for="thanhtoanrdo">
                                     <span>Thanh toán khi giao hàng (COD) [Được kiểm tra hàng tại chỗ, không được thử
                                         hàng]</span>
                                 </label>

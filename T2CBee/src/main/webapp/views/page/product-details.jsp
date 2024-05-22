@@ -87,7 +87,7 @@
                         </div>
 
                         <div class="group-submit mb-3 ">
-                            <input type="number" value="1" class="input-quantity p-3 me-3 text-center">
+                            <input type="number" value="1" min="1"  class="input-quantity p-3 me-3 text-center">
                             <button class="button-cart"><i class="bi bi-basket3"></i>Thêm vào giỏ</button>
                         </div>
 
@@ -212,6 +212,6 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="../component/footer.jsp"></jsp:include>
+   
     </section>
 </div>

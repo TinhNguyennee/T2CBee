@@ -258,5 +258,6 @@
 	</section>
 
 </div>
+<script src="../js/filter-list.js"></script>
 
 <!-- Content -->

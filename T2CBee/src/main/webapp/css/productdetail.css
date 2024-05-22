@@ -72,7 +72,8 @@ a,
 }
 
 .input-quantity {
-    width: 90px;
+    width: 90px !important;
+     padding:  30px ;
 }
 
 .form-select {
@@ -85,16 +86,16 @@ a,
 .input-quantity,
 .button-cart {
     background: 0 0;
-    border: 2px solid #ebebeb;
+    border: 2px solid #ebebeb !important ;
     color: #858383;
     font-family: Poppins, Arial, Helvetica, sans-serif;
     font-size: 1em;
     font-weight: 600;
-    height: 54px;
+    height: 54px !important;
     letter-spacing: 0;
-    line-height: 50px;
+    
     margin: 0 0 10px;
-    padding: 0 30px;
+    padding: 0 30px ;
     text-transform: uppercase;
     border-radius: 0;
 }

@@ -4,8 +4,11 @@
     padding: 8px;
     font-weight: 100;
     text-decoration: none;
+    
 }
-
+.body-checkout span{
+  color: #333;
+}
 * {
     box-sizing: border-box;
 }
