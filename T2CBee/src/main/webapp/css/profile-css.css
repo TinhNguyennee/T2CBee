@@ -1,14 +1,6 @@
 body{
-    font-family: "Quicksand", sans-serif;
+    /* font-family: "Quicksand", sans-serif; */
     box-sizing: border-box  ;
-}
-
-
-.profile-top{
-
-background-image: url('../img/backgroud-black.png');
-height: 300px;
-
 }
 
 .shadow{

@@ -11,21 +11,22 @@
     color: #333;
 }
 
-.total-btn button {
+.total-btn a {
     border: 1px solid #656565;
+    color: #333;
 }
 
-.total-btn button:hover {
+.total-btn a:hover {
     border: 1px solid #ee4343 !important;
 }
 
 .total-btn-active {
     background: #ee4343 !important;
     border: 1px solid #ee4343 !important;
-    color: #fff;
+    color: #fff !important;
 }
 
 .total-btn-active:hover {
-    color: #ee4343;
+    color: #ee4343 !important;
     background-color: transparent !important;
 }

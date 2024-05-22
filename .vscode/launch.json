@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-T2CBeeApplication<T2CBee>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.T2CBee.T2CBeeApplication",
+            "projectName": "T2CBee",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

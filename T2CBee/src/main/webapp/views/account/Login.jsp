@@ -7,13 +7,13 @@
 <head>
   <meta charset="UTF-8">
   <title> Trang đăng nhập </title>
-  <link rel="stylesheet" href="../css/Login.css">
+  <link rel="stylesheet" href="../../css/login.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body>
-  <div class="container">
+<body class="body-acc">
+  <div class="container-acc">
     <div class="title">ĐĂNG NHẬP</div>
     <div class="content">
       <form action="#">
