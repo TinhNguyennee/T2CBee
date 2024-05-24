@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AccountController {
-@GetMapping("/account/login")
+@GetMapping("/tai-khoan/dang-nhap")
 public String login() {
-    return "account/Login";
+    return "account/login";
 }
-@GetMapping("/account/register")
+@GetMapping("/tai-khoan/dang-ky")
 public String register() {
-	return "account/Register";
+	return "account/register";
 }
 
 }
