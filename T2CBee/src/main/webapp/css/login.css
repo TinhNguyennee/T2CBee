@@ -133,6 +133,15 @@ form .input-box span.details{
   /* background: linear-gradient(-135deg, #71b7e6, #9b59b6); */
   background-color: #ef3d36;
   }
+  form .registere{
+    text-align: center;
+  }
+  form .registere span{
+    font-size: 13px;
+  }
+  form .registere a{
+    color: red;
+  }
  @media(max-width: 584px){
  .container-acc{
   max-width: 100%;

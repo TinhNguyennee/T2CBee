@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- Created By CodingLab - www.codinglabweb.com -->
+
 <html lang="en" dir="ltr">
 
 <head>
@@ -28,11 +28,14 @@
           </div>
           <div class="radio">
             <input type="checkbox" id="checkboxId" name="checkboxName">
-            <label for="checkboxId">Forgot password?</label>
+            <label for="checkboxId">Lưu lại mật khẩu?</label>
           </div>
         </div>
         <div class="button">
           <input type="submit" value="Đăng Nhập">
+        </div>
+        <div class="registere">
+          <span>Bạn chưa có tài khoản?Đăng ký <a href="/tai-khoan/dang-ky">Tại Đây</a></span>
         </div>
         <div class="icon"
           style="justify-content: space-between; justify-content: space-between;padding: 0 20px; margin: 30px;display: flex;">
