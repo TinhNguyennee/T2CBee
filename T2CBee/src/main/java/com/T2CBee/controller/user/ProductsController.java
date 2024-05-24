@@ -1,4 +1,4 @@
-package com.T2CBee.controllers;
+package com.T2CBee.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

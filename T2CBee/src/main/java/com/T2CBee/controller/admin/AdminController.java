@@ -1,4 +1,4 @@
-package com.T2CBee.controllers;
+package com.T2CBee.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ public class AdminController {
         return "admin/index";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/trang-chu")
     public String home() {
         return "admin/index";
     }
