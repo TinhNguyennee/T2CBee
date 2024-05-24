@@ -46,7 +46,7 @@
                                         <li><a class="dropdown-item" href="/profile/information">My Account</a></li>
                                         <li><a class="dropdown-item" href="/profile/wishlist">Wishlist</a></li>
                                         <li><a class="dropdown-item" href="/cart">Cart</a></li>
-                                        <li><a class="dropdown-item" href="/checkout">Checkout</a></li>
+                                        <li><a class="dropdown-item" href="/thanh-toan">Checkout</a></li>
                                     </div>
                                     <div class="col-md-4">
                                         <li class="dropdown-item fw-bold mb-2">Shop Layouts</li>
@@ -182,7 +182,7 @@
                                         <li><a class="dropdown-item" href="/profile/information">My Account</a></li>
                                         <li><a class="dropdown-item" href="/profile/wishlist">Wishlist</a></li>
                                         <li><a class="dropdown-item" href="/cart">Cart</a></li>
-                                        <li><a class="dropdown-item" href="/checkout">Checkout</a></li>
+                                        <li><a class="dropdown-item" href="/thanh-toan">Checkout</a></li>
                                     </div>
                                     <div class="col-md-4">
                                         <li class="dropdown-item fw-bold mb-2">Shop Layouts</li>

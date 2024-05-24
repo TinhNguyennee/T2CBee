@@ -4,7 +4,7 @@
 
 <div class="col-md-4">
     <div class="card rounded-0">
-        <a href="/product-details">
+        <a href="/chi-tiet-san-pham">
             <img src="/images/product01.jpg" class="card-img-top" alt="...">
         </a>
         <div class="card-body">
@@ -18,7 +18,7 @@
                     <i class="bi bi-star"></i>
                 </div>
             </div>
-            <a href="/product-details"
+            <a href="/chi-tiet-san-pham"
                 class="card-title mb-2 fw-bold text-decoration-none text-dark">
                 Mirum est notare tellus eu nibh iaculis pretium
 

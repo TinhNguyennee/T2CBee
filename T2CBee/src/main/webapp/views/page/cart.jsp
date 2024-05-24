@@ -102,7 +102,7 @@
             <h3 class="fw-bold">Tổng tiền <span class="fs-3 fw-bold">$80000</span></h3>
             <div class="total-btn pt-3">
                 <a href="/list-product" class="bg-transparent py-3 px-4 mx-3">Tiếp tục mua hàng</a>
-                <a href="/checkout" class="bg-transparent py-3 px-4 total-btn-active">Tiến hành thanh toán</a>
+                <a href="/thanh-toan" class="bg-transparent py-3 px-4 total-btn-active">Tiến hành thanh toán</a>
             </div>
         </div>
     </section>

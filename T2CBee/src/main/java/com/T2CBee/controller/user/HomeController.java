@@ -51,13 +51,7 @@ public class HomeController {
 		model.addAttribute("path", "page/cart");
 	    return "index";
 	}
-
-	// Check Out
-	@GetMapping("/checkout")
-	public String checkout(Model model) {
-		model.addAttribute("path", "page/checkout");
-	    return "index";
-	}
+	
 
 	// List Product
 	@GetMapping("/list-product")
@@ -66,10 +60,5 @@ public class HomeController {
 	    return "index";
 	}
 
-	// Product Details
-	@GetMapping("/product-details")
-	public String productDetails(Model model) {
-		model.addAttribute("path", "page/product-details");
-	    return "index";
-	}
+
 }
