@@ -83,4 +83,10 @@ public class AdminController {
     public String handle404() {
         return "admin/404";
     }
+    
+    @GetMapping("/HaiNam")
+    public String getMethodName() {
+        return new String();
+    }
+    
 }
