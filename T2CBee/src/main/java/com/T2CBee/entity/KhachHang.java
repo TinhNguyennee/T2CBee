@@ -44,13 +44,13 @@ public class KhachHang {
     @Column(name = "ngay_tao")
     private LocalDate ngayTao;
 
-    @OneToMany(mappedBy = "khachHang")
+    @OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
     private List<SanPhamYeuThich> sanPhamYeuThichList;
 
-    @OneToMany(mappedBy = "nguoiBinhLuan")
+    @OneToMany(mappedBy = "nguoiBinhLuan", fetch = FetchType.LAZY)
     private List<BinhLuan> binhLuanList;
 
-    @OneToMany(mappedBy = "khachHang")
+    @OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
     private List<GioHang> gioHangList;
 
 }

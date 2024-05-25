@@ -79,8 +79,6 @@ public class AdminController {
         return "admin/forgot-password";
     }
 
-    @GetMapping("/*")
-    public String handle404() {
-        return "admin/404";
-    }
+    
+    
 }

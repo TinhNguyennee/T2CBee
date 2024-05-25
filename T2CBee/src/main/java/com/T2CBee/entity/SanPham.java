@@ -45,19 +45,19 @@ public class SanPham {
     @Column(name = "kich_thuoc")
     private String kichThuoc;
 
-    @OneToMany(mappedBy = "sanPham")
+    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<ChiTietDanhMuc> danhMucs;
 
-    @OneToMany(mappedBy = "sanPham")
+    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<AnhSanPham> anhSanPhams;
 
-    @OneToMany(mappedBy = "sanPham")
+    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<BinhLuan> binhLuans;
 
-    @OneToMany(mappedBy = "sanPham")
+    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<ChiTietMaGiamGia> chiTietMaGiamGias;
 
-    @OneToMany(mappedBy = "sanPham")
+    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<SanPhamYeuThich> sanPhamYeuThichs;
 
     @ManyToOne
