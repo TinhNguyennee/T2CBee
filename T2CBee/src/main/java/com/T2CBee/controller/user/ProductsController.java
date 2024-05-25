@@ -7,19 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ProductsController {
-//	@GetMapping("/products/checkout")
-//	public String Checkout() {
-//		return "products/Checkout";
-//	}
-//	@GetMapping("/products/productdetail")
-//	public String ProductDetail() {
-//		return "products/ProductDetail";
-//	}
-	
+
 	// Product Details
 		@GetMapping("/chi-tiet-san-pham")
 		public String productDetails(Model model) {
 			model.addAttribute("path", "page/product-details");
+			model.addAttribute("testImg", "test123");
 		    return "index";
 		}
 		// Check Out
