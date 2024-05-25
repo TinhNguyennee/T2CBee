@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AccountController {
-@GetMapping("/tai-khoan/dang-nhap")
+@GetMapping("/dang-nhap")
 public String login() {
     return "account/login";
 }
-@GetMapping("/tai-khoan/dang-ky")
+@GetMapping("/dang-ky")
 public String register() {
 	return "account/register";
 }

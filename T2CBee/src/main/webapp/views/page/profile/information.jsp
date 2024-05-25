@@ -12,9 +12,9 @@
 
         <div class="row">
 
-            <a href="myorders"
+            <a href="/don-hang-cua-toi"
                 class="card card-3-items-inline col-4 rounded-0 none-underline shadow text-center p-5 m-2">
-                <h4>My Orders</h4>
+                <h4>Đơn hàng của tôi</h4>
                 <hr>
                 <span class="text-body-secondary">Track the progress of your order, or arrange an exchange or
                     return</span>
@@ -22,7 +22,7 @@
             </a>
 
 
-            <a href="wishlist"
+            <a href="/danh-sach-yeu-thich"
                 class="card card-3-items-inline col-4 rounded-0 none-underline shadow text-center p-5 m-2">
                 <h4>Wish List</h4>
                 <hr>
@@ -32,7 +32,7 @@
             </a>
 
 
-            <a href="accountdetails"
+            <a href="/tai-khoan-chi-tiet"
                 class="card card-3-items-inline col-4 rounded-0 none-underline shadow text-center p-5 m-2">
                 <h4>Account Details</h4>
                 <hr>
@@ -42,7 +42,7 @@
 
 
 
-            <a href="addressbook"
+            <a href="/so-dia-chi"
                 class="card card-3-items-inline col-4 rounded-0 none-underline shadow text-center p-5 m-2">
                 <h4>Address Book</h4>
                 <hr>

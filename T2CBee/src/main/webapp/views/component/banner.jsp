@@ -19,7 +19,7 @@
         </div>
     </section> -->
 
-
+    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <link rel="stylesheet" href="../css/productdetail.css">
 
@@ -30,7 +30,7 @@
         </div>
         <div class="banner-breadcrumb text-center ">
             <div class="banner-title">
-                <h1 class="entry-title fw-bold">Aliquam lobortis pellentesque nisi lectus</h1>
+                <h1 class="entry-title fw-bold">ALL T2CBee | Tất Cả Sản Phẩm Tại T2CBee Việt Nam</h1>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb d-flex justify-content-center">
