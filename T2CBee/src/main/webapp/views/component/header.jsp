@@ -31,7 +31,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <li class="dropdown-item fw-bold mb-2">DANH MỤC</li>
-                                            <li><a class="dropdown-item" href="/danh-sach-san-pham">Danh Sách Sản Phẩm</a></li>
+                                            <li><a class="dropdown-item" href="/danh-sach-san-pham">Danh Sách Sản
+                                                    Phẩm</a></li>
                                             <li><a class="dropdown-item" href="#">Nội Thất</a></li>
                                             <li><a class="dropdown-item" href="#">Trang Trí</a></li>
                                             <li><a class="dropdown-item" href="#">Sân Vườn</a></li>
@@ -86,10 +87,63 @@
                             aria-labelledby="dropdownMenuButton1">
                             <input type="text" class="form-control border-0 shadow-none" placeholder="Search...">
                         </div>
-                        <a href="/gio-hang" class="text-secondary text-decoration-none"> <i class=" bi bi-bag pe-3"></i>
-                        </a>
-                        <a href="/thong-tin" class="text-secondary"> <i
-                                class="bi bi-person-circle pe-3"></i></a>
+                        <i class="bi bi-bag pe-3 position-relative pb-3">
+                            <div class="cart-page position-absolute top-100 end-0 p-3 bg-white z-2">
+                                <table class="table">
+                                    <tr>
+                                        <td></td>
+                                        <td class="fw-bold fs-6">Sản Phẩm</td>
+                                        <td class="fw-bold fs-6">Số Lượng</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle"><input type="checkbox"
+                                                style="width: 20px; height: 20px;"></td>
+                                        <td class="cart-info d-flex align-items-center align-middle">
+                                            <img src="../../images/product01.jpg" alt="" width="80"
+                                                class="m-0 img-fluid">
+                                            <div>
+                                                <p>Bình hoa trắng cao cấp</p>
+                                                <small class="text-danger">1000000Đ</small>
+                                                <br>
+                                                <a href="" class="fw-bold"">Xóa</a>
+                                                </div>
+                                            </td>
+                                            <!-- <td class=" text-end"><input type="number" ng-model="p.quantity">
+                                        </td> -->
+                                        <td class="align-middle"><input type="number" max="10" value="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle"><input type="checkbox"
+                                                style="width: 20px; height: 20px;"></td>
+                                        <td class="cart-info d-flex align-items-center align-middle">
+                                            <img src="../../images/product01.jpg" alt="" width="80"
+                                                class="m-0 img-fluid">
+                                            <div>
+                                                <p>Bình hoa trắng cao cấp</p>
+                                                <small class="text-danger">1000000Đ</small>
+                                                <br>
+                                                <a href="" class="fw-bold"">Xóa</a>
+                                                </div>
+                                            </td>
+                                            <!-- <td class=" text-end"><input type="number" ng-model="p.quantity">
+                                        </td> -->
+                                        <td class="align-middle"><input type="number" max="10" value="1"></td>
+                                    </tr>
+
+                                </table>
+                                <div class="total d-flex justify-content-between align-items-center">
+                                    <div class="total-price p-2">
+                                        <p class="fw-bold m-0">Tổng Tiền: <span class="text-danger">1000000Đ</span>
+                                        </p>
+                                    </div>
+                                    <div class="go-to-cart p-2">
+                                        <a href="/gio-hang" class="fw-bold text-decoration-none">TỚI GIỎ HÀNG</a>
+                                        <i class="bi bi-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </i>
+                        <a href="/thong-tin" class="text-secondary"> <i class="bi bi-person-circle pe-3"></i></a>
                     </div>
 
                 </div>
@@ -116,7 +170,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <li class="dropdown-item fw-bold mb-2">DANH MỤC</li>
-                                            <li><a class="dropdown-item" href="/danh-sach-san-pham">Danh Sách Sản Phẩm</a></li>
+                                            <li><a class="dropdown-item" href="/danh-sach-san-pham">Danh Sách Sản
+                                                    Phẩm</a></li>
                                             <li><a class="dropdown-item" href="#">Nội Thất</a></li>
                                             <li><a class="dropdown-item" href="#">Trang Trí</a></li>
                                             <li><a class="dropdown-item" href="#">Sân Vườn</a></li>
