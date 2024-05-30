@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,97 +50,107 @@
                             <h6 class="m-0 font-weight-bold text-primary">Danh Sách Sản Phẩm</h6>
                         </div>
                         <div class="card-body">
-                            <button class="btn btn-primary mb-3">Lưu</button>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label class="form-label">ID</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Nhóm</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Số lượng</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Danh Mục</label>
-                                    <div class="input-group">
-                                        <select class="custom-select">
-                                            <option value="1">Nội thất</option>
-                                            <option value="2">Trang trí</option>
-                                            <option value="3">Sân vườn</option>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary font-weight-bold" href="#" data-toggle="modal" data-target="#danhmucModal">&#43;</button>
+                            <form:form action="${pageContext.request.contextPath}/admin/san-pham" method="POST" modelAttribute="sanPham" enctype="multipart/form-data" >
+                                <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/san-pham">Quay về</a>
+                                <button class="btn btn-primary mb-3" type="submit">Lưu</button>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="form-label">ID</label>
+                                        <form:input cssClass="form-control" path="maSanPham" readonly="${isUpdatePage}"/>
+                                        <label class="form-label">Nhóm</label>
+                                        <form:input cssClass="form-control" path="groupId"/>
+                                        <label class="form-label">Số lượng</label>
+                                        <form:input cssClass="form-control" path="soLuong"/>
+                                        <label class="form-label">Danh Mục <span class="text-success">${danhMucMessage}</span></label>
+                                        <div class="input-group">
+                                            <form:select path="danhMucs" class="custom-select" multiple="multiple" size="3">
+                                                <form:options items="${listDM}" itemLabel="tenDanhMuc" itemValue="maDanhMuc" ></form:options>
+                                            </form:select>
+                                            <div class="input-group-append">
+                                                <a class="btn btn-primary font-weight-bold pt-4" href="${pageContext.request.contextPath}/admin/danh-muc" >&#43;</a>
+                                                <a class="btn btn-danger font-weight-bold pt-4" href="${pageContext.request.contextPath}/admin/san-pham/delete?ctdm=all&spid=${sanPham.maSanPham}" ><i class="fa-solid fa-trash"></i></a>
+                                            </div>
                                         </div>
+                                        <label class="form-label">Phân loại* (vd: hồng, hồng + tặng kèm ghế,...)</label>
+                                        <form:input cssClass="form-control" path="phanLoai"/>
+                                        <label class="form-label">Trọng lượng</label>
+                                        <form:input cssClass="form-control" path="trongLuong"/>
+                                        <label class="form-label">Tạo bởi</label>
+                                        <form:input cssClass="form-control" path="nguoiThem" readonly="true"/>
+                                        <label class="form-label">Lần cuối cập nhật</label>
+                                        <form:input cssClass="form-control" path="ngayCapNhat" readonly="true"/>
+                                        <label class="form-label">Mô tả</label>
+                                        <form:textarea class="form-control" rows="11" path="moTa"></form:textarea>
                                     </div>
-                                    <label class="form-label">Phân loại</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Trọng lượng</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Tạo bởi</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Lần cuối cập nhật</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Mô tả</label>
-                                    <textarea class="form-control" rows="11" id="comment"></textarea>
+                                    <div class="col-6">
+                                        <label class="form-label">Tên</label>
+                                        <form:input cssClass="form-control" path="tenSanPham"/>
+                                        <label class="form-label">Giá</label>
+                                        <form:input cssClass="form-control" path="giaBan"/>
+                                        <label class="form-label">Hiển thị</label>
+                                        <div class="input-group">
+                                            <form:select class="custom-select" path="hienThi">
+                                                <form:option value="true">Hiển thị sản phẩm</form:option>
+                                                <form:option value="false">Ẩn sản phẩm</form:option>
+                                            </form:select>
+                                        </div>
+                                        <label class="form-label">Thương hiệu</label>
+                                        <div class="input-group">
+                                            <form:select class="custom-select" path="thuongHieu">
+                                                <form:options items="${listTH}" itemLabel="tenThuongHieu" itemValue="maThuongHieu"></form:options>
+                                            </form:select>
+                                            <div class="input-group-append">
+                                                <a class="btn btn-primary font-weight-bold" href="${pageContext.request.contextPath}/admin/thuong-hieu">&#43;</a>
+                                            </div>
+                                        </div>
+                                        <label class="form-label">Kích thước</label>
+                                        <form:input cssClass="form-control" path="kichThuoc"/>
+                                        <label class="form-label">Phiếu nhập</label>
+                                        <div class="input-group">
+                                            <form:select class="custom-select" path="phieuNhap">
+                                                <form:options items="${listPN}" itemLabel="maPhieuNhap" itemValue="maPhieuNhap"></form:options>
+                                            </form:select>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary font-weight-bold" href="${pageContext.request.contextPath}/admin/phieu-nhap">&#43;</button>
+                                            </div>
+                                        </div>
+                                        <label class="form-label">Ngày tạo</label>
+                                        <form:input cssClass="form-control" path="ngayTao" readonly="true"/>
+                                        <label class="form-label">Upload hình ảnh</label>
+                                        <br>
+                                        <a class="text-danger" href="${pageContext.request.contextPath}/admin/san-pham/delete?anh=all&spid=${sanPham.maSanPham}" >Bấm vào đây đê xóa toàn bộ ảnh!</a>
+                                        <br>
+                                        <span class="text-success">${anhSanPhamMess}</span>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                aria-describedby="inputGroupFileAddon01" name="fileAnhs" multiple>
+                                            <label class="custom-file-label" for="inputGroupFile01">Chọn ảnh tải lên</label>
+                                        </div>
+                                        <%--slider--%>
+                                        <div id="carouselExampleControls" class="carousel slide border mt-3"
+                                            data-ride="carousel" style="width: 300px; height: 300px;">
+                                            <div class="carousel-inner">
+                                                <c:forEach items="${sanPham.anhSanPhams}" var="imgItem" varStatus="loop">
+                                                    <div class="carousel-item ${loop.first ? 'active' : ''} ">
+                                                        <img class="d-block" src="${imgItem.url}" style="width: 300px; height: 300px;">
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                                data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                                data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                        <%--slider end--%>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <label class="form-label">Tên</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Giá</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Hiển thị</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Thương hiệu</label>
-                                    <div class="input-group">
-                                        <select class="custom-select">
-                                            <option value="1">T@ble</option>
-                                            <option value="2">abc</option>
-                                            <option value="3">abc</option>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <a class="btn btn-primary font-weight-bold" href="#" data-toggle="modal" data-target="#thuonghieuModal">&#43;</a>
-                                        </div>
-                                    </div>
-                                    <label class="form-label">Kích thước</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Phiếu nhập</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Ngày tạo</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Upload hình ảnh</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                            aria-describedby="inputGroupFileAddon01">
-                                        <label class="custom-file-label" for="inputGroupFile01">Chọn ảnh tải lên</label>
-                                    </div>
-
-                                    <div id="carouselExampleControls" class="carousel slide border mt-3"
-                                        data-ride="carousel" style="width: 300px; height: 300px;">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img class="d-block" src="/img/eww.png" alt="First slide"
-                                                    style="width: 300px; height: 300px;">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="/img/1151258.160.jpg" alt="Second slide"
-                                                    style="width: 300px; height: 300px;">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="/img/1151258.160.jpg" alt="Third slide"
-                                                    style="width: 300px; height: 300px;">
-                                            </div>
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                            data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                            data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            </form:form>
                         </div>
                     </div>
                 </div>
@@ -162,26 +174,6 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.jsp">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Danh Muc Modal -->
     <div class="modal fade" id="danhmucModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

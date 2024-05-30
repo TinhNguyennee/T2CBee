@@ -3,7 +3,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/trang-chu">
                 <div class="sidebar-brand-text mx-3" style="font-size: 25px;">T2C<sub class="text-danger">Bee</sub>
                 </div>
             </a>
@@ -12,9 +12,9 @@
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin/home">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Home</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/trang-chu">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Trang Chủ</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">

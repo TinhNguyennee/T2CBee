@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "BinhLuan")
+@Table(name = "Binhluan")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,4 +38,10 @@ public class BinhLuan {
 
     @Column(name = "bao_cao_sai_pham")
     private boolean baoCaoSaiPham;
+
+    @PrePersist
+    protected void onCreate() {
+        ngayBinhLuan = LocalDate.now();
+    }
+
 }

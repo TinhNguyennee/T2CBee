@@ -1,26 +1,26 @@
 package com.T2CBee.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "NhanVien")
+@Table(name = "Nhanvien")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class NhanVien {
     @Id
+    @Column(name = "ma_nhan_vien")
     private String id;
 
     @Column(name = "ho_ten")
     private String hoTen;
 
     @Column(name = "chuc_vu")
-    private String chucVu;
+    private boolean chucVu;
 
     @Column(name = "dia_chi")
     private String diaChi;
@@ -33,4 +33,23 @@ public class NhanVien {
 
     @Column(name = "so_dien_thoai")
     private String soDienThoai;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_vao", columnDefinition = "DATE", nullable = true)
+    LocalDate ngayVao;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_cap_nhat", columnDefinition = "DATE", nullable = true)
+    LocalDate ngayCapNhat;
+
+    @PrePersist
+    protected void onCreate() {
+        ngayVao = LocalDate.now();
+        ngayCapNhat = LocalDate.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        ngayCapNhat = LocalDate.now();
+    }
 }

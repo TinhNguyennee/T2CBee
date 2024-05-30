@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,35 +50,40 @@
                             <h6 class="m-0 font-weight-bold text-primary">Danh Sách Phiếu Nhập</h6>
                         </div>
                         <div class="card-body">
-                            <button class="btn btn-primary mb-3">Lưu</button>
-                            <button class="btn btn-danger mb-3">Xóa</button>
                             <div class="row">
                                 <div class="col-6">
-                                    <label class="form-label">Mã phiếu nhập</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Nhà cung cấp</label>
-                                    <div class="input-group">
-                                        <select class="custom-select">
-                                            <option value="1">Công ty A</option>
-                                            <option value="2">Công ty A</option>
-                                            <option value="3">Công ty A</option>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <a class="btn btn-primary font-weight-bold" href="${pageContext.request.contextPath}/admin/nha-cung-cap">&#43;</a>
+                                    <form:form action="${pageContext.request.contextPath}/admin/phieu-nhap" method="POST" modelAttribute="phieuNhapHang">
+                                        <button class="btn btn-primary mb-3" type="submit">Lưu</button>
+                                        <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/phieu-nhap">Mới</a>
+                                        <a class="btn btn-danger mb-3 ml-2" href="${pageContext.request.contextPath}/admin/phieu-nhap/delete?id=${phieuNhapHang.maPhieuNhap}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                        <br>
+                                        <label class="form-label">Mã phiếu nhập</label>
+                                        <form:input cssClass="form-control" path="maPhieuNhap" readonly="${isUpdatePage}"/>
+                                        <label class="form-label">Nhà cung cấp</label>
+                                        <div class="input-group">
+                                            <form:select class="custom-select" path="nhaCungCap">
+                                                <form:options items="${listNCC}"></form:options>
+                                            </form:select>
+                                            <div class="input-group-append">
+                                                <a class="btn btn-primary font-weight-bold" href="${pageContext.request.contextPath}/admin/nha-cung-cap">&#43;</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <label class="form-label">Trạng thái</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Tạo bởi</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Ngày thêm</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Lần cuối cập nhật</label>
-                                    <input class="form-control" disabled>
+                                        <label class="form-label">Trạng thái</label>
+                                        <form:select class="custom-select" path="trangThai">
+                                            <form:option value="DANG_HOAN_THANH">Đang hoàn thành</form:option>
+                                            <form:option value="HOAN_THANH">Hoàn thành</form:option>
+                                        </form:select>
+                                        <label class="form-label">Tạo bởi</label>
+                                        <form:input cssClass="form-control" path="nguoiNhap.id" readonly="true"/>
+                                        <label class="form-label">Ngày thêm</label>
+                                        <form:input cssClass="form-control" path="ngayNhap" readonly="true"/>
+                                        <label class="form-label">Lần cuối cập nhật</label>
+                                        <form:input cssClass="form-control" path="ngayCapNhat" readonly="true"/>
+                                    </form:form>
                                 </div>
                                 <div class="col-6">
-                                    <form class="d-flex mt-4">
-                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." style="width: 300px;">
+                                    <form class="d-flex mt-4 mb-3" action="${pageContext.request.contextPath}/admin/phieu-nhap/tim-kiem" method="GET">
+                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." name="keyword" style="width: 300px;">
                                         <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                                     </form>
                                     <div class="table-responsive mt-4">
@@ -87,43 +94,35 @@
                                                     <th>Nhà cung cấp</th>
                                                     <th>Trạng thái</th>
                                                     <th>Tạo bởi</th>
-                                                    <th>Cập nhật</th>
                                                     <th>Ngày tạo</th>
+                                                    <th>Cập nhật</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Bàn học</td>
-                                                    <td>T1</td>
-                                                    <td>T1</td>
-                                                    <td>100.000đ</td>
-                                                    <td>24</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Bàn học</td>
-                                                    <td>T1</td>
-                                                    <td>T1</td>
-                                                    <td>100.000đ</td>
-                                                    <td>24</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
-                                                    </td>
-                                                </tr>
+                                                <p class="text-danger">${listPN.totalPages <= 0 ? 'Không có kết quả' : ''}</p>
+                                                <c:forEach items="${listPN.content}" var="item">
+                                                    <tr>
+                                                        <td>${item.maPhieuNhap}</td>
+                                                        <td>${item.nhaCungCap.tenNhaCungCap}</td>
+                                                        <td>${item.trangThai}</td>
+                                                        <td>${item.nguoiNhap.id}</td>
+                                                        <td>${item.ngayNhap}</td>
+                                                        <td>${item.ngayCapNhat}</td>
+                                                        <td class="">
+                                                            <a class="btn btn-primary mr-1" href="${pageContext.request.contextPath}/admin/phieu-nhap/${item.maPhieuNhap}">Sửa</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                     <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/phieu-nhap?p=${listPN.first ? 0 : listPN.number - 1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                        <c:forEach begin="0" end="${listPN.totalPages <= 0 ? 0 : listPN.totalPages - 1}" var="pageItemNumber">
+                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/phieu-nhap?p=${pageItemNumber}">${pageItemNumber + 1}</a></li>
+                                        </c:forEach>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/phieu-nhap?p=${listPN.last ? listPN.totalPages - 1 : listPN.number + 1}"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

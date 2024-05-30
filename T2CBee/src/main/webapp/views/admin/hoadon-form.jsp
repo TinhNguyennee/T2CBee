@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>T2C-Bee - Hóa Đơn</title>
     <%@include file="../component/css-embed.jsp" %>
 </head>
 
 <body id="page-top">
-
+    <fmt:setLocale value="vi_VN"/>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -50,13 +50,20 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-end mb-3">
-                                        <form class="d-flex ">
-                                            <input class="form-control mr-2" placeholder="Tìm kiếm..." style="width: 300px;">
+                                        <select id="orderStatusSelect" class="custom-select mr-5">
+                                            <option value="TAT_CA">Tất Cả</option>
+                                            <option value="DANG_CHO" ${param.tt == 'DANG_CHO' ? 'selected' : ''}>Đang Chờ</option>
+                                            <option value="DA_THANH_TOAN" ${param.tt == 'DA_THANH_TOAN' ? 'selected' : ''}>Đã Thanh Toán</option>
+                                            <option value="DANG_GIAO_HANG" ${param.tt == 'DANG_GIAO_HANG' ? 'selected' : ''}>Đang Giao Hàng</option>
+                                            <option value="HUY" ${param.tt == 'HUY' ? 'selected' : ''}>Hủy</option>
+                                        </select>
+                                        <form class="d-flex" action="${pageContext.request.contextPath}/admin/hoa-don/tim-kiem" method="GET">
+                                            <input class="form-control mr-2" placeholder="Tìm kiếm..." name="keyword" style="width: 300px;">
                                             <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                                         </form>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <table class="table table-bordered" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
                                                     <th>ID Giỏ Hàng</th>
@@ -67,26 +74,29 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Lương Công Huấn</td>
-                                                    <td>ĐANG GIAO HÀNG</td>
-                                                    <td>2011/04/25</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-secondary mr-1">Xem</a>
-                                                    </td>
-                                                </tr>
+                                                <p class="text-danger">${listGH.totalPages <= 0 ? 'Không có kết quả' : ''}</p>
+                                                <c:forEach items="${listGH.content}" var="item">
+                                                    <tr>
+                                                        <td>${item.id}</td>
+                                                        <td>${item.khachHang.maKhachHang}</td>
+                                                        <td>${item.trangThai}</td>
+                                                        <td>${item.ngayTao}</td>
+                                                        <td class="d-flex">
+                                                            <a class="btn btn-secondary mr-1" href="${pageContext.request.contextPath}/admin/hoa-don?id=${item.id}">Xem</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="d-flex">
                                         <div class="mx-auto">
                                             <ul class="pagination">
-                                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/hoa-don?p=${listGH.first ? 0 : listGH.number - 1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                                <c:forEach begin="0" end="${listGH.totalPages <= 0 ? 0 : listGH.totalPages - 1}" var="pageItemNumber">
+                                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/hoa-don?p=${pageItemNumber}">${pageItemNumber + 1}</a></li>
+                                                </c:forEach>
+                                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/hoa-don?p=${listGH.last ? listGH.totalPages - 1 : listGH.number + 1}"><i class="fa-solid fa-chevron-right"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -96,7 +106,7 @@
                         <div class="col-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Sản phẩm trong hóa đơn <b>1</b></h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Sản phẩm trong hóa đơn <b>${param.id}</b></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -105,6 +115,7 @@
                                                 <tr>
                                                     <th>Mã SP</th>
                                                     <th>Tên Sản Phẩm</th>
+                                                    <th>Giảm</th>
                                                     <th>Đơn Giá</th>
                                                     <th>SL</th>
                                                     <th>Thành Tiền</th>
@@ -112,47 +123,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Bàn + màu hồng</td>
-                                                    <td>100.000đ</td>
-                                                    <td>2</td>
-                                                    <td>200.000đ</td>
-                                                    <td class="d-flex">
-                                                        <div class="mx-auto">
-                                                            <a class="btn btn-primary" style="font-size: 12px;"><i class="fa-solid fa-eye"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Bàn + màu đen</td>
-                                                    <td>100.000đ</td>
-                                                    <td>2</td>
-                                                    <td>200.000đ</td>
-                                                    <td class="d-flex">
-                                                        <div class="mx-auto">
-                                                            <a class="btn btn-primary" style="font-size: 12px;"><i class="fa-solid fa-eye"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <c:set var="totalAmount" value="0" />
+                                                <c:set var="totalDiscount" value="0" />
+                                                <p class="text-danger">${listCTGH.totalPages <= 0 ? 'Giỏ hàng rỗng!' : ''}</p>
+                                                <c:forEach items="${listCTGH.content}" var="item">
+                                                    <tr>
+                                                        <td>${item.sanPham.maSanPham}</td>
+                                                        <td>${item.sanPham.tenSanPham}+ ${item.sanPham.phanLoai}</td>
+                                                        <td>${item.maGiamGia.discount}</td>
+                                                        <c:set var="totalDiscount" value="${totalDiscount + (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0))}" />
+                                                        <td>${item.sanPham.giaBan - (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0)) }</td>
+                                                        <td>${item.soLuong}</td>
+                                                        <td>${item.soLuong * item.sanPham.giaBan - (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0))}</td>
+                                                        <c:set var="totalAmount" value="${totalAmount + (item.soLuong * (item.sanPham.giaBan - (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0)) ))}" />
+                                                        <td class="d-flex">
+                                                            <div class="mx-auto">
+                                                                <a class="btn btn-primary" style="font-size: 12px;" href="#"><i class="fa-solid fa-eye"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
-                                        <div class="d-flex">
-                                            <div class="mx-auto">
-                                                <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
                                         <div class=" text-right ">
-                                            <h5 class="font-weight-bold text-dark">Phí vận chuyển: <span>0đ</span></h5> 
-                                            <h5 class="font-weight-bold text-dark">Giảm giá: <span>-0đ</span></h5>
-                                            <h5 class="text-danger font-weight-bold">Tổng tiền: <span class="text-dark">400.000đ</span></h5> 
+                                            <h5 class="font-weight-bold text-dark">Phí vận chuyển: <span>0đ</span></h5>
+                                            <h5 class="font-weight-bold text-dark">Giảm giá: <span>-<fmt:formatNumber value="${totalDiscount}" type="currency" /></span></h5>
+                                            <h5 class="text-danger font-weight-bold">Tổng tiền: <span class="text-dark"><fmt:formatNumber value="${totalAmount}" type="currency" /></span></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -199,7 +195,13 @@
             </div>
         </div>
     </div>
-
+    <script>
+        document.getElementById('orderStatusSelect').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var url = '${pageContext.request.contextPath}/admin/hoa-don?tt=' + selectedValue;
+            window.location.href = url;
+        });
+    </script>
 </body>
 
 </html>

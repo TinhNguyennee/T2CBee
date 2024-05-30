@@ -1,3 +1,6 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,32 +51,50 @@
                             <h6 class="m-0 font-weight-bold text-primary">Danh Sách Khách Hàng</h6>
                         </div>
                         <div class="card-body">
-                            <button class="btn btn-primary mb-3">Lưu</button>
-                            <button class="btn btn-danger mb-3">Xóa</button>
                             <div class="row">
                                 <div class="col-6">
-                                    <label class="form-label">Mã Khách Hàng</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Họ và tên</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Mật khẩu</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Email</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Số điện thoại</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Giới tính</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Địa chỉ</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Ngày sinh</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Ngày đăng ký</label>
-                                    <input class="form-control" disabled>
+                                    <form:form action="${pageContext.request.contextPath}/admin/khach-hang" method="POST" modelAttribute="khachHang">
+                                        <button class="btn btn-primary mb-3" type="submit">Lưu</button>
+                                        <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/khach-hang">Mới</a>
+                                        <a class="btn btn-danger mb-3 ml-2" href="${pageContext.request.contextPath}/admin/khach-hang/delete?id=${khachHang.maKhachHang}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                        <br>
+                                        <label class="form-label">Mã Khách Hàng</label>
+                                        <form:input cssClass="form-control" path="maKhachHang" readonly="${isUpdatePage}"/>
+                                        <label class="form-label">Họ và tên</label>
+                                        <form:input cssClass="form-control" path="hoVaTen"/>
+                                        <label class="form-label">Mật khẩu</label>
+                                        <form:input cssClass="form-control" path="password"/>
+                                        <label class="form-label">Email</label>
+                                        <form:input cssClass="form-control" path="email"/>
+                                        <label class="form-label">Số điện thoại</label>
+                                        <form:input cssClass="form-control" path="soDienThoai"/>
+                                        <label class="form-label">Giới tính</label>
+                                        <br>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <form:radiobutton path="gioiTinh" value="true" cssClass="form-check-input"/>Nam
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <form:radiobutton path="gioiTinh" value="false" cssClass="form-check-input"/>Nữ
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <label class="form-label">Địa chỉ</label>
+                                        <form:input cssClass="form-control" path="diaChi"/>
+                                        <label class="form-label">Ngày sinh</label>
+                                        <fmt:formatDate value="${khachHang.ngaySinh}" var="birthdayFormated" pattern="yyyy-MM-dd" />
+                                        <form:input cssClass="form-control" path="ngaySinh" value="${birthdayFormated}" type="date"/>
+                                        <label class="form-label">Ngày đăng ký</label>
+                                        <form:input cssClass="form-control" path="ngayTao" readonly="true"/>
+                                        <label class="form-label">Lần Cuối Cập Nhật</label>
+                                        <form:input cssClass="form-control" path="ngayCapNhat" readonly="true"/>
+                                    </form:form>
                                 </div>
                                 <div class="col-6">
-                                    <form class="d-flex">
-                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." style="width: 300px;">
+                                    <form class="d-flex mt-4 mb-3" action="${pageContext.request.contextPath}/admin/khach-hang/tim-kiem" method="GET">
+                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." name="keyword" style="width: 300px;">
                                         <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                                     </form>
                                     <div class="table-responsive mt-4">
@@ -85,39 +106,34 @@
                                                     <th>Email</th>
                                                     <th>SĐT</th>
                                                     <th>Ngày ĐK</th>
+                                                    <th>Cập Nhật</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Khách Hàng A</td>
-                                                    <td>A@sample.com</td>
-                                                    <td>0987654321</td>
-                                                    <td>19/05/2024</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Khách Hàng A</td>
-                                                    <td>A@sample.com</td>
-                                                    <td>0987654321</td>
-                                                    <td>19/05/2024</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
-                                                    </td>
-                                                </tr>
+                                                <p class="text-danger">${listKH.totalPages <= 0 ? 'Không có kết quả' : ''}</p>
+                                                <c:forEach items="${listKH.content}" var="item">
+                                                    <tr>
+                                                        <td>${item.maKhachHang}</td>
+                                                        <td>${item.hoVaTen}</td>
+                                                        <td>${item.email}</td>
+                                                        <td>${item.soDienThoai}</td>
+                                                        <td>${item.ngayTao}</td>
+                                                        <td>${item.ngayCapNhat}</td>
+                                                        <td class="">
+                                                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/khach-hang/${item.maKhachHang}">Sửa</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                     <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/khach-hang?p=${listKH.first ? 0 : listKH.number - 1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                        <c:forEach begin="0" end="${listKH.totalPages <= 0 ? 0 : listKH.totalPages - 1}" var="pageItemNumber">
+                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/khach-hang?p=${pageItemNumber}">${pageItemNumber + 1}</a></li>
+                                        </c:forEach>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/khach-hang?p=${listKH.last ? listKH.totalPages - 1 : listKH.number + 1}"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -1,19 +1,19 @@
 package com.T2CBee.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "MaGiamGia")
+@Table(name = "Magiamgia")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class MaGiamGia {
     @Id
     private String maGiamGia;
@@ -21,14 +21,12 @@ public class MaGiamGia {
     @Column(name = "discount")
     private String discount;
 
-    @ManyToOne
-    @JoinColumn(name = "ma_san_pham")
-    private SanPham sanPham;
-
-    @Column(name = "ngay_bat_dau")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_bat_dau", columnDefinition = "DATE")
     private LocalDate ngayBatDau;
 
-    @Column(name = "ngay_ket_thuc")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_ket_thuc", columnDefinition = "DATE")
     private LocalDate ngayKetThuc;
 
     @Column(name = "so_luong")
@@ -38,6 +36,25 @@ public class MaGiamGia {
     @JoinColumn(name = "nguoi_them")
     private NhanVien nguoiThem;
 
-    @Column(name = "ngay_tao")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_tao", columnDefinition = "DATE")
     private LocalDate ngayTao;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_cap_nhat", columnDefinition = "DATE")
+    private LocalDate ngayCapNhat;
+
+    @OneToMany(mappedBy = "maGiamGia", fetch = FetchType.LAZY)
+    private List<ChiTietMaGiamGia> chiTietMaGiamGias;
+
+    @PrePersist
+    protected void onCreate() {
+        ngayTao = LocalDate.now();
+        ngayCapNhat = LocalDate.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        ngayCapNhat = LocalDate.now();
+    }
 }
