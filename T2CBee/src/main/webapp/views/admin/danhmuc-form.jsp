@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,24 +50,28 @@
                             <h6 class="m-0 font-weight-bold text-primary">Danh Sách Danh Mục</h6>
                         </div>
                         <div class="card-body">
-                            <button class="btn btn-primary mb-3">Lưu</button>
-                            <button class="btn btn-danger mb-3">Xóa</button>
                             <div class="row">
                                 <div class="col-6">
-                                    <label class="form-label">ID</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Tên</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Tạo bởi</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Ngày thêm</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Lần cuối cập nhật</label>
-                                    <input class="form-control" disabled>
+                                    <form:form action="${pageContext.request.contextPath}/admin/danh-muc" method="POST" modelAttribute="danhMuc">
+                                        <button class="btn btn-primary mb-3" type="submit">Lưu</button>
+                                        <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/danh-muc">Mới</a>
+                                        <a class="btn btn-danger mb-3 ml-2" href="${pageContext.request.contextPath}/admin/danh-muc/delete?id=${danhMuc.maDanhMuc}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                        <br>
+                                        <label class="form-label">ID</label>
+                                        <form:input cssClass="form-control" path="maDanhMuc" readonly="${isUpdatePage}"/>
+                                        <label class="form-label">Tên</label>
+                                        <form:input cssClass="form-control" path="tenDanhMuc"/>
+                                        <label class="form-label">Tạo bởi</label>
+                                        <form:input cssClass="form-control" path="nguoiThem.id" readonly="true"/>
+                                        <label class="form-label">Ngày thêm</label>
+                                        <form:input cssClass="form-control" path="ngayThem" readonly="true"/>
+                                        <label class="form-label">Lần cuối cập nhật</label>
+                                        <form:input cssClass="form-control" path="ngayCapNhat" readonly="true"/>
+                                    </form:form>
                                 </div>
                                 <div class="col-6">
-                                    <form class="d-flex mt-4">
-                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." style="width: 300px;">
+                                    <form class="d-flex mt-4 mb-3" action="${pageContext.request.contextPath}/admin/danh-muc/tim-kiem" method="GET">
+                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." name="keyword" style="width: 300px;">
                                         <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                                     </form>
                                     <div class="table-responsive mt-4">
@@ -75,41 +81,34 @@
                                                     <th>ID</th>
                                                     <th>Tên</th>
                                                     <th>Tạo bởi</th>
-                                                    <th>Cập nhật</th>
                                                     <th>Ngày tạo</th>
+                                                    <th>Cập nhật</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Bàn học</td>
-                                                    <td>T1</td>
-                                                    <td>100.000đ</td>
-                                                    <td>24</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Bàn học</td>
-                                                    <td>T1</td>
-                                                    <td>100.000đ</td>
-                                                    <td>24</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
-                                                    </td>
-                                                </tr>
+                                                <p class="text-danger">${listDM.totalPages <= 0 ? 'Không có kết quả' : ''}</p>
+                                                <c:forEach items="${listDM.content}" var="item">
+                                                    <tr>
+                                                        <td>${item.maDanhMuc}</td>
+                                                        <td>${item.tenDanhMuc}</td>
+                                                        <td>${item.nguoiThem.id}</td>
+                                                        <td>${item.ngayThem}</td>
+                                                        <td>${item.ngayCapNhat}</td>
+                                                        <td class="">
+                                                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/danh-muc/${item.maDanhMuc}">Sửa</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                     <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/danh-muc?p=${listDM.first ? 0 : listDM.number - 1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                        <c:forEach begin="0" end="${listDM.totalPages <= 0 ? 0 : listDM.totalPages - 1}" var="pageItemNumber">
+                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/danh-muc?p=${pageItemNumber}">${pageItemNumber + 1}</a></li>
+                                        </c:forEach>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/danh-muc?p=${listDM.last ? listDM.totalPages - 1 : listDM.number + 1}"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

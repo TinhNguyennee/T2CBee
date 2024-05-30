@@ -1,20 +1,18 @@
 package com.T2CBee.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "SanPham")
+@Table(name = "Sanpham")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class SanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,5 +80,16 @@ public class SanPham {
 
     @Column(name = "trang_thai")
     private String trangThai;
+
+    @PrePersist
+    protected void onCreate() {
+        ngayTao = LocalDate.now();
+        ngayCapNhat = LocalDate.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        ngayCapNhat = LocalDate.now();
+    }
 
 }

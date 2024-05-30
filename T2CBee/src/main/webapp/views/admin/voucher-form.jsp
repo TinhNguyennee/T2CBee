@@ -1,18 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>T2C-Bee - Mã Giảm Giá</title>
     <%@include file="../component/css-embed.jsp" %>
-
 </head>
 
 <body id="page-top">
@@ -48,36 +47,43 @@
                             <h6 class="m-0 font-weight-bold text-primary">Thêm Mã Giảm Giá</h6>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>ID*</th>
-                                        <th>Giảm giá (%)*</th>
-                                        <th>Sản phẩm áp dụng*</th>
-                                        <th>Số lượng*</th>
-                                        <th>Bắt đầu*</th>
-                                        <th>Kết thúc*</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input class="form-control"/></td>
-                                        <td><input class="form-control"/></td>
-                                        <td>
-                                            <select class="custom-select">
-                                                <option value="1">[Bàn học] Màu hồng</option>
-                                                <option value="2">[Bàn học] Màu trắng</option>
-                                                <option value="3">[Bàn học] Màu đen</option>
-                                            </select>
-                                        </td>
-                                        <td><input class="form-control" type="number" min="0"/></td>
-                                        <td><input class="form-control" type="date"/></td>
-                                        <td><input class="form-control" type="date"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button class="btn btn-primary mb-3">Lưu</button>
-                            <button class="btn btn-secondary ml-2 mb-3">Làm mới</button>
+                            <form:form action="${pageContext.request.contextPath}/admin/ma-giam-gia" method="POST" modelAttribute="maGiamGia">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên Mã (ID)*</th>
+                                            <th width="100px">Giảm giá (%)*</th>
+                                            <th>Sản phẩm áp dụng*</th>
+                                            <th width="100px">Số lượng*</th>
+                                            <th>Bắt đầu*</th>
+                                            <th>Kết thúc*</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><form:input cssClass="form-control" path="maGiamGia" readonly="${isUpdatePage}"/></td>
+                                            <td><form:input cssClass="form-control" path="discount"/></td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <form:select class="custom-select" path="chiTietMaGiamGias" multiple="multiple" size="3">
+                                                        <form:options items="${listSP}" itemLabel="tenSanPham" itemValue="maSanPham"></form:options>
+                                                    </form:select>
+                                                    <div class="input-group-append">
+                                                        <a class="btn btn-danger font-weight-bold" href="${pageContext.request.contextPath}/admin/ma-giam-gia/delete?ctgg=all&mggid=${maGiamGia.maGiamGia}">Reset</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><form:input cssClass="form-control" path="soLuong"/></td>
+                                            <fmt:formatDate value="${maGiamGia.ngayBatDau}" var="ngayBatDauFormated" pattern="yyyy-MM-dd" />
+                                            <fmt:formatDate value="${maGiamGia.ngayKetThuc}" var="ngayKetThucFormated" pattern="yyyy-MM-dd" />
+                                            <td><form:input cssClass="form-control" path="ngayBatDau" type="date" value="${ngayBatDauFormated}"/></td>
+                                            <td><form:input cssClass="form-control" path="ngayKetThuc" type="date" value="${ngayKetThucFormated}"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-primary mb-3" type="submit">Lưu</button>
+                                <a class="btn btn-secondary ml-2 mb-3" href="${pageContext.request.contextPath}/admin/ma-giam-gia">Làm mới</a>
+                            </form:form>
                         </div>
                     </div>
 
@@ -91,11 +97,11 @@
                                 <input class="form-control mr-2" placeholder="Tìm kiếm..." style="width: 300px;">
                                 <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                             </form>
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Giảm giá (%)</th>
+                                        <th width="2rem">Giảm (%)</th>
                                         <th>Sản phẩm áp dụng</th>
                                         <th>Số lượng</th>
                                         <th>Bắt đầu</th>
@@ -107,21 +113,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                        <td class="d-flex">
-                                            <a class="btn btn-secondary">Sửa</a>
-                                            <a class="btn btn-danger ml-2">Xóa</a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach items="${listMGG.content}" var="item">
+                                        <tr>
+                                            <td>${item.maGiamGia}</td>
+                                            <td>${item.discount}</td>
+                                            <td>
+                                                <c:forEach items="${item.chiTietMaGiamGias}" var="itemCTGG" varStatus="loop">
+                                                    <p>${loop.index + 1}. ${itemCTGG.sanPham.tenSanPham} - ${itemCTGG.sanPham.phanLoai}</p>
+                                                </c:forEach>
+                                            </td>
+                                            <td>${item.soLuong}</td>
+                                            <td>${item.ngayBatDau}</td>
+                                            <td>${item.ngayKetThuc}</td>
+                                            <td>${item.nguoiThem.id}</td>
+                                            <td>${item.ngayTao}</td>
+                                            <td>${item.ngayCapNhat}</td>
+                                            <td class="">
+                                                <a class="btn btn-primary mr-1" href="${pageContext.request.contextPath}/admin/ma-giam-gia/${item.maGiamGia}">Sửa</a>
+                                                <a class="btn btn-danger ml-2" href="${pageContext.request.contextPath}/admin/ma-giam-gia/delete?id=${item.maGiamGia}">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>

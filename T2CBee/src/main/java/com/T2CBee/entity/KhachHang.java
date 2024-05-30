@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "KhachHang")
+@Table(name = "Khachhang")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,11 +39,17 @@ public class KhachHang {
     @Column(name = "dia_chi")
     private String diaChi;
 
-    @Column(name = "ngay_sinh")
-    private LocalDate ngaySinh;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_sinh", columnDefinition = "DATE", nullable = true)
+    private Date ngaySinh;
 
-    @Column(name = "ngay_tao")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_tao", columnDefinition = "DATE", nullable = true)
     private LocalDate ngayTao;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_cap_nhat", columnDefinition = "DATE", nullable = true)
+    LocalDate ngayCapNhat;
 
     @OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
     private List<SanPhamYeuThich> sanPhamYeuThichList;
@@ -52,5 +59,16 @@ public class KhachHang {
 
     @OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
     private List<GioHang> gioHangList;
+
+    @PrePersist
+    protected void onCreate() {
+        ngayTao = LocalDate.now();
+        ngayCapNhat = LocalDate.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        ngayCapNhat = LocalDate.now();
+    }
 
 }

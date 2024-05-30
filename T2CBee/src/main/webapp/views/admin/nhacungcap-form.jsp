@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +13,6 @@
 
     <title>T2C-Bee - Nhà Cung Cấp</title>
     <%@include file="../component/css-embed.jsp" %>
-
 </head>
 
 <body id="page-top">
@@ -48,80 +48,75 @@
                             <h6 class="m-0 font-weight-bold text-primary">Danh Sách Nhà Cung Cấp</h6>
                         </div>
                         <div class="card-body">
-                            <button class="btn btn-primary mb-3">Lưu</button>
-                            <button class="btn btn-danger mb-3">Xóa</button>
                             <div class="row">
                                 <div class="col-6">
-                                    <label class="form-label">Mã</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Tên</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Mã số thuế</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Số điện thoại</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Địa chỉ</label>
-                                    <input class="form-control">
-                                    <label class="form-label">Tạo bởi</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Ngày thêm</label>
-                                    <input class="form-control" disabled>
-                                    <label class="form-label">Lần cuối cập nhật</label>
-                                    <input class="form-control" disabled>
+                                    <form:form action="${pageContext.request.contextPath}/admin/nha-cung-cap" method="POST" modelAttribute="nhaCungCap">
+                                        <button class="btn btn-primary mb-3" type="submit">Lưu</button>
+                                        <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/nha-cung-cap">Mới</a>
+                                        <a class="btn btn-danger mb-3 ml-2" href="${pageContext.request.contextPath}/admin/nha-cung-cap/delete?id=${nhaCungCap.maNhaCungCap}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                        <br>
+                                        <label class="form-label">Mã</label>
+                                        <form:input cssClass="form-control" path="maNhaCungCap" readonly="${isUpdatePage}"/>
+                                        <label class="form-label">Tên</label>
+                                        <form:input cssClass="form-control" path="tenNhaCungCap"/>
+                                        <label class="form-label">Mã số thuế</label>
+                                        <form:input cssClass="form-control" path="maSoThue"/>
+                                        <label class="form-label">Số điện thoại</label>
+                                        <form:input cssClass="form-control" path="soDienThoai"/>
+                                        <label class="form-label">Địa chỉ</label>
+                                        <form:input cssClass="form-control" path="diaChi"/>
+                                        <label class="form-label">Tạo bởi</label>
+                                        <form:input cssClass="form-control" path="nguoiThem" readonly="true"/>
+                                        <label class="form-label">Ngày thêm</label>
+                                        <form:input cssClass="form-control" path="ngayThem" readonly="true"/>
+                                        <label class="form-label">Lần cuối cập nhật</label>
+                                        <form:input cssClass="form-control" path="ngayCapNhat" readonly="true"/>
+                                    </form:form>
                                 </div>
                                 <div class="col-6">
-                                    <form class="d-flex mt-4">
-                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." style="width: 300px;">
+                                    <form action="${pageContext.request.contextPath}/admin/nha-cung-cap/tim-kiem" method="GET" class="d-flex">
+                                        <input class="form-control mr-2" placeholder="Tìm kiếm..." name="keyword" style="width: 300px;">
                                         <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                                     </form>
                                     <div class="table-responsive mt-4">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Tên</th>
-                                                    <th>MST</th>
-                                                    <th>SĐT</th>
-                                                    <th>Tạo bởi</th>
-                                                    <th>Cập nhật</th>
-                                                    <th>Ngày tạo</th>
-                                                    <th></th>
-                                                </tr>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tên</th>
+                                                <th>MST</th>
+                                                <th>SĐT</th>
+                                                <th>Tạo bởi</th>
+                                                <th>Ngày tạo</th>
+                                                <th>Cập nhật</th>
+                                                <th></th>
+                                            </tr>
                                             </thead>
                                             <tbody>
+                                            <p class="text-danger">${listNCC.totalPages <= 0 ? 'Không có kết quả' : ''}</p>
+                                            <c:forEach items="${listNCC.content}" var="item">
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Bàn học</td>
-                                                    <td>T1</td>
-                                                    <td>100.000đ</td>
-                                                    <td>24</td>
-                                                    <td>24</td>
-                                                    <td>24</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
+                                                    <td>${item.maNhaCungCap}</td>
+                                                    <td>${item.tenNhaCungCap}</td>
+                                                    <td>${item.maSoThue}</td>
+                                                    <td>${item.soDienThoai}</td>
+                                                    <td>${item.nguoiThem.id}</td>
+                                                    <td>${item.ngayThem}</td>
+                                                    <td>${item.ngayCapNhat}</td>
+                                                    <td class="">
+                                                        <a class="btn btn-primary mr-1" href="${pageContext.request.contextPath}/admin/nha-cung-cap/${item.maNhaCungCap}">Sửa</a>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Bàn học</td>
-                                                    <td>T1</td>
-                                                    <td>100.000đ</td>
-                                                    <td>24</td>
-                                                    <td>24</td>
-                                                    <td>24</td>
-                                                    <td class="d-flex">
-                                                        <a class="btn btn-primary mr-1">Sửa</a>
-                                                    </td>
-                                                </tr>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                     <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/nha-cung-cap?p=${listNCC.first ? 0 : listNCC.number - 1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                        <c:forEach begin="0" end="${listNCC.totalPages <= 0 ? 0 : listNCC.totalPages - 1}" var="pageItemNumber">
+                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/nha-cung-cap?p=${pageItemNumber}">${pageItemNumber + 1}</a></li>
+                                        </c:forEach>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/nha-cung-cap?p=${listNCC.last ? listNCC.totalPages - 1 : listNCC.number + 1}"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

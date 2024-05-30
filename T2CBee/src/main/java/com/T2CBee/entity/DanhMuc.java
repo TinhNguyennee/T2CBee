@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "DanhMuc")
+@Table(name = "Danhmuc")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,17 +22,31 @@ public class DanhMuc {
     @Column(name = "ten_danh_muc")
     private String tenDanhMuc;
 
-    @Column(name = "ngay_them")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_them", columnDefinition = "DATE", nullable = true)
     private LocalDate ngayThem;
 
-    @Column(name = "ngay_xoa")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_xoa", columnDefinition = "DATE", nullable = true)
     private LocalDate ngayXoa;
 
-    @Column(name = "ngay_cap_nhat")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "ngay_cap_nhat", columnDefinition = "DATE", nullable = true)
     private LocalDate ngayCapNhat;
 
     @ManyToOne
     @JoinColumn(name = "nguoi_them")
     private NhanVien nguoiThem;
+
+    @PrePersist
+    protected void onCreate() {
+        ngayThem = LocalDate.now();
+        ngayCapNhat = LocalDate.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        ngayCapNhat = LocalDate.now();
+    }
 }
 

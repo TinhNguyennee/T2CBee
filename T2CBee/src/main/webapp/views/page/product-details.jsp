@@ -1,25 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="wrapper-product-detail" style="padding-top: 195px">
-
-
-
-
-
     <jsp:include page="../component/banner.jsp"></jsp:include>
-
-
-
-
-
-
     <section class="product-detail">
         <div class="container">
             <div class="detail-wrapper p-5">
                 <div class="row">
                     <div class="col-6">
                         <div class="img-main">
-                            <img src="http://ginza.mallthemes.com/wp-content/uploads/2019/01/home3-banner1-2.jpg"
+                            <img src="${testImg}"
                                 alt="">
                         </div>
                         <div class="slide">
@@ -32,7 +21,8 @@
                                     alt="">
                                 <img src="http://ginza.mallthemes.com/wp-content/uploads/2019/01/home3-banner1-2.jpg"
                                     alt="">
-
+                                <img src="http://ginza.mallthemes.com/wp-content/uploads/2019/01/home3-banner1-2.jpg"
+                                     alt="">
                             </div>
                             <div class="slide-next">
                                 <i class="bi bi-chevron-right"></i>
@@ -43,7 +33,6 @@
                         </div>
 
                     </div>
-
                     <div class="col-6">
                         <div class="prod-info">
                             <div class="prod-tittle fw-bold mb-3">Aliquam lobortis pellentesque nisi lectus</div>
@@ -76,21 +65,16 @@
                         </div>
                         <div class="hide">
                             <p class="clear-selected">Làm mới</p>
-
                             <div class="prod-type-price">
                                 <span class="price-after me-1">$75.00</span>
                                 <span class="price-before text-decoration-line-through text-secondary">$85.00</span>
                             </div>
                             <p class="inventory-quantity">Kho: 190 </p>
-
-
                         </div>
-
                         <div class="group-submit mb-3 ">
                             <input type="number" value="1" min="1"  class="input-quantity p-3 me-3 text-center">
                             <button class="button-cart"><i class="bi bi-basket3"></i>Thêm vào giỏ</button>
                         </div>
-
                         <div class="group-like-compare">
                             <span class="prod-favorite">
                                 <i class="bi bi-heart"></i> Thêm vào yêu thích
@@ -99,7 +83,6 @@
                                 <i class="bi bi-arrow-left-right"></i> So sánh
                             </span>
                         </div>
-
                         <div class="prod-other">
                             <hr>
                             <p class="sku_wrapper">SKU: <a class="sku">N/A</a></p>
@@ -109,31 +92,20 @@
                                 <a href="#">Storage</a>,
                                 <a href="#">Toys</a>
                             </p>
-
                             <p class="tagged_as">Tags: <a href=#">clothes</a>,
                                 <a href="#">fashion</a>
                             </p>
-
                             <hr>
                         </div>
                         <div class="sharing-prod">
                             <p>SHARE THIS PRODUCT <span class="ms-2"><i class="bi bi-facebook"></i></span>
                                 <span> <i class="bi bi-twitter"></i></span>
                                 <span><i class="bi bi-messenger"></i></span>
-
                             </p>
                         </div>
                     </div>
-
-
-
                 </div>
-
-
-
-
                 <div class="container mt-3 ">
-
                     <!-- Nav tabs -->
                     <ul class="nav cp-nav-product d-flex justify-content-center" role="tablist">
                         <li class="nav-item">
@@ -147,11 +119,9 @@
                             <a class="nav-link" data-bs-toggle="tab" href="#reviews">Reviews (1)</a>
                         </li>
                     </ul>
-
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="description" class="container tab-pane active"><br>
-
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est
                                 tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis
                                 justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
@@ -165,19 +135,16 @@
                             </p>
                         </div>
                         <div id="additional" class="container tab-pane fade"><br>
-
                             <table class="table table-bordered">
                                 <tr>
                                     <td>color</td>
                                     <td>Black, White</td>
                                 </tr>
-
                             </table>
                         </div>
                         <div id="reviews" class="container tab-pane fade"><br>
                             <hr>
                             <section class="reviews-list ">
-
                                 <div class="review-detail  row mb-3 ">
                                     <div class="col-1 review-avatar">
                                         <img src="http://ginza.mallthemes.com/wp-content/uploads/2019/01/home3-banner1-2.jpg"
@@ -204,8 +171,6 @@
                                     </div>
                                 </div>
                             </section>
-
-
                         </div>
                     </div>
 

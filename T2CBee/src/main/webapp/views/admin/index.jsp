@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +51,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Đơn Hàng Chờ Xử Lý</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${countDHCXL}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -67,8 +68,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Đơn Hàng Đang Xử Lý</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Đơn Hàng Đang Giao</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${countDHDXL}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -89,7 +90,7 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${countDHHT}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,9 +109,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Tin Nhắn
+                                                Đơn Hàng Hủy
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${countDHH}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -131,126 +132,74 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Bình luận Sản Phẩm <sup><span
-                                                class="badge badge-danger badge-counter">3</span></sup></h6>
+                                                class="badge badge-danger badge-counter">${listBL.content.size()}</span></sup></h6>
                                 </div>
                                 <div class="card-body">
+                                    <p class="text-danger">${listBL.totalPages <= 0 ? 'Không có kết quả' : ''}</p>
                                     <div class="d-flex">
-                                        <form class="d-flex mb-3">
-                                            <input class="form-control mr-2" placeholder="Tìm kiếm..."
-                                                style="width: 200px;">
-                                            <select class="custom-select mr-2">
-                                                <option value="1">Mới nhất</option>
-                                                <option value="1">Cũ nhất</option>
-                                                <option value="1">5 sao</option>
-                                                <option value="2">4 sao</option>
-                                                <option value="3">3 sao</option>
-                                                <option value="3">2 sao</option>
-                                                <option value="3">1 sao</option>
-                                                <option value="3">Khách hàng báo cáo</option>
+                                        <form class="d-flex mb-3" action="${pageContext.request.contextPath}/admin/binh-luan/tim-kiem" method="GET">
+                                            <input class="form-control mr-2" placeholder="Tìm kiếm..." name="keyword" style="width: 300px;">
+                                            <select class="custom-select mr-2" id="orderStatusSelect">
+                                                <option value="lasted" ${param.tt == 'lasted' ? 'selected' : ''}>Mới nhất</option>
+                                                <option value="oldest" ${param.tt == 'oldest' ? 'selected' : ''}>Cũ nhất</option>
+                                                <option value="5" ${param.tt == '5' ? 'selected' : ''}>5 sao</option>
+                                                <option value="4" ${param.tt == '4' ? 'selected' : ''}>4 sao</option>
+                                                <option value="3" ${param.tt == '3' ? 'selected' : ''}>3 sao</option>
+                                                <option value="2" ${param.tt == '2' ? 'selected' : ''}>2 sao</option>
+                                                <option value="1" ${param.tt == '1' ? 'selected' : ''}>1 sao</option>
+                                                <option value="reported" ${param.tt == 'reported' ? 'selected' : ''}>Khách hàng báo cáo</option>
                                             </select>
-                                            <button class="btn btn-primary"><i class="fas fa-search fa-sm"
-                                                    aria-hidden="true"></i></button>
+                                            <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                                         </form>
                                     </div>
                                     <hr>
+                                    <%--  Table bình luận--%>
                                     <div class="row">
-                                        <div class="mx-4 mb-4 w-100 comment-item">
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <div class="">
-                                                        <span class="font-weight-bold">Công Huấn</span>
-        
-                                                        <span>16:30 11/01/2024</span>
-                                                    </div>
-                                                    <div class="d-flex mt-1 mb-1">
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px"></span>
-                                                    </div>
-                                                    <span class="fw-normal">
-                                                        Sản phẩm quá xinh đẹp tuyệt vời cảm ơn nhà sản xuất
+                                        <c:forEach items="${listBL.content}" var="item">
+                                            <div class="mx-4 mb-4 w-100 comment-item">
+                                                <div class="row">
+                                                    <div class="col-10">
+                                                        <div class="">
+                                                            <span class="font-weight-bold">${item.nguoiBinhLuan.hoVaTen}</span>
+
+                                                            <span>${item.ngayBinhLuan}</span>
+                                                        </div>
+                                                        <div class="d-flex mt-1 mb-1">
+                                                            <c:forEach begin="1" end="5" var="star">
+                                                                <c:choose>
+                                                                    <c:when test="${star <= item.danhGia}">
+                                                                        <span class="fa fa-star fs-11px orange"></span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span class="fa fa-star fs-11px"></span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </div>
+
+                                                        <span class="fw-normal">
+                                                        ${item.binhLuan}
                                                     </span>
-                                                    <br>
-        
-                                                    <span class="font-weight-bold">Sản phẩm bình luận:</span>
-                                                    <br>
-                                                    <img src="images/nhan-vat-ha-cap-tomozaki_tap-6-5_ban-gioi-han.jpg" alt=""
-                                                        width="120" height="90" class="img rounded">
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-danger w-100 h-100 font-weight-bold">Xóa</button>
+                                                        <br>
+
+                                                        <span class="font-weight-bold">Sản phẩm bình luận:</span>
+                                                        <br>
+                                                        <img src="${item.sanPham.anhSanPhams[0].url}" alt="${item.sanPham.anhSanPhams[0].url}"
+                                                             width="120" height="90" class="img rounded">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <a class="btn btn-danger w-100 h-100 font-weight-bold" href="${pageContext.request.contextPath}/admin/binh-luan/delete?id=${item.id}">Xóa</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="mx-4 mb-4 w-100 comment-item">
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <div class="">
-                                                        <span class="font-weight-bold">Công Huấn</span>
-        
-                                                        <span>16:30 11/01/2024</span>
-                                                    </div>
-                                                    <div class="d-flex mt-1 mb-1">
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px"></span>
-                                                    </div>
-                                                    <span class="fw-normal">
-                                                        Sản phẩm quá xinh đẹp tuyệt vời cảm ơn nhà sản xuất
-                                                    </span>
-                                                    <br>
-        
-                                                    <span class="font-weight-bold">Sản phẩm bình luận:</span>
-                                                    <br>
-                                                    <img src="images/nhan-vat-ha-cap-tomozaki_tap-6-5_ban-gioi-han.jpg" alt=""
-                                                        width="120" height="90" class="img rounded">
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-danger w-100 h-100 font-weight-bold">Xóa</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mx-4 mb-4 w-100 comment-item">
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <div class="">
-                                                        <span class="font-weight-bold">Công Huấn</span>
-        
-                                                        <span>16:30 11/01/2024</span>
-                                                    </div>
-                                                    <div class="d-flex mt-1 mb-1">
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px orange"></span>
-                                                        <span class="fa fa-star fs-11px"></span>
-                                                    </div>
-                                                    <span class="fw-normal">
-                                                        Sản phẩm quá xinh đẹp tuyệt vời cảm ơn nhà sản xuất
-                                                    </span>
-                                                    <br>
-        
-                                                    <span class="font-weight-bold">Sản phẩm bình luận:</span>
-                                                    <br>
-                                                    <img src="images/nhan-vat-ha-cap-tomozaki_tap-6-5_ban-gioi-han.jpg" alt=""
-                                                        width="120" height="90" class="img rounded">
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-danger w-100 h-100 font-weight-bold">Xóa</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
                                         <div class="mx-auto">
                                             <ul class="pagination">
-                                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/trang-chu?p=${listBL.first ? 0 : listBL.number - 1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                                <c:forEach begin="0" end="${listBL.totalPages <= 0 ? 0 : listBL.totalPages - 1}" var="pageItemNumber">
+                                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/trang-chu?p=${pageItemNumber}">${pageItemNumber + 1}</a></li>
+                                                </c:forEach>
+                                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/trang-chu?p=${listBL.last ? listBL.totalPages - 1 : listBL.number + 1}"><i class="fa-solid fa-chevron-right"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -422,7 +371,13 @@
             </div>
         </div>
     </div>
-
+    <script>
+        document.getElementById('orderStatusSelect').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var url = '${pageContext.request.contextPath}/admin/trang-chu/binh-luan?tt=' + selectedValue;
+            window.location.href = url;
+        });
+    </script>
 </body>
 
 </html>
