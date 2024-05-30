@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <div class="container-fluid text-center" style="padding-top: 195px">
 
-    <span class="text-body-secondary fs14px">MY ACCOUNT</span>
-    <h4>Address Book</h4>
+    <span class="text-body-secondary fs14px">Tài Khoản Của Tôi</span>
+    <h4>Sổ Địa Chỉ</h4>
 
     <hr class="mt-5">
 
@@ -54,7 +54,7 @@
                     class="card col-6 m-2 card-2-items-inline rounded-0 none-underline d-flex justify-content-center text-center"
                     style="border: 1px solid rgb(210,210,210)">
 
-                    <span class="text-body-secondary fs15px">Add an address</span>
+                    <span class="text-body-secondary fs15px">Thêm địa chỉ mới</span>
 
                 </a>
 
