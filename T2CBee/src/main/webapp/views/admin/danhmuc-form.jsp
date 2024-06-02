@@ -57,6 +57,11 @@
                                         <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/danh-muc">Mới</a>
                                         <a class="btn btn-danger mb-3 ml-2" href="${pageContext.request.contextPath}/admin/danh-muc/delete?id=${danhMuc.maDanhMuc}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
                                         <br>
+                                        <c:if test="${systemError != null}">
+                                            <div class="alert alert-danger alert-dismissible">
+                                                <strong>Lỗi!</strong> ${systemError}
+                                            </div>
+                                        </c:if>
                                         <label class="form-label">ID</label>
                                         <form:input cssClass="form-control" path="maDanhMuc" readonly="${isUpdatePage}"/>
                                         <label class="form-label">Tên</label>

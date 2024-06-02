@@ -116,7 +116,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/dang-xuat">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Đăng Xuất</span>
                 </a>

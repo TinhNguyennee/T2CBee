@@ -57,6 +57,11 @@
                                         <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/phieu-nhap">Mới</a>
                                         <a class="btn btn-danger mb-3 ml-2" href="${pageContext.request.contextPath}/admin/phieu-nhap/delete?id=${phieuNhapHang.maPhieuNhap}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
                                         <br>
+                                        <c:if test="${systemError != null}">
+                                            <div class="alert alert-danger alert-dismissible">
+                                                <strong>Lỗi!</strong> ${systemError}
+                                            </div>
+                                        </c:if>
                                         <label class="form-label">Mã phiếu nhập</label>
                                         <form:input cssClass="form-control" path="maPhieuNhap" readonly="${isUpdatePage}"/>
                                         <label class="form-label">Nhà cung cấp</label>

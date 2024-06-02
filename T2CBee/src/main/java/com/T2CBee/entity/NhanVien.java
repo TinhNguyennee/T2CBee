@@ -11,10 +11,14 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class NhanVien {
     @Id
     @Column(name = "ma_nhan_vien")
     private String id;
+
+    @Column(name = "mat_khau")
+    private String matKhau;
 
     @Column(name = "ho_ten")
     private String hoTen;
