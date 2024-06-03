@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.T2CBee.entity.NhanVien;
+import com.T2CBee.entity.KhachHang;
 import com.T2CBee.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 			String uri = request.getRequestURI();
-			NhanVien user = session.get("user"); // lấy từ session
+			KhachHang user = session.get("user"); // lấy từ session
 			String error = "";
 			
 			
@@ -27,7 +27,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 			response.sendRedirect("/dang-nhap?error=" + error);
 			}else		
 			// không đúng vai trò
-			if(!user.isChucVu() && uri.startsWith("/admin/")) {
+			if(uri.startsWith("/admin/")) {
 			error = "Access denied!";
 			response.sendRedirect("/dang-nhap?error=" + error);
 			}

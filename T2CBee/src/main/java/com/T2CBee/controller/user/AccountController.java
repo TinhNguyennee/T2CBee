@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.T2CBee.entity.NhanVien;
-import com.T2CBee.repository.NhanVienRepository;
+import com.T2CBee.entity.KhachHang;
+import com.T2CBee.repository.KhachHangRepository;
 import com.T2CBee.service.SessionService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AccountController {
 
 	@Autowired
-	NhanVienRepository repository;
+	KhachHangRepository repository;
 	@Autowired
 	SessionService session;
 
@@ -32,12 +32,11 @@ public class AccountController {
 			@RequestParam("password") String password, HttpServletResponse response) {
 		session.remove("user");
 		try {
-			NhanVien user = repository.getOne(username);
-			if (!user.getMatKhau().equals(password)) {
+			KhachHang user = repository.findBySoDienThoaiEquals(username);
+			if (!user.getPassword().equals(password)) {
 				model.addAttribute("message", "Invalid password");
 
 			} else {
-//				System.out.println("hellow "+user.getId());
 				
 				
 				String uri = session.get("security-uri");
@@ -50,7 +49,7 @@ public class AccountController {
 				} else {
 					session.set("user", user);
 					model.addAttribute("message", "Login succeed");
-					System.out.println(user.getHoTen());
+					System.out.println(user.getHoVaTen());
 					response.sendRedirect("/trang-chu");
 				}
 				

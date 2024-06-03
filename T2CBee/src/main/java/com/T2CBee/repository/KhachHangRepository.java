@@ -13,4 +13,6 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, Integer> {
             "OR e.email LIKE %:keyword% " +
             "OR e.soDienThoai LIKE %:keyword% ")
     Page<KhachHang> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    
+    KhachHang findBySoDienThoaiEquals(String sodienthoai);
 }
