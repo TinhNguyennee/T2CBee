@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NhanVienServiceImpl implements NhanVienService{
@@ -28,7 +29,11 @@ public class NhanVienServiceImpl implements NhanVienService{
 
     @Override
     public NhanVien findById(String id) {
-        return nhanVienRepository.findById(id).get();
+        Optional<NhanVien> nhanVien = nhanVienRepository.findById(id);
+        if(nhanVien.isPresent()) {
+            return nhanVien.get();
+        }
+        return null;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class AdminHomeController {
     @Autowired
     private BinhLuanService binhLuanService;
 
-    @GetMapping("/trang-chu")
+    @GetMapping({"/trang-chu", "/binh-luan"})
     public String home(Model model, @RequestParam("p") Optional<Integer> p) {
         //dashboard
         model.addAttribute("countDHCXL", gioHangService.findByTrangThai("DANG_CHO").size());

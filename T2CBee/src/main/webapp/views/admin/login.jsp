@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,12 +21,9 @@
 
 <body class="bg-secondary">
     <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
-
             <div class="col-xl-10 col-lg-12 col-md-9">
-
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -33,35 +32,40 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Chào mừng trở lại! <h1>${tessa}</h1></h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Chào mừng trở lại!</h1>
                                     </div>
-                                    <form class="user">
+                                    <c:if test="${error != null}">
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <strong>Lỗi!</strong> ${error}
+                                        </div>
+                                    </c:if>
+                                    <form:form action="${pageContext.request.contextPath}/admin/dang-nhap" method="POST" modelAttribute="nhanVien" cssClass="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <form:input class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Mã Nhân Viên...">
+                                                placeholder="Mã Nhân Viên..." path="id"/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Mật Khẩu...">
+                                            <form:input type="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" placeholder="Mật Khẩu..." path="matKhau"/>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember"/>
                                                 <label class="custom-control-label" for="customCheck">Ghi nhớ tài khoản?</label>
                                             </div>
                                         </div>
-                                        <a href="${pageContext.request.contextPath}/admin/home" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Đăng Nhập
-                                        </a>
+                                        </button>
                                         <hr>
-                                        <a href="${pageContext.request.contextPath}/admin/home" class="btn btn-google btn-user btn-block">
+                                        <a href="#" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Đăng nhập với Google
                                         </a>
-                                        <a href="${pageContext.request.contextPath}/admin/home" class="btn btn-facebook btn-user btn-block">
+                                        <a href="#" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Đăng nhập với Facebook
                                         </a>
-                                    </form>
+                                    </form:form>
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="${pageContext.request.contextPath}/admin/quen-mat-khau">Quên Mật Khẩu?</a>

@@ -152,6 +152,11 @@
                                             <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                                         </form>
                                     </div>
+                                    <c:if test="${systemError != null}">
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <strong>Lỗi!</strong> ${systemError}
+                                        </div>
+                                    </c:if>
                                     <hr>
                                     <%--  Table bình luận--%>
                                     <div class="row">
