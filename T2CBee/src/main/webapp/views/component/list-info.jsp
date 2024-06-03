@@ -14,4 +14,6 @@
 		class="text-black none-underline list-hover">Tài khoản</a></li>
 	<li class="list-group-item border-0"><a href="/so-dia-chi"
 		class="text-black none-underline list-hover">Sổ địa chỉ</a></li>
+	<li class="list-group-item border-0"><a href="/dang-xuat"
+		class="text-black none-underline list-hover">Đăng xuất</a></li>
 </ul>

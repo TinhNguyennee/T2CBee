@@ -16,15 +16,15 @@
   <div class="container-acc">
     <div class="title">ĐĂNG NHẬP</div>
     <div class="content">
-      <form action="#">
+      <form action="dang-nhap" method="post">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Họ và tên</span>
-            <input type="text" placeholder="Nhập tên của bạn" required> <br>
+            <input name="username" type="text" placeholder="Nhập tên của bạn" required> <br>
           </div>
           <div class="input-box">
             <span class="details">Nhập mật khẩu</span>
-            <input type="text" placeholder="Nhập mật khẩu " required>
+            <input name="password" type="text" placeholder="Nhập mật khẩu " required>
           </div>
           <div class="radio">
             <input type="checkbox" id="checkboxId" name="checkboxName">

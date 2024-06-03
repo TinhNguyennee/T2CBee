@@ -1,12 +1,12 @@
 package com.T2CBee.repository;
 
-import com.T2CBee.entity.NhaCungCap;
-import com.T2CBee.entity.NhanVien;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.T2CBee.entity.NhanVien;
 
 public interface NhanVienRepository extends JpaRepository<NhanVien, String> {
     @Query("SELECT e FROM NhanVien e WHERE " +
