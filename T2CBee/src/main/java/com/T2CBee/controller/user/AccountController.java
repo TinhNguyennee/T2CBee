@@ -76,5 +76,26 @@ public class AccountController {
 	public String register() {
 		return "account/register";
 	}
+	@PostMapping("/tai-khoan/dang-ky")
+	public String Resgister(@RequestParam("hoten") String hoten,
+							@RequestParam("user") String user,
+							@RequestParam("diachi") String diachi,
+							@RequestParam("sdt") String sdt,
+							@RequestParam("mk") String mk,
+							@RequestParam("snmk") String snmk,
+							@RequestParam("gender") Boolean gender) {
+		KhachHang  khachhang = new KhachHang ();
+		khachhang.setHoVaTen(hoten);
+		khachhang.setDiaChi(diachi);
+		khachhang.setSoDienThoai(sdt);
+		khachhang.setPassword(snmk);
+		khachhang.setGioiTinh(gender);
+		khachhang.setNgayTao(null);
+		khachhang.setNgaySinh(null);
+		khachhang.setEmail(null);
 
+		repository.save(khachhang);
+
+		return "account/login";
+	}
 }
