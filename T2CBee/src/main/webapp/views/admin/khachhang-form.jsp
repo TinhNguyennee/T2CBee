@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>T2C-Bee - Khách Hàng</title>
+    <title>T2CBee - Khách Hàng</title>
     <%@include file="../component/css-embed.jsp" %>
 
 </head>

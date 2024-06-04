@@ -50,4 +50,9 @@ public class NhanVienServiceImpl implements NhanVienService{
     public Page<NhanVien> findByKeyword(String keyword, Pageable pageable) {
         return nhanVienRepository.findByKeyword(keyword, pageable);
     }
+
+    @Override
+    public NhanVien findByEmail(String email) {
+        return nhanVienRepository.findByEmail(email);
+    }
 }

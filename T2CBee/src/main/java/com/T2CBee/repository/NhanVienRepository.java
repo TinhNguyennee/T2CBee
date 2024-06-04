@@ -15,4 +15,8 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, String> {
             "OR e.email LIKE %:keyword% " +
             "OR e.diaChi LIKE %:keyword% ")
     Page<NhanVien> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+
+
+    @Query("SELECT e FROM NhanVien e WHERE e.email = :email")
+    NhanVien findByEmail(@Param("email") String email);
 }

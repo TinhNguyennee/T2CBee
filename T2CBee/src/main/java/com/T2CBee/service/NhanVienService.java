@@ -19,4 +19,6 @@ public interface NhanVienService {
     void deleteById(String id);
 
     Page<NhanVien> findByKeyword(String keyword, Pageable pageable);
+
+    NhanVien findByEmail(String email);
 }

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>T2CBee - Quên Mật Khẩu</title>
+    <title>T2CBee - Xác nhận mật khẩu</title>
     <%@include file="../component/css-embed.jsp" %>
 
 </head>
@@ -31,22 +31,27 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Quên Mật Khẩu?</h1>
-                                        <p class="mb-4">Quên mất tài khoản đăng nhập? Hãy nhập địa chỉ Email và chúng tôi sẽ gửi bạn link để lấy lại mật khẩu!</p>
+                                        <h1 class="h4 text-gray-900 mb-2">Thay Đổi Mật Khẩu</h1>
+                                        <p class="mb-4">Nhập mật khẩu mới và chúng tôi sẽ thay đổi nó cho bạn!</p>
                                     </div>
                                     <c:if test="${message != null}">
                                         <div class="alert ${alertCssClass} alert-dismissible">
-                                            ${message}
+                                                ${message}
                                         </div>
                                     </c:if>
-                                    <form class="user" action="${pageContext.request.contextPath}/admin/quen-mat-khau" method="POST">
+                                    <form class="user" action="${pageContext.request.contextPath}/admin/thay-doi-mat-khau" method="POST">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Nhập Email..." name="email" required>
+                                            <input type="text" class="form-control form-control-user"
+                                                 aria-describedby="emailHelp"
+                                                placeholder="Mật khẩu..." name="matKhau" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                    aria-describedby="d"
+                                                   placeholder="Xác nhận mật khẩu..." name="nhapLaiMatKhau" required>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Lấy Lại Mật Khẩu
+                                            Thay Đổi Mật Khẩu
                                         </button>
                                     </form>
                                     <hr>
