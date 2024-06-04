@@ -1,5 +1,6 @@
 package com.T2CBee.controller.admin;
 
+import com.T2CBee.entity.GoogleUserInfo;
 import com.T2CBee.entity.MailInfo;
 import com.T2CBee.entity.NhanVien;
 import com.T2CBee.entity.ResetAdminPasswordToken;
@@ -7,17 +8,18 @@ import com.T2CBee.service.CookieService;
 import com.T2CBee.service.MailerService;
 import com.T2CBee.service.NhanVienService;
 import com.T2CBee.service.SessionService;
+import com.T2CBee.util.GoogleLoginUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -176,6 +178,49 @@ public class AdminLoginController {
         sessionService.remove("nhanVien");
         sessionService.remove("resetPwCookie");
         return "redirect:/admin/dang-nhap";
+    }
+
+    //Google Login
+    @Value("${google.client.id}")
+    private String clientGoogletId;
+
+    @Value("${google.client.secret}")
+    private String clientGoogleSecret;
+
+    @Value("${google.redirect.uri}")
+    private String redirectGoogleUri;
+
+
+    @GetMapping("dang-nhap/google")
+    public String google(@RequestParam("code") String code, Model model) {
+        boolean validAccess = isValidAccessGoogle(code);
+        if(validAccess) {
+            return "redirect:/admin/trang-chu";
+        }
+        return "redirect:/admin/dang-nhap";
+    }
+
+    public boolean isValidAccessGoogle(String code) {
+        // Bước 1: Lấy access token
+        String accessToken = GoogleLoginUtil.getAccessToken(code, clientGoogletId, clientGoogleSecret, redirectGoogleUri);
+        // Bước 2: Lấy thông tin người dùng
+        String userInfoJson = GoogleLoginUtil.getUserInfo(accessToken);
+        GoogleUserInfo userInfo = null;
+        try {
+            userInfo = new ObjectMapper().readValue(userInfoJson , GoogleUserInfo.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Bước 3: Kiểm tra Email có trong hệ thống
+        if(userInfo != null) {
+            NhanVien nv = nhanVienService.findByEmail(userInfo.getEmail());
+            if(nv != null) {
+                sessionService.set("nhanVien", nv);
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getResetEmailForm(String tenNhanVien, String urlLogo, String urlResetPassword) {

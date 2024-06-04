@@ -56,7 +56,11 @@
                                             Đăng Nhập
                                         </button>
                                         <hr>
-                                        <a href="#" class="btn btn-google btn-user btn-block">
+
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/admin/dang-nhap/google&response_type=code
+		   &client_id=12456709965-bcd1s08rm1sjro0md66hbh6eu4updfeq.apps.googleusercontent.com&approval_prompt=force"
+		                                class="btn btn-google btn-user btn-block">
+
                                             <i class="fab fa-google fa-fw"></i> Đăng nhập với Google
                                         </a>
                                         <a href="#" class="btn btn-facebook btn-user btn-block">
