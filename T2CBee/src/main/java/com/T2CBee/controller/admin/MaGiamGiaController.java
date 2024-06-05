@@ -1,13 +1,11 @@
 package com.T2CBee.controller.admin;
 
-import com.T2CBee.entity.ChiTietDanhMuc;
-import com.T2CBee.entity.ChiTietMaGiamGia;
-import com.T2CBee.entity.MaGiamGia;
-import com.T2CBee.entity.SanPham;
+import com.T2CBee.entity.*;
 import com.T2CBee.repository.ChiTietMaGiamGiaRepository;
 import com.T2CBee.repository.MaGiamGiaRepository;
 import com.T2CBee.service.NhanVienService;
 import com.T2CBee.service.SanPhamService;
+import com.T2CBee.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +35,8 @@ public class MaGiamGiaController {
 
     @Autowired
     ChiTietMaGiamGiaRepository chiTietMaGiamGiaRepository;
+    @Autowired
+    private SessionService sessionService;
 
     @GetMapping("")
     public String index(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -84,7 +84,8 @@ public class MaGiamGiaController {
             return "redirect:/admin/ma-giam-gia";
         }
         //Kết thúc lưu chi tiết giảm giá
-        maGiamGia.setNguoiThem(nhanVienService.findById("NV01"));
+        NhanVien nv = sessionService.get("nhanVien");
+        maGiamGia.setNguoiThem(nv);
         maGiamGiaRepository.save(maGiamGia);
 
         if(listCTGG != null) {

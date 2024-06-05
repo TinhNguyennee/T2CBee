@@ -5,6 +5,7 @@ import com.T2CBee.entity.NhanVien;
 import com.T2CBee.service.NhaCungCapService;
 import com.T2CBee.service.NhaCungCapServiceImpl;
 import com.T2CBee.service.NhanVienService;
+import com.T2CBee.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,8 @@ public class NhaCungCapController {
     NhaCungCapService nhaCungCapService;
     @Autowired
     NhanVienService nhanVienService;
+    @Autowired
+    private SessionService sessionService;
 
     @GetMapping("")
     public String nhaCungCap(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -39,7 +42,8 @@ public class NhaCungCapController {
     @PostMapping("")
     public String handlePostNhaCungCap(NhaCungCap ncc, BindingResult bindingResult, Model model) {
         //sau nay get session object NhanVien o day
-        ncc.setNguoiThem(nhanVienService.findById("NV01"));
+        NhanVien nv = sessionService.get("nhanVien");
+        ncc.setNguoiThem(nv);
         nhaCungCapService.save(ncc);
         return "redirect:/admin/nha-cung-cap";
     }

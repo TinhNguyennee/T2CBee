@@ -1,7 +1,9 @@
 package com.T2CBee.controller.admin;
 
+import com.T2CBee.entity.NhanVien;
 import com.T2CBee.entity.ThuongHieu;
 import com.T2CBee.service.NhanVienService;
+import com.T2CBee.service.SessionService;
 import com.T2CBee.service.ThuongHieuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,8 @@ public class ThuongHieuController {
 
     @Autowired
     private NhanVienService nhanVienService;
+    @Autowired
+    private SessionService sessionService;
 
     @GetMapping("")
     public String index(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -34,7 +38,8 @@ public class ThuongHieuController {
 
     @PostMapping("")
     public String handlePostThuongHieu(ThuongHieu th, BindingResult bindingResult, Model model) {
-        th.setNguoiThem(nhanVienService.findById("NV01"));
+        NhanVien nv = sessionService.get("nhanVien");
+        th.setNguoiThem(nv);
         thuongHieuService.save(th);
         return "redirect:/admin/thuong-hieu";
     }

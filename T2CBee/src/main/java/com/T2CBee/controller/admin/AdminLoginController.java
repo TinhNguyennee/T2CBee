@@ -200,6 +200,11 @@ public class AdminLoginController {
         return "redirect:/admin/dang-nhap";
     }
 
+    @GetMapping(value = "/dang-nhap/google", params = "error")
+    public String handleGoogle() {
+        return "redirect:/admin/dang-nhap";
+    }
+
     public boolean isValidAccessGoogle(String code) {
         // Bước 1: Lấy access token
         String accessToken = GoogleLoginUtil.getAccessToken(code, clientGoogletId, clientGoogleSecret, redirectGoogleUri);

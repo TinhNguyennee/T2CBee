@@ -22,4 +22,8 @@ public interface GioHangRepository extends JpaRepository<GioHang, Integer> {
             "OR e.khachHang.email LIKE %:keyword% " +
             "OR e.khachHang.hoVaTen LIKE %:keyword%")
     Page<GioHang> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+
+    //Thống kê doanh thu
+    @Query("SELECT SUM(ctgh.sanPham.giaBan + ctgh.soLuong) FROM GioHang e JOIN ChiTietGioHang ctgh WHERE e.trangThai = :tt")
+    Double countDoanhThuByTrangThai(@Param("tt") String trangThai);
 }
