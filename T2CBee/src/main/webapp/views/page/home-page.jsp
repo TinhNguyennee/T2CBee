@@ -80,27 +80,78 @@
 						<h4>SẢN PHẨM</h4>
 						<h2 class="text-secondary fw-bold pb-1">TỐT NHẤT CỦA CHÚNG TÔI</h2>
 						<div class="list-group rounded-0">
-							<a href="/trang-chu" class="list-group-item lst list-group-item-action item-active"
+							<a href="/trang-chu"
+								class="list-group-item lst list-group-item-action item-active"
 								aria-current="true">Tất Cả</a>
-							<a href="/trang-chu/Nội Thất" class="list-group-item lst list-group-item-action"
-								aria-current="true">Nội
-								Thất</a>
-							<a href="/trang-chu/Trang Trí" class="list-group-item lst list-group-item-action">Trang
-								Trí</a>
-							<a href="/trang-chu/Chiếu Sáng" class="list-group-item lst list-group-item-action">Chiếu
-								Sáng</a>
-							<a href="/trang-chu/Ngoài Trời" class="list-group-item lst list-group-item-action">Ngoài
-								Trời</a>
-							<a href="/trang-chu/Sân Vườn" class="list-group-item lst list-group-item-action">Sân
-								Vườn</a>
-							<a href="/trang-chu/Phụ Kiện" class="list-group-item lst list-group-item-action">Phụ
-								Kiện</a>
+							<c:forEach var="danhMuc" items="${listDanhMuc}">
+								<a href="/trang-chu/${danhMuc.tenDanhMuc}"
+									class="list-group-item lst list-group-item-action ${danhMuc.tenDanhMuc == param['danh-muc'] ? 'item-active' : ''}"
+									aria-current="true">${danhMuc.tenDanhMuc}</a>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-9 p-0">
-					<div class="product-list-items ">
-						<div id="carouselExample" class="carousel slide">
+					<div class="product-list-items">
+						<div class="row mx-auto my-auto" style="height: 580px;">
+							<div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+								<div class="carousel-inner" role="listbox">
+									<c:forEach var="sanPham" items="${page.content}" varStatus="status">
+										<div class="carousel-item carousel-product ${status.first ? 'active' : ''}">
+											<div class="col-md-4 p-2">
+												<div class="card rounded-0">
+													<div class="card-image position-relative">
+														<c:if test="${not empty sanPham.anhSanPhams}">
+															<img src="${sanPham.anhSanPhams[0].url}" height="350"
+																class="card-img-top" alt="...">
+															<div
+																class="add-to-cart-btn d-flex justify-content-center p-2 border position-absolute start-50 translate-middle">
+																<a href=""
+																	class="text-decoration-none text-dark fw-medium me-3 w-100">Add
+																	to cart</a>
+																<a href=""><i class="bi bi-suit-heart"></i></a>
+																<a href=""><i class="bi bi-toggles"></i></a>
+																<a href="/chi-tiet-san-pham/${sanPham.maSanPham}"><i
+																		class="bi bi-search"></i></a>
+															</div>
+														</c:if>
+													</div>
+													<div class="card-body">
+														<div class="title-head d-flex m-0">
+															<p class="card-text mb-2 w-100" style="font-size: 12px;">
+																<c:forEach items="${sanPham.danhMucs}" var="danhMuc"
+																	varStatus="loop">
+																	${danhMuc} ${!loop.last ? ', ' : ''}
+																</c:forEach>
+															</p>
+															<div class="rating w-100 text-end text-warning">
+																<i class="bi bi-star-fill"></i>
+																<i class="bi bi-star-fill"></i>
+																<i class="bi bi-star-fill"></i>
+																<i class="bi bi-star-fill"></i>
+																<i class="bi bi-star"></i>
+															</div>
+														</div>
+														<p class="card-title mb-2 fw-bold">${sanPham.tenSanPham}</p>
+														<h5 class="fw-bold product-price">${sanPham.giaBan}</h5>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+								<a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel"
+									role="button" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon prev-icon" aria-hidden="true"></span>
+								</a>
+								<a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel"
+									role="button" data-bs-slide="next">
+									<span class="carousel-control-next-icon next-icon" aria-hidden="true"></span>
+								</a>
+							</div>
+						</div>
+						<!-- <div id="carouselExample" class="carousel slide">
 							<div class="row carousel-inner">
 								<c:forEach var="sanPham" items="${page.content}" varStatus="status">
 									<div class="carousel-item carousel-product ${status.first ? 'active' : ''}">
@@ -158,7 +209,7 @@
 									<span class="visually-hidden">Next</span>
 								</button>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 		</section>

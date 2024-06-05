@@ -109,4 +109,14 @@ public class SanPhamServiceImpl implements SanPhamService {
     public Page<SanPham> findByPriceBetween(double minPrice, double maxPrice, Pageable pageable) {
         return dao.findByGiaBanBetween(minPrice, maxPrice, pageable);
     }
+
+    @Override
+    public int countByDanhMuc(String tenDanhMuc) {
+        return dao.countByDanhMuc(tenDanhMuc);
+    }
+
+    @Override
+    public int countAllSanPham() {
+        return dao.countAllSanPham();
+    }
 }

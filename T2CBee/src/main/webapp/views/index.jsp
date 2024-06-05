@@ -46,17 +46,22 @@
 			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 			crossorigin="anonymous"></script>
 		<script>
-			var itemss = document.querySelectorAll('.carousel .carousel-product')
-			console.log(itemss)
-			itemss.forEach((el) => {
-				const slide = 4
+			let items = document.querySelectorAll('.carousel .carousel-product')
+
+			items.forEach((el) => {
+				const minPerSlide = 4
 				let next = el.nextElementSibling
-				for (var i = 1; i < slide; i++) {
+				for (var i = 1; i < minPerSlide; i++) {
+					if (!next) {
+						// wrap carousel by using first child
+						next = items[0]
+					}
 					let cloneChild = next.cloneNode(true)
 					el.appendChild(cloneChild.children[0])
 					next = next.nextElementSibling
 				}
 			})
+
 		</script>
 
 	</body>

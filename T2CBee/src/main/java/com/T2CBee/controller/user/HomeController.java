@@ -17,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.T2CBee.entity.SanPham;
 import com.T2CBee.repository.SanPhamRepository;
+import com.T2CBee.service.ChiTietDanhMucService;
 import com.T2CBee.service.SanPhamService;
 
 @Controller
 public class HomeController {
 	@Autowired
 	private SanPhamService sanPhamService;
+
+	@Autowired
+	private ChiTietDanhMucService chiTietDanhMucService;
 
 	// Home Page
 	@GetMapping("/trang-chu")
@@ -31,6 +35,7 @@ public class HomeController {
 		model.addAttribute("page", sanPhamService.findAll(pageable));
 		model.addAttribute("listSanPhamNoiBat", sanPhamService.findAll());
 		model.addAttribute("listSanPhamMoi", sanPhamService.findNewProducts());
+		model.addAttribute("listDanhMuc", chiTietDanhMucService.getAllDanhMucs());
 		model.addAttribute("path", "page/home-page");
 		return "index";
 	}
@@ -49,6 +54,7 @@ public class HomeController {
 		model.addAttribute("path", "page/home-page");
 		model.addAttribute("listSanPhamNoiBat", sanPhamService.findAll());
 		model.addAttribute("listSanPhamMoi", sanPhamService.findNewProducts());
+		model.addAttribute("listDanhMuc", chiTietDanhMucService.getAllDanhMucs());
 		return "index";
 	}
 

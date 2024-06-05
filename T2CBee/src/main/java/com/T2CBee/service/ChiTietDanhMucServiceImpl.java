@@ -1,6 +1,7 @@
 package com.T2CBee.service;
 
 import com.T2CBee.entity.ChiTietDanhMuc;
+import com.T2CBee.entity.DanhMuc;
 import com.T2CBee.repository.ChiTietDanhMucRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,5 +43,10 @@ public class ChiTietDanhMucServiceImpl implements ChiTietDanhMucService{
     @Override
     public void deleteAllChiTietDanhMucBySanPhamID(Integer maSanPham) {
         dao.deleteAllChiTietDanhMucBySanPhamID(maSanPham);
+    }
+
+    @Override
+    public List<DanhMuc> getAllDanhMucs() {
+        return dao.findAllDanhMucs();
     }
 }

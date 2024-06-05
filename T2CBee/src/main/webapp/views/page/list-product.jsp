@@ -54,20 +54,11 @@
 						<div class="col-md-3">
 							<div class="list border-bottom pb-5">
 								<h4>DANH MỤC SẢN PHẨM</h4>
-								<a href="/danh-sach-san-pham/Tất Cả" class="list-group pb-2 pt-3">+ Tất Cả
-									(14)</a>
-								<a href="/danh-sach-san-pham/Phụ Kiện" class="list-group pb-2">+ Phụ kiện
-									(14)</a>
-								<a href="/danh-sach-san-pham/Trang Trí" class="list-group pb-2">+ Trang trí
-									(14)</a>
-								<a href="/danh-sach-san-pham/Nội Thất" class="list-group pb-2">+ Nội thất
-									(28)</a>
-								<a href="/danh-sach-san-pham/Chiếu Sáng" class="list-group pb-2">+ Chiếu sáng
-									(14)</a>
-								<a href="/danh-sach-san-pham/Ngoài Trời" class="list-group pb-2">+ Ngoài trời
-									(14)</a>
-								<a href="/danh-sach-san-pham/Thể Thao" class="list-group pb-2">+ Thể thao
-									(13)</a>
+								<a href="/danh-sach-san-pham/Tất Cả" class="list-group pb-2 pt-3">+ Tất Cả (${allCounts})</a>
+								<c:forEach var="danhMuc" items="${listDanhMuc}">
+									<a href="/danh-sach-san-pham/${danhMuc.tenDanhMuc}" class="list-group pb-2 pt-3">+ ${danhMuc.tenDanhMuc}
+										(${danhMucCounts[danhMuc.tenDanhMuc]})</a>
+								</c:forEach>
 							</div>
 							<div class="filter border-bottom pb-5">
 								<h4 class="pt-5">LỌC THEO GIÁ</h4>

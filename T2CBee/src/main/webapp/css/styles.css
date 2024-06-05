@@ -199,15 +199,6 @@ footer a {
     }
 }
 
-@media (max-width: 767px) {
-    .carousel-inner .carousel-item>div {
-        display: none;
-    }
-
-    .carousel-inner .carousel-item>div:first-child {
-        display: block;
-    }
-}
 
 .card {
     cursor: pointer;
@@ -233,7 +224,7 @@ footer a {
     display: flex !important;
 }
 
-.add-to-cart-btn a:hover{
+.add-to-cart-btn a:hover {
     color: var(--color-primary) !important;
 }
 
@@ -248,4 +239,47 @@ footer a {
 
 .product-list-items a:hover i {
     color: var(--color-primary);
+}
+
+
+@media (max-width: 767px) {
+    .carousel-inner .carousel-product>div {
+        display: none;
+    }
+
+    .carousel-inner .carousel-product>div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(25%);
+    }
+
+    .carousel-inner .carousel-item-start.active,
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-25%);
+    }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start {
+    transform: translateX(0);
+}
+
+.prev-icon {
+    background-image: url(https://cdn-icons-png.flaticon.com/128/271/271220.png);
+}
+.next-icon {
+    background-image: url(https://cdn-icons-png.flaticon.com/128/271/271228.png);
 }

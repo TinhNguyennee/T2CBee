@@ -1,7 +1,12 @@
 package com.T2CBee.repository;
 
 import com.T2CBee.entity.ChiTietDanhMuc;
+import com.T2CBee.entity.DanhMuc;
+
 import jakarta.transaction.Transactional;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +20,7 @@ public interface ChiTietDanhMucRepository extends JpaRepository<ChiTietDanhMuc, 
     @Modifying
     @Query("DELETE FROM ChiTietDanhMuc e where e.sanPham.maSanPham = :masp")
     void deleteAllChiTietDanhMucBySanPhamID(@Param("masp") Integer masp);
+
+    @Query("SELECT DISTINCT e.danhMuc FROM ChiTietDanhMuc e")
+    List<DanhMuc> findAllDanhMucs();
 }

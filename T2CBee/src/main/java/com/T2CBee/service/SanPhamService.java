@@ -45,4 +45,8 @@ public interface SanPhamService{
     List<String> findDanhMucNamesByGroupId(String groupId);
 
     SanPham findSanPhamByPhanLoaiAndGroup(String groupId, Optional<String> productType);
+
+    int countByDanhMuc(String tenDanhMuc);
+
+    int countAllSanPham();
 }

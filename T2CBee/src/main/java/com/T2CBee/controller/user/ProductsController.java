@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import com.T2CBee.entity.AnhSanPham;
 import com.T2CBee.entity.BinhLuan;
+import com.T2CBee.entity.DanhMuc;
 import com.T2CBee.entity.SanPham;
+import com.T2CBee.service.ChiTietDanhMucService;
 import com.T2CBee.service.SanPhamService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,9 @@ import com.T2CBee.service.SanPhamService;
 import com.T2CBee.service.SessionService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -36,6 +40,9 @@ public class ProductsController {
 
 	Page<SanPham> lstProducts;
 
+	@Autowired
+	private ChiTietDanhMucService chiTietDanhMucService;
+
 	// Product Details
 	@Autowired
 	SanPhamService daoSanPham;
@@ -43,7 +50,7 @@ public class ProductsController {
 	// Product Details
 	@GetMapping("/chi-tiet-san-pham/{id}")
 	public String productDetails(Model model, @PathVariable(name = "id") Integer id,
-								 @RequestParam(name = "productType", required = false) Optional<String> productType) {
+			@RequestParam(name = "productType", required = false) Optional<String> productType) {
 		SanPham sp = daoSanPham.findById(id);
 		String group = sp.getGroupId().trim();
 		List<AnhSanPham> lstPicture = daoSanPham.findAllPictureByGroupId(group);
@@ -135,12 +142,21 @@ public class ProductsController {
 			lstProducts = sanPhamService.findByDanhMucAndGiaBetween(danhMuc, minPrice, maxPrice, pageable);
 		}
 
+		Map<String, Integer> danhMucCounts = new HashMap<>();
+        List<DanhMuc> danhMucs = chiTietDanhMucService.getAllDanhMucs();
+        for (DanhMuc dm : danhMucs) {
+            int count = sanPhamService.countByDanhMuc(dm.getTenDanhMuc());
+            danhMucCounts.put(dm.getTenDanhMuc(), count);
+        }
+        model.addAttribute("danhMucCounts", danhMucCounts);
+        model.addAttribute("allCounts", sanPhamService.countAllSanPham());
 		model.addAttribute("sort", sort.orElse(""));
 		model.addAttribute("pageNumber", currentPage);
 		model.addAttribute("minPrice", minPrice);
 		model.addAttribute("maxPrice", maxPrice);
 		model.addAttribute("danhMuc", danhMuc);
 		model.addAttribute("page", lstProducts);
+		model.addAttribute("listDanhMuc", chiTietDanhMucService.getAllDanhMucs());
 		model.addAttribute("path", "page/list-product");
 
 		return "index";
