@@ -80,18 +80,21 @@
 						<h4>SẢN PHẨM</h4>
 						<h2 class="text-secondary fw-bold pb-1">TỐT NHẤT CỦA CHÚNG TÔI</h2>
 						<div class="list-group rounded-0">
-							<a href="/trang-chu"
-								class="list-group-item lst list-group-item-action item-active" aria-current="true">Tất Cả</a>
-							<a href="/trang-chu/Nội Thất"
-								class="list-group-item lst list-group-item-action" aria-current="true">Nội
+							<a href="/trang-chu" class="list-group-item lst list-group-item-action item-active"
+								aria-current="true">Tất Cả</a>
+							<a href="/trang-chu/Nội Thất" class="list-group-item lst list-group-item-action"
+								aria-current="true">Nội
 								Thất</a>
 							<a href="/trang-chu/Trang Trí" class="list-group-item lst list-group-item-action">Trang
 								Trí</a>
 							<a href="/trang-chu/Chiếu Sáng" class="list-group-item lst list-group-item-action">Chiếu
 								Sáng</a>
-							<a href="/trang-chu/Ngoài Trời" class="list-group-item lst list-group-item-action">Ngoài Trời</a>
-							<a href="/trang-chu/Sân Vườn" class="list-group-item lst list-group-item-action">Sân Vườn</a>
-							<a href="/trang-chu/Phụ Kiện" class="list-group-item lst list-group-item-action">Phụ Kiện</a>
+							<a href="/trang-chu/Ngoài Trời" class="list-group-item lst list-group-item-action">Ngoài
+								Trời</a>
+							<a href="/trang-chu/Sân Vườn" class="list-group-item lst list-group-item-action">Sân
+								Vườn</a>
+							<a href="/trang-chu/Phụ Kiện" class="list-group-item lst list-group-item-action">Phụ
+								Kiện</a>
 						</div>
 					</div>
 				</div>
@@ -105,8 +108,8 @@
 											<div class="card rounded-0">
 												<div class="card-image position-relative">
 													<c:if test="${not empty sanPham.anhSanPhams}">
-														<img src="${sanPham.anhSanPhams[0].url}"
-															height="350" class="card-img-top" alt="...">
+														<img src="${sanPham.anhSanPhams[0].url}" height="350"
+															class="card-img-top" alt="...">
 														<div
 															class="add-to-cart-btn d-flex justify-content-center p-2 border position-absolute start-50 translate-middle">
 															<a href=""
@@ -114,7 +117,7 @@
 																to cart</a>
 															<a href=""><i class="bi bi-suit-heart"></i></a>
 															<a href=""><i class="bi bi-toggles"></i></a>
-															<a href="/chi-tiet-san-pham"><i
+															<a href="/chi-tiet-san-pham/${sanPham.maSanPham}"><i
 																	class="bi bi-search"></i></a>
 														</div>
 													</c:if>
@@ -122,8 +125,9 @@
 												<div class="card-body">
 													<div class="title-head d-flex m-0">
 														<p class="card-text mb-2 w-100" style="font-size: 12px;">
-															<c:forEach items="${sanPham.danhMucs}" var="danhMuc" varStatus="loop">
-																	${danhMuc} ${!loop.last ? ', ' : ''}
+															<c:forEach items="${sanPham.danhMucs}" var="danhMuc"
+																varStatus="loop">
+																${danhMuc} ${!loop.last ? ', ' : ''}
 															</c:forEach>
 														</p>
 														<div class="rating w-100 text-end text-warning">
@@ -180,7 +184,8 @@
 													to cart</a>
 												<a href=""><i class="bi bi-suit-heart"></i></a>
 												<a href=""><i class="bi bi-toggles"></i></a>
-												<a href="/chi-tiet-san-pham"><i class="bi bi-search"></i></a>
+												<a href="/chi-tiet-san-pham/${sanPham.maSanPham}"><i
+														class="bi bi-search"></i></a>
 											</div>
 										</c:if>
 									</div>
@@ -255,7 +260,8 @@
 													to cart</a>
 												<a href=""><i class="bi bi-suit-heart"></i></a>
 												<a href=""><i class="bi bi-toggles"></i></a>
-												<a href="/chi-tiet-san-pham"><i class="bi bi-search"></i></a>
+												<a href="/chi-tiet-san-pham/${sanPham.maSanPham}"><i
+														class="bi bi-search"></i></a>
 											</div>
 										</c:if>
 									</div>

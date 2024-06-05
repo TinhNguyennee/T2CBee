@@ -133,7 +133,7 @@
 																to cart</a>
 															<a href=""><i class="bi bi-suit-heart"></i></a>
 															<a href=""><i class="bi bi-toggles"></i></a>
-															<a href="/chi-tiet-san-pham"><i
+															<a href="/chi-tiet-san-pham/${sanPham.maSanPham}"><i
 																	class="bi bi-search"></i></a>
 														</div>
 													</c:if>
