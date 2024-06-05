@@ -151,7 +151,7 @@ footer a {
 .cart-page {
     width: 450px;
     font-style: normal;
-    display: none; 
+    display: none;
     cursor: default;
 }
 
@@ -197,4 +197,55 @@ footer a {
     .home-title {
         display: none;
     }
+}
+
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item>div {
+        display: none;
+    }
+
+    .carousel-inner .carousel-item>div:first-child {
+        display: block;
+    }
+}
+
+.card {
+    cursor: pointer;
+}
+
+.carousel-inner .carousel-item.active {
+    display: flex;
+}
+
+.add-to-cart-btn {
+    display: none !important;
+    z-index: 10;
+    width: 200px;
+    bottom: -10px !important;
+}
+
+.add-to-cart-btn i {
+    margin: 0 5px;
+    color: #646464;
+}
+
+.card:hover .add-to-cart-btn {
+    display: flex !important;
+}
+
+.add-to-cart-btn a:hover{
+    color: var(--color-primary) !important;
+}
+
+.add-to-cart-btn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .add-to-cart-btn {
+    opacity: 1;
+}
+
+.product-list-items a:hover i {
+    color: var(--color-primary);
 }

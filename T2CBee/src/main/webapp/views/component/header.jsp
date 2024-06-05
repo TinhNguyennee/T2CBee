@@ -31,7 +31,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <li class="dropdown-item fw-bold mb-2">DANH MỤC</li>
-                                            <li><a class="dropdown-item" href="/danh-sach-san-pham">Danh Sách Sản
+                                            <li><a class="dropdown-item" href="/danh-sach-san-pham/Tất Cả">Danh Sách Sản
                                                     Phẩm</a></li>
                                             <li><a class="dropdown-item" href="#">Nội Thất</a></li>
                                             <li><a class="dropdown-item" href="#">Trang Trí</a></li>
@@ -170,7 +170,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <li class="dropdown-item fw-bold mb-2">DANH MỤC</li>
-                                            <li><a class="dropdown-item" href="/danh-sach-san-pham">Danh Sách Sản
+                                            <li><a class="dropdown-item" href="/danh-sach-san-pham/Tất Cả">Danh Sách Sản
                                                     Phẩm</a></li>
                                             <li><a class="dropdown-item" href="#">Nội Thất</a></li>
                                             <li><a class="dropdown-item" href="#">Trang Trí</a></li>

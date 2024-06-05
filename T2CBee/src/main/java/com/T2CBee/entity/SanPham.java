@@ -25,10 +25,10 @@ public class SanPham {
     private String groupId;
 
     @Column(name = "gia_ban")
-    private double giaBan;
+    private Double giaBan;
 
     @Column(name = "so_luong")
-    private int soLuong;
+    private Integer soLuong;
 
     @Column(name = "mo_ta", columnDefinition = "TEXT")
     private String moTa;
@@ -38,7 +38,7 @@ public class SanPham {
     private ThuongHieu thuongHieu;
 
     @Column(name = "trong_luong")
-    private double trongLuong;
+    private Double trongLuong;
 
     @Column(name = "kich_thuoc")
     private String kichThuoc;
@@ -63,7 +63,7 @@ public class SanPham {
     private NhanVien nguoiThem;
 
     @Column(name = "hien_thi")
-    private boolean hienThi;
+    private Boolean hienThi;
 
     @ManyToOne
     @JoinColumn(name = "phieu_nhap")

@@ -5,12 +5,13 @@ import com.T2CBee.repository.SanPhamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SanPhamServiceImpl implements SanPhamService{
+public class SanPhamServiceImpl implements SanPhamService {
     @Autowired
     SanPhamRepository dao;
 
@@ -43,4 +44,27 @@ public class SanPhamServiceImpl implements SanPhamService{
     public void deleteById(Integer id) {
         dao.deleteById(id);
     }
+
+    @Override
+    public Page<SanPham> findByDanhMuc(String danhMuc, Pageable pageable) {
+        return dao.findByDanhMuc(danhMuc, pageable);
+    }
+
+    @Override
+    public List<SanPham> findNewProducts() {
+        return dao.findNewProducts();
+    }
+
+    @Override
+    public Page<SanPham> findByDanhMucAndGiaBetween(String danhMuc, double minPrice, double maxPrice, Pageable pageable) {
+        return dao.findByDanhMucAndGiaBanBetween(danhMuc, minPrice, maxPrice, pageable);
+    }
+
+    @Override
+    public Page<SanPham> findByPriceBetween(double minPrice, double maxPrice, Pageable pageable) {
+        return dao.findByGiaBanBetween(minPrice, maxPrice, pageable);
+    }
+    
+    
+
 }
