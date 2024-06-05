@@ -91,26 +91,22 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     @Override
     public Page<SanPham> findByDanhMuc(String danhMuc, Pageable pageable) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByDanhMuc'");
+        return dao.findByDanhMuc(danhMuc, pageable);
     }
 
     @Override
     public List<SanPham> findNewProducts() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findNewProducts'");
+        return dao.findNewProducts();
     }
 
     @Override
     public Page<SanPham> findByDanhMucAndGiaBetween(String danhMuc, double minPrice, double maxPrice,
             Pageable pageable) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByDanhMucAndGiaBetween'");
+        return dao.findByDanhMucAndGiaBanBetween(danhMuc, minPrice, maxPrice, pageable);
     }
 
     @Override
     public Page<SanPham> findByPriceBetween(double minPrice, double maxPrice, Pageable pageable) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByPriceBetween'");
+        return dao.findByGiaBanBetween(minPrice, maxPrice, pageable);
     }
 }
