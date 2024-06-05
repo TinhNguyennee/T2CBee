@@ -44,6 +44,8 @@ public class SanPhamController {
 
     @Autowired
     private AnhSanPhamService anhSanPhamService;
+    @Autowired
+    private SessionService sessionService;
 
     @GetMapping("")
     public String sanPham(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -58,6 +60,8 @@ public class SanPhamController {
                                     @RequestParam("danhMucs") Optional<String[]> danhMucs,
                                     @RequestParam("fileAnhs") Optional<List<MultipartFile>> files
     )  {
+        NhanVien nv = sessionService.get("nhanVien");
+
         if(sp.isPresent()) {
             SanPham sanPham = sp.get();
 
@@ -123,6 +127,7 @@ public class SanPhamController {
                 System.out.println("loz");
             }
             sanPham.setAnhSanPhams(listAnhSanPham);
+            sanPham.setNguoiThem(nv);
             //kết thúc xử lý thêm nhiều ảnh vào 1 sản phẩm
 
 
@@ -214,20 +219,6 @@ public class SanPhamController {
             }
         } else {
             return "redirect:/admin/san-pham";
-        }
-    }
-
-
-    private void uploadFilesToWebApp(List<MultipartFile> files, SanPham sp) throws IOException {
-        if (!files.isEmpty()) {
-            for (MultipartFile file : files) {
-                if (!file.isEmpty()) {
-                    System.out.println(ImgBBUploader.uploadImage(file.getBytes(),null));
-                }
-            }
-            System.out.println("Upload ảnh thành công");
-        } else {
-            System.out.println("Vui lòng chọn ít nhất 1 ảnh");
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.T2CBee.controller.admin;
 
+import com.T2CBee.entity.NhanVien;
 import com.T2CBee.entity.PhieuNhapHang;
 import com.T2CBee.service.NhaCungCapService;
 import com.T2CBee.service.NhanVienService;
 import com.T2CBee.service.PhieuNhapHangService;
+import com.T2CBee.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +29,8 @@ public class PhieuNhapHangController {
 
     @Autowired
     private NhanVienService nhanVienService;
+    @Autowired
+    private SessionService sessionService;
 
     @GetMapping("")
     public String index(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -42,7 +46,8 @@ public class PhieuNhapHangController {
     @PostMapping("")
     public String handlePostPhieuNhapHang(PhieuNhapHang pn, BindingResult bindingResult, Model model) {
 //        pn.setNhaCungCap(nhaCungCapService.findById("Hiroshima"));
-        pn.setNguoiNhap(nhanVienService.findById("NV01"));
+        NhanVien nv = sessionService.get("nhanVien");
+        pn.setNguoiNhap(nv);
         phieuNhapHangService.save(pn);
         return "redirect:/admin/phieu-nhap";
     }

@@ -2,10 +2,9 @@ package com.T2CBee.controller.admin;
 
 import com.T2CBee.entity.DanhMuc;
 import com.T2CBee.entity.DanhMuc;
+import com.T2CBee.entity.NhanVien;
+import com.T2CBee.service.*;
 import com.T2CBee.service.DanhMucService;
-import com.T2CBee.service.DanhMucService;
-import com.T2CBee.service.NhaCungCapService;
-import com.T2CBee.service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +25,8 @@ public class DanhMucController {
 
     @Autowired
     private NhanVienService nhanVienService;
+    @Autowired
+    private SessionService sessionService;
 
     @GetMapping("")
     public String index(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -37,7 +38,8 @@ public class DanhMucController {
 
     @PostMapping("")
     public String handlePostDanhMuc(DanhMuc dm, BindingResult bindingResult, Model model) {
-        dm.setNguoiThem(nhanVienService.findById("NV01"));
+        NhanVien nv = sessionService.get("nhanVien");
+        dm.setNguoiThem(nv);
         danhMucService.save(dm);
         return "redirect:/admin/danh-muc";
     }
