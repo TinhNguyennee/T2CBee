@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>T2C-Bee - Mã Giảm Giá</title>
+    <title>T2CBee - Mã Giảm Giá</title>
     <%@include file="../component/css-embed.jsp" %>
 </head>
 
@@ -97,6 +97,11 @@
                                 <input class="form-control mr-2" placeholder="Tìm kiếm..." style="width: 300px;">
                                 <button class="btn btn-primary"><i class="fas fa-search fa-sm" aria-hidden="true"></i></button>
                             </form>
+                            <c:if test="${systemError != null}">
+                                <div class="alert alert-danger alert-dismissible">
+                                    <strong>Lỗi!</strong> ${systemError}
+                                </div>
+                            </c:if>
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>

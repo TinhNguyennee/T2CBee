@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>T2C-Bee - Hóa Đơn</title>
+    <title>T2CBee - Hóa Đơn</title>
     <%@include file="../component/css-embed.jsp" %>
 </head>
 

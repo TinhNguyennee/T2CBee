@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <div class="container-fluid text-center" style="padding-top: 195px">
 
-    <span class="text-body-secondary fs14px">MY ACCOUNT</span>
-    <h4>Wish List</h4>
+    <span class="text-body-secondary fs14px">Tài Khoản Của Tôi</span>
+    <h4>Danh Sách Yêu Thích</h4>
 
     <hr class="mt-5">
 
@@ -21,12 +21,12 @@
         <div class="dropdown d-flex justify-content-end">
             <button class="btn btn-secondary btn-sm dropdown-toggle rounded-0 bg-white text-black" type="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                Sort By
+                Sắp xếp
             </button>
             <ul class="dropdown-menu rounded-0">
-                <li><a class="dropdown-item list-hover" href="#">Recently Add</a></li>
-                <li><a class="dropdown-item list-hover" href="#">Price High to Low</a></li>
-                <li><a class="dropdown-item list-hover" href="#">Price Low to High</a></li>
+                <li><a class="dropdown-item list-hover" href="#">Mới thêm vào</a></li>
+                <li><a class="dropdown-item list-hover" href="#">Giá cao đến thấp</a></li>
+                <li><a class="dropdown-item list-hover" href="#">Giá thấp đến cao</a></li>
             </ul>
         </div>
 

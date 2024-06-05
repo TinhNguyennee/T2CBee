@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>T2C-Bee - Nhà Cung Cấp</title>
+    <title>T2CBee - Nhà Cung Cấp</title>
     <%@include file="../component/css-embed.jsp" %>
 </head>
 
@@ -55,6 +55,11 @@
                                         <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/nha-cung-cap">Mới</a>
                                         <a class="btn btn-danger mb-3 ml-2" href="${pageContext.request.contextPath}/admin/nha-cung-cap/delete?id=${nhaCungCap.maNhaCungCap}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
                                         <br>
+                                        <c:if test="${systemError != null}">
+                                            <div class="alert alert-danger alert-dismissible">
+                                                <strong>Lỗi!</strong> ${systemError}
+                                            </div>
+                                        </c:if>
                                         <label class="form-label">Mã</label>
                                         <form:input cssClass="form-control" path="maNhaCungCap" readonly="${isUpdatePage}"/>
                                         <label class="form-label">Tên</label>

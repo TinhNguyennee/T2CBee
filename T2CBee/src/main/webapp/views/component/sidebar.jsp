@@ -92,13 +92,15 @@
             <div class="sidebar-heading">
                 Quản Trị
             </div>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin/nhan-vien">
-                    <i class="fa-solid fa-user-tie"></i>
-                    <span>Nhân Viên</span>
-                </a>
-            </li>
+
+            <c:if test="${sessionScope.nhanVien.chucVu == true}">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/nhan-vien">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>Nhân Viên</span>
+                    </a>
+                </li>
+            </c:if>
 
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/khach-hang">
@@ -116,7 +118,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/dang-xuat">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Đăng Xuất</span>
                 </a>

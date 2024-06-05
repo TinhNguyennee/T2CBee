@@ -3,8 +3,8 @@
     
 <div class="container-fluid text-center" style="padding-top: 195px">
 
-    <span class="text-body-secondary fs14px">MY ACCOUNT</span>
-    <h4>Account Details</h4>
+    <span class="text-body-secondary fs14px">Tài Khoản Của Tôi</span>
+    <h4>Tài Khoản</h4>
 
     <hr class="mt-5">
 
@@ -37,25 +37,25 @@
 
 
             <div class="card p-4 rounded-0 mb-3">
-                <h4 class="py-3">Personal Information</h4>
-                <span class="fs14px">${name}</span>
-                <span class="fs14px">${birthday}</span>
+                <h4 class="py-3">Thông tin cá nhân</h4>
+                <span class="fs14px">${name}ten</span>
+                <span class="fs14px">${birthday}ngaysinh</span>
                 <hr class="text-body-secondary">
-                <a href="" class="text-black none-underline">Edit</a>
+                <a href="" class="text-black none-underline">Sửa</a>
             </div>
 
             <div class="card p-4 rounded-0 mb-3">
-                <h4 class="py-3">Email address</h4>
-                <span class="fs14px">${email}</span>
+                <h4 class="py-3">Email</h4>
+                <span class="fs14px">${email}mail</span>
                 <hr class="text-body-secondary">
-                <a href="" class="text-black none-underline">Edit</a>
+                <a href="" class="text-black none-underline">Sửa</a>
             </div>
 
             <div class="card p-4 rounded-0 mb-3">
-                <h4 class="py-3">Password</h4>
-                <span class="fs14px">${password}</span>
+                <h4 class="py-3">Mật Khẩu</h4>
+                <span class="fs14px">${password}****</span>
                 <hr class="text-body-secondary">
-                <a href="" class="text-black none-underline">Edit</a>
+                <a href="" class="text-black none-underline">Sửa</a>
             </div>
 
         </div>

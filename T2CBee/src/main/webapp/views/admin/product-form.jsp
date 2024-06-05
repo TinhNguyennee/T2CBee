@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>T2C-Bee - Chi Tiết Sản Phẩm</title>
+    <title>T2CBee - Chi Tiết Sản Phẩm</title>
     <%@include file="../component/css-embed.jsp" %>
 
 </head>
