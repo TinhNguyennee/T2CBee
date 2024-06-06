@@ -25,11 +25,13 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 			if(user == null) { // chưa đăng nhập
 			error = "Please login!";
 			response.sendRedirect("/dang-nhap?error=" + error);
+			return false;
 			}else		
 			// không đúng vai trò
 			if(uri.startsWith("/admin/")) {
 			error = "Access denied!";
 			response.sendRedirect("/dang-nhap?error=" + error);
+			return false;
 			}
 			
 			return true;
