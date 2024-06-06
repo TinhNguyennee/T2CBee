@@ -20,7 +20,7 @@
     </section> -->
 
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="../css/productdetail.css">
 
 <section class="banner container-fluid">
@@ -34,9 +34,11 @@
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb d-flex justify-content-center">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active">Product 1</li>
+                    <li class="breadcrumb-item"><a href="/trang-chu">Home</a></li>
+                <c:forEach var="item" items="${breadcrumb}">
+                    <li class="breadcrumb-item"><a href="${item[1]}">${item[0]}</a></li>
+                </c:forEach>
+
                 </ol>
             </nav>
         </div>

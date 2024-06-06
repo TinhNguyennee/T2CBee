@@ -55,7 +55,7 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     @Override
     public Double findMinPriceByGroupId(String groupId) {
-        return dao.findMinPriceByGroupId(groupId);
+        return dao.findMinPriceByGroupId(groupId) == null ? 0.0 : dao.findMinPriceByGroupId(groupId);
     }
 
     @Override
@@ -88,7 +88,14 @@ public class SanPhamServiceImpl implements SanPhamService {
         // TODO Auto-generated method stub
         return dao.findSanPhamByPhanLoaiAndGroup(groupId, productType);
     }
-
+    @Override
+    public Double findAverageRatingByGroupId(String groupId) {
+        Double averageRating = dao.findAverageRatingByGroupId(groupId);
+        if (averageRating == null) {
+            return 0.0; // Trả về 0 nếu không có bình luận nào
+        }
+        return Math.ceil(averageRating); // Làm tròn lên giá trị trung bình
+    }
     @Override
     public Page<SanPham> findByDanhMuc(String danhMuc, Pageable pageable) {
         return dao.findByDanhMuc(danhMuc, pageable);
@@ -101,7 +108,7 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     @Override
     public Page<SanPham> findByDanhMucAndGiaBetween(String danhMuc, double minPrice, double maxPrice,
-            Pageable pageable) {
+                                                    Pageable pageable) {
         return dao.findByDanhMucAndGiaBanBetween(danhMuc, minPrice, maxPrice, pageable);
     }
 
@@ -119,4 +126,10 @@ public class SanPhamServiceImpl implements SanPhamService {
     public int countAllSanPham() {
         return dao.countAllSanPham();
     }
+
+    @Override
+    public List<AnhSanPham> findPictureBySanPhamId(Integer id) {
+        return dao.findPictureBySanPhamId(id);
+    }
+
 }

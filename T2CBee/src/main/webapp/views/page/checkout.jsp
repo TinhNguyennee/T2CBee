@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <div class="body-checkout" style="padding-top: 195px; padding-bottom: 50px;">
+<div style="padding-top: 195px; padding-bottom: 50px;">
+
+</div>
+<jsp:include page="../component/banner.jsp"></jsp:include>
+    <div class="body-checkout" style="padding-top: 55px" >
+
         <div class="container container-checkout border-0">
             <div class="row row-re d-flex">
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <h1 class="text-center p-3">Thanh Toán</h1>
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <h3>Thông tin nhận hàng</h3>
@@ -55,7 +59,7 @@
 
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12">
-                    <h3 class="mt-3">Đơn hàng <span>(1 sản phẩm)</span></h3>
+                    <h3 class="">Đơn hàng <span>(1 sản phẩm)</span></h3>
                     <hr>
 
                     <table class="product-table " id="product-table" data-tg-refresh="refreshDiscount">

@@ -19,7 +19,7 @@ public class MaGiamGia {
     private String maGiamGia;
 
     @Column(name = "discount")
-    private String discount;
+    private float discount;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "ngay_bat_dau", columnDefinition = "DATE")
