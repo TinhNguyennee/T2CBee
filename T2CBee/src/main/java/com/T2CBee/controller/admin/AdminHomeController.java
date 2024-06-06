@@ -34,6 +34,9 @@ public class AdminHomeController {
         model.addAttribute("countDHDXL", gioHangService.findByTrangThai("DANG_GIAO_HANG").size());
         model.addAttribute("countDHHT", gioHangService.findByTrangThai("HOAN_THANH").size());
         model.addAttribute("countDHH", gioHangService.findByTrangThai("HUY").size());
+        Double doanhThuDuKien = gioHangService.countDoanhThuByTrangThai("DANG_CHO") + gioHangService.countDoanhThuByTrangThai("DANG_GIAO_HANG");
+        model.addAttribute("doanhThuDuKien", doanhThuDuKien);
+        model.addAttribute("doanhThuHienTai", gioHangService.countDoanhThuByTrangThai("HOAN_THANH"));
         //bình luận
         Pageable pageable = PageRequest.of(p.orElse(0), 5);
         model.addAttribute("listBL", binhLuanService.findAll(pageable));

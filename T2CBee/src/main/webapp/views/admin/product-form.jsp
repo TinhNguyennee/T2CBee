@@ -53,17 +53,26 @@
                             <form:form action="${pageContext.request.contextPath}/admin/san-pham" method="POST" modelAttribute="sanPham" enctype="multipart/form-data" >
                                 <a class="btn btn-secondary mb-3" href="${pageContext.request.contextPath}/admin/san-pham">Quay về</a>
                                 <button class="btn btn-primary mb-3" type="submit">Lưu</button>
+                                <c:if test="${formError != null}">
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <strong>${formError}</strong>
+                                    </div>
+                                </c:if>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label class="form-label">ID</label>
-                                        <form:input cssClass="form-control" path="maSanPham" readonly="${isUpdatePage}"/>
-                                        <label class="form-label">Nhóm</label>
+                                        <label class="form-label d-none">ID</label>
+                                        <form:input cssClass="form-control d-none" path="maSanPham" readonly="true"/>
+                                        <label class="form-label">Nhóm*</label>
                                         <form:input cssClass="form-control" path="groupId"/>
-                                        <label class="form-label">Số lượng</label>
-                                        <form:input cssClass="form-control" path="soLuong"/>
-                                        <label class="form-label">Danh Mục <span class="text-success">${danhMucMessage}</span></label>
+                                        <label class="form-label">Số lượng*</label>
+                                        <form:input cssClass="form-control" path="soLuong" type="number" min="0" required="required"/>
+                                        <label class="form-label">Phân loại* (vd: hồng, hồng + tặng kèm ghế,...)</label>
+                                        <form:input cssClass="form-control" path="phanLoai" required="required"/>
+                                        <label class="form-label">Trọng lượng (KG)*</label>
+                                        <form:input cssClass="form-control" path="trongLuong" type="number" required="required"/>
+                                        <label class="form-label">Danh Mục* <span class="text-success">${danhMucMessage}</span></label>
                                         <div class="input-group">
-                                            <form:select path="danhMucs" class="custom-select" multiple="multiple" size="3">
+                                            <form:select path="danhMucs" class="custom-select" multiple="multiple" size="3" >
                                                 <form:options items="${listDM}" itemLabel="tenDanhMuc" itemValue="maDanhMuc" ></form:options>
                                             </form:select>
                                             <div class="input-group-append">
@@ -71,51 +80,45 @@
                                                 <a class="btn btn-danger font-weight-bold pt-4" href="${pageContext.request.contextPath}/admin/san-pham/delete?ctdm=all&spid=${sanPham.maSanPham}" ><i class="fa-solid fa-trash"></i></a>
                                             </div>
                                         </div>
-                                        <label class="form-label">Phân loại* (vd: hồng, hồng + tặng kèm ghế,...)</label>
-                                        <form:input cssClass="form-control" path="phanLoai"/>
-                                        <label class="form-label">Trọng lượng</label>
-                                        <form:input cssClass="form-control" path="trongLuong"/>
-                                        <label class="form-label">Tạo bởi</label>
-                                        <form:input cssClass="form-control" path="nguoiThem" readonly="true"/>
+                                        <label class="form-label">Mô tả*</label>
+                                        <form:textarea class="form-control" rows="11" path="moTa" required="required"></form:textarea>
                                         <label class="form-label">Lần cuối cập nhật</label>
                                         <form:input cssClass="form-control" path="ngayCapNhat" readonly="true"/>
-                                        <label class="form-label">Mô tả</label>
-                                        <form:textarea class="form-control" rows="11" path="moTa"></form:textarea>
+                                        <label class="form-label">Tạo bởi</label>
+                                        <form:input cssClass="form-control" path="nguoiThem" readonly="true"/>
                                     </div>
                                     <div class="col-6">
-                                        <label class="form-label">Tên</label>
+                                        <label class="form-label">Tên*</label>
                                         <form:input cssClass="form-control" path="tenSanPham"/>
-                                        <label class="form-label">Giá</label>
-                                        <form:input cssClass="form-control" path="giaBan"/>
-                                        <label class="form-label">Hiển thị</label>
+                                        <label class="form-label">Giá*</label>
+                                        <form:input cssClass="form-control" path="giaBan" type="number" required="required"/>
+                                        <label class="form-label">Kích thước*</label>
+                                        <form:input cssClass="form-control" path="kichThuoc" required="required"/>
+                                        <label class="form-label">Hiển thị*</label>
                                         <div class="input-group">
-                                            <form:select class="custom-select" path="hienThi">
+                                            <form:select class="custom-select" path="hienThi" required="required">
                                                 <form:option value="true">Hiển thị sản phẩm</form:option>
                                                 <form:option value="false">Ẩn sản phẩm</form:option>
                                             </form:select>
                                         </div>
-                                        <label class="form-label">Thương hiệu</label>
+                                        <label class="form-label">Thương hiệu*</label>
                                         <div class="input-group">
-                                            <form:select class="custom-select" path="thuongHieu">
+                                            <form:select class="custom-select" path="thuongHieu" required="required">
                                                 <form:options items="${listTH}" itemLabel="tenThuongHieu" itemValue="maThuongHieu"></form:options>
                                             </form:select>
                                             <div class="input-group-append">
                                                 <a class="btn btn-primary font-weight-bold" href="${pageContext.request.contextPath}/admin/thuong-hieu">&#43;</a>
                                             </div>
                                         </div>
-                                        <label class="form-label">Kích thước</label>
-                                        <form:input cssClass="form-control" path="kichThuoc"/>
-                                        <label class="form-label">Phiếu nhập</label>
+                                        <label class="form-label">Phiếu nhập*</label>
                                         <div class="input-group">
-                                            <form:select class="custom-select" path="phieuNhap">
+                                            <form:select class="custom-select" path="phieuNhap" required="required">
                                                 <form:options items="${listPN}" itemLabel="maPhieuNhap" itemValue="maPhieuNhap"></form:options>
                                             </form:select>
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary font-weight-bold" href="${pageContext.request.contextPath}/admin/phieu-nhap">&#43;</button>
                                             </div>
                                         </div>
-                                        <label class="form-label">Ngày tạo</label>
-                                        <form:input cssClass="form-control" path="ngayTao" readonly="true"/>
                                         <label class="form-label">Upload hình ảnh</label>
                                         <br>
                                         <a class="text-danger" href="${pageContext.request.contextPath}/admin/san-pham/delete?anh=all&spid=${sanPham.maSanPham}" >Bấm vào đây đê xóa toàn bộ ảnh!</a>
@@ -148,6 +151,8 @@
                                             </a>
                                         </div>
                                         <%--slider end--%>
+                                        <label class="form-label">Ngày tạo</label>
+                                        <form:input cssClass="form-control" path="ngayTao" readonly="true"/>
                                     </div>
                                 </div>
                             </form:form>
@@ -176,59 +181,59 @@
     <!-- End of Page Wrapper -->
 
     <!-- Danh Muc Modal -->
-    <div class="modal fade" id="danhmucModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thêm danh mục</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form>
-                    <div class="modal-body">                       
-                        <input class="form-control" placeholder="Mã danh mục...">
-                        <br>
-                        <input class="form-control" placeholder="Tên danh mục...">
-                    </div>
-                    <div class="modal-footer">
-                        <a href="${pageContext.request.contextPath}/admin/danh-muc">Chuyển tới trang danh mục...</a>
-                        <button type="button" class="btn btn-primary" onclick="alert('m')">Thêm</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<%--    <div class="modal fade" id="danhmucModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"--%>
+<%--        aria-hidden="true">--%>
+<%--        <div class="modal-dialog" role="document">--%>
+<%--            <div class="modal-content">--%>
+<%--                <div class="modal-header">--%>
+<%--                    <h5 class="modal-title" id="exampleModalLabel">Thêm danh mục</h5>--%>
+<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                        <span aria-hidden="true">&times;</span>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--                <form>--%>
+<%--                    <div class="modal-body">                       --%>
+<%--                        <input class="form-control" placeholder="Mã danh mục...">--%>
+<%--                        <br>--%>
+<%--                        <input class="form-control" placeholder="Tên danh mục...">--%>
+<%--                    </div>--%>
+<%--                    <div class="modal-footer">--%>
+<%--                        <a href="${pageContext.request.contextPath}/admin/danh-muc">Chuyển tới trang danh mục...</a>--%>
+<%--                        <button type="button" class="btn btn-primary" onclick="alert('m')">Thêm</button>--%>
+<%--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>--%>
+<%--                        --%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 
     <!-- Thuong Hieu Modal -->
-    <div class="modal fade" id="thuonghieuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thêm Thương Hiệu</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form>
-                    <div class="modal-body">                       
-                        <input class="form-control" placeholder="Mã thương hiệu...">
-                        <br>
-                        <input class="form-control" placeholder="Tên thương hiệu...">
-                    </div>
-                    <div class="modal-footer">
-                        <a href="${pageContext.request.contextPath}/admin/thuong-hieu">Chuyển tới trang thương hiệu...</a>
-                        <button type="button" class="btn btn-primary" onclick="alert('Them thuong hieu')">Thêm</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<%--    <div class="modal fade" id="thuonghieuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"--%>
+<%--        aria-hidden="true">--%>
+<%--        <div class="modal-dialog" role="document">--%>
+<%--            <div class="modal-content">--%>
+<%--                <div class="modal-header">--%>
+<%--                    <h5 class="modal-title" id="exampleModalLabel">Thêm Thương Hiệu</h5>--%>
+<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                        <span aria-hidden="true">&times;</span>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--                <form>--%>
+<%--                    <div class="modal-body">                       --%>
+<%--                        <input class="form-control" placeholder="Mã thương hiệu...">--%>
+<%--                        <br>--%>
+<%--                        <input class="form-control" placeholder="Tên thương hiệu...">--%>
+<%--                    </div>--%>
+<%--                    <div class="modal-footer">--%>
+<%--                        <a href="${pageContext.request.contextPath}/admin/thuong-hieu">Chuyển tới trang thương hiệu...</a>--%>
+<%--                        <button type="button" class="btn btn-primary" onclick="alert('Them thuong hieu')">Thêm</button>--%>
+<%--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
