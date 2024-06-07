@@ -1,6 +1,7 @@
 package com.T2CBee.repository;
 
 import com.T2CBee.entity.GioHang;
+import com.T2CBee.entity.KhachHang;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,15 +24,17 @@ public interface GioHangRepository extends JpaRepository<GioHang, Integer> {
     Page<GioHang> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
     //Thống kê doanh thu
+//    @Query("SELECT SUM((ctgh.sanPham.giaBan * ctgh.soLuong) - (ctgh.sanPham.giaBan * ctgh.soLuong)*mgg.discount) FROM ChiTietGioHang ctgh JOIN ctgh.gioHang gh JOIN ctgh.maGiamGia mgg WHERE gh.trangThai = :tt")
+//    @Query("SELECT SUM(sp.giaBan * ctgh.soLuong) FROM ChiTietGioHang ctgh JOIN ctgh.gioHang gh JOIN ctgh.sanPham sp JOIN ctgh.maGiamGia WHERE gh.trangThai = :tt GROUP BY sp.groupId")
     @Query("SELECT SUM((sp.giaBan * ctgh.soLuong) - (sp.giaBan * ctgh.soLuong) * COALESCE(mgg.discount, 0)) " +
             "FROM ChiTietGioHang ctgh " +
             "JOIN ctgh.gioHang gh " +
             "JOIN ctgh.sanPham sp " +
             "LEFT JOIN ctgh.maGiamGia mgg " +
-            "WHERE gh.trangThai = :tt ")
+            "WHERE gh.trangThai = :tt "
+            )
     Double countDoanhThuByTrangThai(@Param("tt") String trangThai);
 
-    //Biểu đồ cột thống kê doanh thu theo tháng trong năm
     @Query("SELECT EXTRACT(MONTH FROM gh.ngayTao) AS month, " +
             "SUM((sp.giaBan * ctgh.soLuong) - (sp.giaBan * ctgh.soLuong) * COALESCE(mgg.discount, 0)) AS doanhThu " +
             "FROM ChiTietGioHang ctgh " +
@@ -43,4 +46,6 @@ public interface GioHangRepository extends JpaRepository<GioHang, Integer> {
             "ORDER BY EXTRACT(MONTH FROM gh.ngayTao)")
     List<Object[]> countDoanhThuByTrangThaiAndYear(@Param("tt") String trangThai, @Param("year") int year);
 
+
+    List<GioHang> findByKhachHangEquals(KhachHang khachHang);
 }

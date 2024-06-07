@@ -1,11 +1,17 @@
 package com.T2CBee.controller.user;
 
-import com.T2CBee.entity.KhachHang;
+import com.T2CBee.entity.*;
+import com.T2CBee.repository.ChiTietGioHangRepository;
+import com.T2CBee.repository.GioHangRepository;
+import com.T2CBee.repository.SanPhamYeuThichRepository;
 import com.T2CBee.service.KhachHangServiceImpl;
 import com.T2CBee.service.ProvinceService;
 import com.T2CBee.service.SessionService;
 import org.eclipse.tags.shaded.org.apache.xpath.objects.XString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProfileController {
@@ -24,6 +30,13 @@ public class ProfileController {
     SessionService session;
     @Autowired
     KhachHangServiceImpl khachHangServiceImplement;
+    @Autowired
+    SanPhamYeuThichRepository sanPhamYeuThichRepository;
+    @Autowired
+    GioHangRepository gioHangRepository;
+    @Autowired
+    ChiTietGioHangRepository chiTietGioHangRepository;
+
 
     // Profile Page
     @GetMapping("/thong-tin")
@@ -33,16 +46,71 @@ public class ProfileController {
     }
 
     @GetMapping("/don-hang-cua-toi")
-    public String myorders(Model model) {
+    public String myorders(Model model,
+                           @RequestParam(name = "status", required = false, defaultValue = "all") String status) {
         model.addAttribute("path", "page/profile/myorders");
+        model.addAttribute("status", status);
+
+        KhachHang user = session.get("user");
+
+        List<GioHang> gioHangList = gioHangRepository.findByKhachHangEquals(user);
+
+        // Lọc giỏ hàng theo trạng thái nếu status không phải là "all"
+        if (!status.equals("all")) {
+            gioHangList = gioHangList.stream()
+                    .filter(gioHang -> status.equalsIgnoreCase(gioHang.getTrangThai().trim()))
+                    .collect(Collectors.toList());
+        }
+
+
+
+        Map<GioHang, List<ChiTietGioHang>> chiTietGioHangMap = new HashMap<>();
+        Map<GioHang, Float> gioHangTongTienMap = new HashMap<>();
+
+        for (GioHang gioHang : gioHangList) {
+            List<ChiTietGioHang> chiTietGioHangList = chiTietGioHangRepository.findByGioHangEquals(gioHang);
+            chiTietGioHangMap.put(gioHang, chiTietGioHangList);
+
+            float sum = 0;
+            for (ChiTietGioHang chiTietGioHang : chiTietGioHangList) {
+                float discount = 0;  // Giá trị mặc định nếu không có mã giảm giá
+                if (chiTietGioHang.getMaGiamGia() != null) {
+                    discount = chiTietGioHang.getMaGiamGia().getDiscount();
+                }
+                sum += chiTietGioHang.getSanPham().getGiaBan() * chiTietGioHang.getSoLuong() * (1 - discount);
+            }
+            gioHangTongTienMap.put(gioHang, sum); // Lưu tổng tiền vào map
+        }
+
+
+
+
+        model.addAttribute("gioHangTongTienMap", gioHangTongTienMap);
+        model.addAttribute("gioHangList", gioHangList);
+        model.addAttribute("chiTietGioHangMap", chiTietGioHangMap);
+
         return "index";
     }
 
+
     @GetMapping("/danh-sach-yeu-thich")
-    public String wishlist(Model model) {
+    public String wishlist(@RequestParam(name = "page", defaultValue = "0") int page,
+                           @RequestParam(name = "size", defaultValue = "3") int size,
+                           Model model) {
         model.addAttribute("path", "page/profile/wishlist");
+
+        KhachHang user = session.get("user");
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<SanPhamYeuThich> sanPhamYeuThichPage = sanPhamYeuThichRepository.findByKhachHangEquals(user, pageable);
+
+        model.addAttribute("sanPhamYeuThichList", sanPhamYeuThichPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", sanPhamYeuThichPage.getTotalPages());
+
         return "index";
     }
+
 
     @RequestMapping("/tai-khoan-chi-tiet")
     public String accountdetails(Model model) {
@@ -147,10 +215,10 @@ public class ProfileController {
 
     @PostMapping("/so-dia-chi")
     public String addressbookpost(Model model,
-                                  @RequestParam("city")String city,
-                                  @RequestParam("address")String address) {
+                                  @RequestParam("city") String city,
+                                  @RequestParam("address") String address) {
 
-        String fullAddress = city + " - "+address;
+        String fullAddress = city + " - " + address;
 
         KhachHang user = session.get("user");
         user.setDiaChi(fullAddress);

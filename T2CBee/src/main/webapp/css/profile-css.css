@@ -34,6 +34,15 @@ body{
     font-size: 15px;
     font-weight: 500;
 }
+.fs16px{
+    font-size: 16px;
+}
+.fs17px{
+    font-size: 17px;
+}
+.fs18px{
+    font-size: 18px;
+}
 
 
 .bold{
@@ -65,4 +74,16 @@ body{
     outline: none !important;
     box-shadow: none !important;
     border: 1px solid rgb(222,226,230);
+}
+
+
+.btn-custom-fix {
+    outline: none;
+    border-color: #000;
+    font-weight: bold;
+}
+.btn-custom:hover {
+    outline: none;
+    border-color: #000;
+    font-weight: bold;
 }
