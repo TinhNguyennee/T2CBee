@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 		<div class="container-fluid position-relative p-0">
 
 
@@ -133,7 +134,10 @@
 															</div>
 														</div>
 														<p class="card-title mb-2 fw-bold">${sanPham.tenSanPham}</p>
-														<h5 class="fw-bold product-price">${sanPham.giaBan}</h5>
+														<h5 class="fw-bold product-price">
+															<fmt:formatNumber value="${sanPham.giaBan}"
+															type="currency" />
+														</h5>
 													</div>
 
 												</div>
@@ -252,7 +256,10 @@
 											</div>
 										</div>
 										<p class="card-title mb-2 fw-bold">${sanPham.tenSanPham}</p>
-										<h5 class="fw-bold product-price">${sanPham.giaBan}</h5>
+										<h5 class="fw-bold product-price">
+											<fmt:formatNumber value="${sanPham.giaBan}"
+											type="currency" />
+										</h5>
 									</div>
 
 								</div>
@@ -328,7 +335,10 @@
 											</div>
 										</div>
 										<p class="card-title mb-2 fw-bold">${sanPham.tenSanPham}</p>
-										<h5 class="fw-bold product-price">${sanPham.giaBan}</h5>
+										<h5 class="fw-bold product-price">
+											<fmt:formatNumber value="${sanPham.giaBan}"
+											type="currency" />
+										</h5>
 									</div>
 
 								</div>
