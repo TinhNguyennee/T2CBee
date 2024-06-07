@@ -60,4 +60,9 @@ public class GioHangServiceImpl implements GioHangService{
         Double doanhThu = dao.countDoanhThuByTrangThai(trangThai);
         return doanhThu != null ? doanhThu : 0.0;
     }
+
+    @Override
+    public List<Object[]> countDoanhThuByTrangThaiAndYear(String trangThai, int year) {
+        return dao.countDoanhThuByTrangThaiAndYear(trangThai, year);
+    }
 }

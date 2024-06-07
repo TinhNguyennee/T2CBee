@@ -35,7 +35,7 @@
           <input type="submit" value="Đăng Nhập">
         </div>
         <div class="registere">
-          <span>Bạn chưa có tài khoản?Đăng ký <a href="/tai-khoan/dang-ky">Tại Đây</a></span>
+          <span>Bạn chưa có tài khoản?Đăng ký <a href="/dang-ky">Tại Đây</a></span>
         </div>
         <div class="icon"
           style="justify-content: space-between; justify-content: space-between;padding: 0 20px; margin: 30px;display: flex;">

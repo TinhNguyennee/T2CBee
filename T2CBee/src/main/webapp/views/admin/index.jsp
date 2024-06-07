@@ -14,6 +14,7 @@
     <meta name="author" content="">
     <title>T2CBee - Trang Chủ</title>
     <%@include file="../component/css-embed.jsp" %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -132,7 +133,7 @@
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Doanh thu dự kiến
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${doanhThuDuKien}" type="currency"/></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${doanhThuDuKien}" type="currency" currencySymbol="VNĐ"/></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -151,7 +152,7 @@
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Doanh thu hiện tại
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${doanhThuHienTai}" type="currency"/></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${doanhThuHienTai}" type="currency" currencySymbol="VNĐ"/></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -362,18 +363,14 @@
                         </div>
                         <div class="col-lg-6 mb-4">
                             <!-- Approach -->
-                            <!-- <div class="card shadow mb-4">
+                            <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Biểu Đồ Doanh Thu</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
+                                    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
                                 </div>
-                            </div> -->
+                            </div>
 
                         </div>
                     </div>
@@ -423,6 +420,28 @@
             var selectedValue = this.value;
             var url = '${pageContext.request.contextPath}/admin/trang-chu/binh-luan?tt=' + selectedValue;
             window.location.href = url;
+        });
+
+        var xValues = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"];
+        var yValues = ${chartValue};
+        var barColors = ["#2b5797", "#2b7797", "#2b5797", "#2b7797","#2b5797", "#2b7797" , "#2b5797", "#2b7797", "#2b5797", "#2b7797", "#2b5797", "#2b7797"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Doanh Thu năm 2024"
+                }
+            }
         });
     </script>
 </body>

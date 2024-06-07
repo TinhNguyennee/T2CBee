@@ -3,6 +3,7 @@ package com.T2CBee.service;
 import com.T2CBee.entity.GioHang;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface GioHangService {
     Page<GioHang> findByTrangThai(String trangThai, Pageable pageable);
 
     Double countDoanhThuByTrangThai(String trangThai);
+
+    List<Object[]> countDoanhThuByTrangThaiAndYear(String trangThai, int year);
 }

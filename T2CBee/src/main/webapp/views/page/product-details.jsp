@@ -163,11 +163,11 @@
                     <ul class="nav cp-nav-product d-flex justify-content-center"
                         role="tablist">
                         <li class="nav-item"><a class="nav-link active "
-                                                data-bs-toggle="tab" href="#description">Description </a></li>
+                                                data-bs-toggle="tab" href="#description">Mô Tả </a></li>
                         <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-                                                href="#additional"> Additional information</a></li>
+                                                href="#additional">Thông Số</a></li>
                         <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-                                                href="#reviews">Reviews (${soDanhGia})</a></li>
+                                                href="#reviews">Đánh Giá (${soDanhGia})</a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">

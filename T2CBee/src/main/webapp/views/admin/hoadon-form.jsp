@@ -52,8 +52,8 @@
                                     <div class="d-flex justify-content-end mb-3">
                                         <select id="orderStatusSelect" class="custom-select mr-5">
                                             <option value="TAT_CA">Tất Cả</option>
-                                            <option value="DANG_CHO" ${param.tt == 'DANG_CHO' ? 'selected' : ''}>Đang Chờ</option>
-                                            <option value="DA_THANH_TOAN" ${param.tt == 'DA_THANH_TOAN' ? 'selected' : ''}>Đã Thanh Toán</option>
+                                            <option value="CHO_XU_LY" ${param.tt == 'CHO_XU_LY' ? 'selected' : ''}>Chờ Xử Lý</option>
+                                            <option value="HOAN_THANH" ${param.tt == 'HOAN_THANH' ? 'selected' : ''}>Hoàn Thành</option>
                                             <option value="DANG_GIAO_HANG" ${param.tt == 'DANG_GIAO_HANG' ? 'selected' : ''}>Đang Giao Hàng</option>
                                             <option value="HUY" ${param.tt == 'HUY' ? 'selected' : ''}>Hủy</option>
                                         </select>
@@ -132,13 +132,13 @@
                                                         <td>${item.sanPham.tenSanPham}+ ${item.sanPham.phanLoai}</td>
                                                         <td>${item.maGiamGia.discount}</td>
                                                         <c:set var="totalDiscount" value="${totalDiscount + (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0))}" />
-                                                        <td>${item.sanPham.giaBan - (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0)) }</td>
+                                                        <td><fmt:formatNumber value="${item.sanPham.giaBan - (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0)) }" type="currency" currencySymbol="đ"/></td>
                                                         <td>${item.soLuong}</td>
                                                         <td>${item.soLuong * item.sanPham.giaBan - (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0))}</td>
                                                         <c:set var="totalAmount" value="${totalAmount + (item.soLuong * (item.sanPham.giaBan - (item.sanPham.giaBan * (item.maGiamGia.discount != null ? item.maGiamGia.discount : 0)) ))}" />
                                                         <td class="d-flex">
                                                             <div class="mx-auto">
-                                                                <a class="btn btn-primary" style="font-size: 12px;" href="#"><i class="fa-solid fa-eye"></i></a>
+                                                                <a class="btn btn-primary" style="font-size: 12px;" target="_blank" href="${pageContext.request.contextPath}/chi-tiet-san-pham/${item.sanPham.maSanPham}"><i class="fa-solid fa-eye"></i></a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -146,9 +146,9 @@
                                             </tbody>
                                         </table>
                                         <div class=" text-right ">
-                                            <h5 class="font-weight-bold text-dark">Phí vận chuyển: <span>0đ</span></h5>
-                                            <h5 class="font-weight-bold text-dark">Giảm giá: <span>-<fmt:formatNumber value="${totalDiscount}" type="currency" /></span></h5>
-                                            <h5 class="text-danger font-weight-bold">Tổng tiền: <span class="text-dark"><fmt:formatNumber value="${totalAmount}" type="currency" /></span></h5>
+                                            <h5 class="font-weight-bold text-dark">Phí vận chuyển: <span>0 đ</span></h5>
+                                            <h5 class="font-weight-bold text-dark">Giảm giá: <span>-<fmt:formatNumber value="${totalDiscount}" type="currency" currencySymbol="đ"/></span></h5>
+                                            <h5 class="text-danger font-weight-bold">Tổng tiền: <span class="text-dark"><fmt:formatNumber value="${totalAmount}" type="currency" currencySymbol="đ"/></span></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
+                <!-- /.container-fluid --
 
             </div>
             <!-- End of Main Content -->
