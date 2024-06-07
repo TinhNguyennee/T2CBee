@@ -283,3 +283,7 @@ footer a {
 .next-icon {
     background-image: url(https://cdn-icons-png.flaticon.com/128/271/271228.png);
 }
+
+.add-to-cart-btn {
+    background-color: #e9e8e8;
+}

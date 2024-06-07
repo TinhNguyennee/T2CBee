@@ -125,11 +125,9 @@
 																<c:when test="${sanPham.hienThi}">
 																	<div
 																		class="add-to-cart-btn d-flex justify-content-center p-2 border position-absolute start-50 translate-middle">
-																		<form action="/gio-hang/add" modelAttribute="cart" method="post">
-																			<input type="hidden" name="productId" value="${sanPham.maSanPham}">
-																			<input type="hidden" name="quantity" value="1">
-																			<button type="submit" class="btn btn-link text-dark fw-medium me-3 w-100">Add to cart</button>
-																		</form>
+																		<a href=""
+																			class="text-decoration-none text-dark fw-medium me-3 w-100">Add
+																			to cart</a>
 																		<a href=""><i class="bi bi-suit-heart"></i></a>
 																		<a href=""><i class="bi bi-toggles"></i></a>
 																		<a
