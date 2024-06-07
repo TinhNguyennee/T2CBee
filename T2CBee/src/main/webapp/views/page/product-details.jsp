@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"/>
 <div class="wrapper-product-detail" style="padding-top: 195px">
 
     <jsp:include page="../component/banner.jsp"></jsp:include>
@@ -15,84 +15,116 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="img-main">
-                            <img src="${imgs[0].url}" alt="">
+                                <img src="${main_imgs[0].url}" alt="" id="mainImage">
+
                         </div>
-                        <div class="slide">
                             <div class="slider-wrapper">
-                                <button id="prev-slide"
-                                        class="slide-button material-symbols-rounded">
-                                    chevron_left</button>
-                                <div class="image-list">
-                                    <c:forEach var="img" items="${imgs }">
-                                        <img class="image-item" src="${img.url}"
-                                             alt="img${loop.index}" />
-                                    </c:forEach>
+                                <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                    <!-- The slideshow/carousel -->
+                                    <div class="carousel-inner">
+                                        <c:set var="counter" value="0"/>
+                                        <c:forEach var="img" items="${imgs }" varStatus="status">
+                                            <c:if test="${status.index % 4 == 0}">
+                                                <div class="carousel-item <c:if
+                                                    test='${status.index == 0}'>active</c:if>">
+                                                <div class="row">
+                                            </c:if>
+
+                                            <div class="col-3 ">
+                                                <img class="image-item" src="${img.url}" alt="img${status.index}"
+                                                     onclick="changeMainImage('${img.url}')"/>
+                                            </div>
+
+                                            <c:if test="${(status.index + 1) % 4 == 0 || status.last}">
+                                                </div>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    </div>
+
+                                    <!-- Left and right controls/icons -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#demo"
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon bg-secondary rounded-circle"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#demo"
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon bg-secondary rounded-circle "></span>
+                                    </button>
                                 </div>
-                                <button id="next-slide"
-                                        class="slide-button material-symbols-rounded">
-                                    chevron_right</button>
                             </div>
-                            <div class="slider-scrollbar">
-                                <div class="scrollbar-track">
-                                    <div class="scrollbar-thumb"></div>
-                                </div>
-                            </div>
-                        </div>
+
 
 
                     </div>
                     <div class="col-6">
                         <div class="prod-info">
-                            <div class="prod-tittle fw-bold mb-3 text-uppercase">${sp.tenSanPham}</div>
+                            <div class="prod-tittle fw-bold mb-3 text-uppercase">${sp.tenSanPham} <c:if
+                                    test="${!sp.hienThi}"><span class="alert-danger fs-3">(Hết hàng)</span></c:if></div>
+
                         </div>
                         <div class="prod-star mb-3">
-                            <i class="bi bi-star-fill checked"></i> <i
-                                class="bi bi-star-fill checked"></i> <i
-                                class="bi bi-star-fill checked"></i> <i
-                                class="bi bi-star-fill checked"></i> <i class="bi bi-star-fill"></i>
-                            <span class="people-comment">(${soDanhGia} customer
-								review)</span>
+                            <c:if test="${soSao != 0}">
+                                <c:forEach var="i" begin="1" end="5">
+                                    <i class="bi bi-star-fill <c:if test='${i <= soSao}'>checked</c:if>"></i>
+                                </c:forEach>
+                            </c:if>
+                            <c:choose>
+                                <c:when test="${soDanhGia != 0}">
+                                    <span class="people-comment">(${soDanhGia} người đánh giá)</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="people-comment">Chưa có đánh giá</span>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div>
-                        <fmt:setLocale value="vi_VN" />
-                        <fmt:setBundle basename="java.text.resources" />
+                        <fmt:setLocale value="vi_VN"/>
+                        <fmt:setBundle basename="java.text.resources"/>
                         <div class="prod-price  mb-3">
-                            <fmt:formatNumber value="${min_max_giaBan[0]}" type="currency" />
+                            <fmt:formatNumber value="${min_max_giaBan[0]}" type="currency"/>
                             <c:if test="${min_max_giaBan[1] != null}">- <fmt:formatNumber
-                                    value="${min_max_giaBan[1]}" type="currency" />
+                                    value="${min_max_giaBan[1]}" type="currency"/>
                             </c:if>
 
                         </div>
                         <div class="prod-describe mb-4">${sp.moTa}</div>
                         <div class="select-type-product mb-4 ">
-                            <label for="type-select" class="fw-bold mb-3">Phân loại:</label> <select
-                                id="type-select" class="form-select rounded-0 w-50"
+
+                            <label for="type-select" class="fw-bold mb-3 ">Phân loại:</label> <select
+                                id="type-select" class="form-select rounded-0 w-50 " <c:if test="${!sp.hienThi}">disabled</c:if>
                                 aria-label="Default select example">
-                            <c:set var="selectedProductType" value="${param.productType}" />
+                            <c:set var="selectedProductType" value="${param.productType}"/>
                             <option value="0"
-                            ${selectedProductType == null || selectedProductType == "0" ? "selected" : ""}>Chọn
-                                phân loại</option>
+                                ${selectedProductType == null || selectedProductType == "0" ? "selected" : ""}>Chọn
+                                phân loại
+                            </option>
                             <c:forEach var="chiTietLoai" items="${chiTietLoai}">
                                 <option value="${chiTietLoai}"
                                     ${selectedProductType == chiTietLoai ? "selected" : ""}>${chiTietLoai}</option>
                             </c:forEach>
                         </select>
                         </div>
+                        <c:if test="${sp.hienThi}">
                         <div id="hide" class="hide">
                             <p class="clear-selected">Làm mới</p>
                             <div class="prod-type-price ">
 								<span class="price-after me-1 type-price fs-5">
-								<fmt:formatNumber value="${sp.giaBan }" type="currency" />
+								<fmt:formatNumber value="${sp.giaBan }" type="currency"/>
 								</span>
                             </div>
                             <p class="inventory-quantity">Kho: ${sp.soLuong }</p>
-
                         </div>
+                        </c:if>
                         <div class="group-submit mb-3 ">
-                            <input type="number" value="1" min="1"
+                            <input type="number" value="1" min="1" max="${sp.soLuong }"
                                    class="input-quantity p-3 me-3 text-center">
-                            <button class="button-cart">
+                            <c:if test="${sp.hienThi}">
+                            <button class="button-cart" >
                                 <i class="bi bi-basket3"></i>Thêm vào giỏ
                             </button>
+                            </c:if>
                         </div>
                         <div class="group-like-compare">
 							<span class="prod-favorite"> <i class="bi bi-heart"></i>
@@ -101,9 +133,12 @@
                                 class="bi bi-arrow-left-right"></i> So sánh
 							</span>
                         </div>
+
                         <div class="prod-other">
+
                             <hr>
                             Danh mục:
+
                             <c:forEach var="nameDanhMuc" items="${lstDanhMuc}"
                                        varStatus="status">
                                 <a href="#">${nameDanhMuc}</a>
@@ -111,7 +146,9 @@
                             </c:forEach>
 
                             <hr>
+
                         </div>
+
                         <div class="sharing-prod">
                             <p>
                                 Chia sẻ: <span class="ms-2"><i class="bi bi-facebook"></i></span>
@@ -142,8 +179,20 @@
                             <br>
                             <table class="table table-bordered">
                                 <tr>
-                                    <td>color</td>
-                                    <td>Black, White</td>
+                                    <td>Thương hiệu</td>
+                                    <td>${sp.thuongHieu.tenThuongHieu}</td>
+                                </tr>
+                                <tr>
+                                    <td>Trọng lượng</td>
+                                    <td>${sp.trongLuong} kg</td>
+                                </tr>
+                                <tr>
+                                    <td>Kích thước</td>
+                                    <td>${sp.trongLuong} cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Phân Loại</td>
+                                    <td>${sp.phanLoai}</td>
                                 </tr>
                             </table>
                         </div>
@@ -162,20 +211,18 @@
                                             </div>
                                             <div class="col-11 review-info">
                                                 <p class="mb-0">
-                                                    <b>John Doe</b><span class="commented-date">
+                                                    <b>${cmt.nguoiBinhLuan.hoVaTen}</b><span class="commented-date">
 														(${cmt.ngayBinhLuan})</span>
                                                 </p>
                                                 <div class="prod-star mb-3">
-                                                    <i class="bi bi-star-fill checked"></i> <i
-                                                        class="bi bi-star-fill checked"></i> <i
-                                                        class="bi bi-star-fill checked"></i> <i
-                                                        class="bi bi-star-fill checked"></i> <i
-                                                        class="bi bi-star-fill"></i>
+                                                    <c:forEach var="i" begin="1" end="5">
+                                                        <i class="bi bi-star-fill <c:if test='${i <= cmt.danhGia}'>checked</c:if>"></i>
+                                                    </c:forEach>
                                                 </div>
                                                 <p>${cmt.binhLuan}</p>
                                                 <div class="d-flex justify-content-between mt-2">
                                                     <span></span>
-                                                    <span class="text-muted">Báo cáo</span>
+                                                    <span class="text-muted"><a href="#">Báo cáo</a> </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +243,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded",
-        function() {
+        function () {
             const selectElement = document
                 .getElementById("type-select");
             const hideDiv = document.getElementById("hide");
@@ -212,7 +259,8 @@
                     toggleHideDiv(); // Ẩn hiện div theo giá trị của select
                     const selectedOption = selectElement.options[selectElement.selectedIndex];
                     const selectedPhanLoai = selectedOption.value;
-                    if (selectedOption.value !== "0") {
+                    if (selectedPhanLoai !== "0") {
+                        hideDiv.style.display = "block";
                         const url = '?productType='
                             + selectedPhanLoai;
                         window.location.href = url; // Chuyển hướng trang với tham số productType
@@ -221,31 +269,37 @@
                     isUserAction = true; // Đặt lại biến cờ
                 }
             }
+
             toggleHideDiv()
             // Bắt sự kiện khi select box thay đổi
             selectElement.addEventListener("change",
                 handleSelectChange);
 
             // Bắt sự kiện trước khi trang được chuyển hướng
-            window.addEventListener('beforeunload', function() {
+            window.addEventListener('beforeunload', function () {
                 isUserAction = false; // Đặt biến cờ thành false trước khi chuyển hướng trang
             });
 
-            clearSelectedElement.addEventListener("click", function() {
+            clearSelectedElement.addEventListener("click", function () {
                 selectElement.value = "0";
                 toggleHideDiv();
 
             });
+
             // Hàm ẩn hiện div dựa trên giá trị của select box
             function toggleHideDiv() {
                 if (selectElement.value === "0") {
                     hideDiv.style.display = "none"; // Ẩn div nếu select chọn giá trị 0
                 } else {
+                    console.log('Block');
                     hideDiv.style.display = "block"; // Hiện div nếu select chọn giá trị khác 0
                 }
             }
         });
 
+    function changeMainImage(url) {
+        document.getElementById('mainImage').src = url;
+    }
 </script>
 
 

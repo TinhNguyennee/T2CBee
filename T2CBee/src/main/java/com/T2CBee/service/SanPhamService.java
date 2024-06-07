@@ -6,6 +6,7 @@ import com.T2CBee.entity.SanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public interface SanPhamService{
     SanPham findById(Integer id);
 
     Page<SanPham> findByKeyword(String keyword, Pageable pageable);
-    
+
     Page<SanPham> findByDanhMuc(String danhMuc, Pageable pageable);
 
     List<SanPham> findNewProducts();
@@ -46,7 +47,11 @@ public interface SanPhamService{
 
     SanPham findSanPhamByPhanLoaiAndGroup(String groupId, Optional<String> productType);
 
+    Double findAverageRatingByGroupId(String groupId);
+
     int countByDanhMuc(String tenDanhMuc);
 
     int countAllSanPham();
+
+    List<AnhSanPham> findPictureBySanPhamId( Integer id);
 }

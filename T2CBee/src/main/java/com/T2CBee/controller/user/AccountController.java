@@ -49,7 +49,7 @@ public class AccountController {
 				} else {
 					session.set("user", user);
 					model.addAttribute("message", "Login succeed");
-					System.out.println(user.getHoVaTen());
+//					System.out.println(user.getHoVaTen());
 					response.sendRedirect("/trang-chu");
 				}
 				

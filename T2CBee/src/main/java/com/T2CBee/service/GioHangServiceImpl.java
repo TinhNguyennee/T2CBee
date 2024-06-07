@@ -54,4 +54,10 @@ public class GioHangServiceImpl implements GioHangService{
     public Page<GioHang> findByTrangThai(String trangThai, Pageable pageable) {
         return dao.findByTrangThai(trangThai.trim(), pageable);
     }
+
+    @Override
+    public Double countDoanhThuByTrangThai(String trangThai) {
+        Double doanhThu = dao.countDoanhThuByTrangThai(trangThai);
+        return doanhThu != null ? doanhThu : 0.0;
+    }
 }

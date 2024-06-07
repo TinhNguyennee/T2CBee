@@ -74,10 +74,8 @@
                                                 </div>
                                             </td>
                                             <td><form:input cssClass="form-control" path="soLuong"/></td>
-                                            <fmt:formatDate value="${maGiamGia.ngayBatDau}" var="ngayBatDauFormated" pattern="yyyy-MM-dd" />
-                                            <fmt:formatDate value="${maGiamGia.ngayKetThuc}" var="ngayKetThucFormated" pattern="yyyy-MM-dd" />
-                                            <td><form:input cssClass="form-control" path="ngayBatDau" type="date" value="${ngayBatDauFormated}"/></td>
-                                            <td><form:input cssClass="form-control" path="ngayKetThuc" type="date" value="${ngayKetThucFormated}"/></td>
+                                            <td><form:input cssClass="form-control" path="ngayBatDau" type="date" value="${maGiamGia.ngayBatDau}"/></td>
+                                            <td><form:input cssClass="form-control" path="ngayKetThuc" type="date" value="${maGiamGia.ngayKetThuc}"/></td>
                                         </tr>
                                     </tbody>
                                 </table>

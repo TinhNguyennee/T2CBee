@@ -22,4 +22,6 @@ public interface GioHangService {
     List<GioHang> findByTrangThai(String trangThai);
 
     Page<GioHang> findByTrangThai(String trangThai, Pageable pageable);
+
+    Double countDoanhThuByTrangThai(String trangThai);
 }

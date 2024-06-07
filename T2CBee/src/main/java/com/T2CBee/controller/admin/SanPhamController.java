@@ -62,8 +62,34 @@ public class SanPhamController {
     )  {
         NhanVien nv = sessionService.get("nhanVien");
 
+
         if(sp.isPresent()) {
             SanPham sanPham = sp.get();
+            //xử lý lỗi
+
+            StringBuilder strb = new StringBuilder();
+            if(sanPham.getGroupId().isBlank()) {
+                strb.append("Nhóm không được để trống!<br/>");
+            }
+            if(sanPham.getTenSanPham().isBlank()) {
+                strb.append("Tên sản phẩm không được để trống!<br/>");
+            }
+            if(sanPham.getSoLuong() < 0) {
+                strb.append("Số lượng không được âm!<br/>");
+            }
+            if(sanPham.getPhanLoai().isBlank()) {
+                strb.append("Phân loại không được để trống!<br/>");
+            }
+            if(sanPham.getKichThuoc().isBlank()) {
+                strb.append("Kích thước  không được để trống!<br/>");
+            }
+            if(sanPham.getKichThuoc().isBlank()) {
+                strb.append("Kích thước  không được để trống!<br/>");
+            }
+            if(sanPham.getTrongLuong() <= 0) {
+                strb.append("Trọng lượng không được <= 0!<br/>");
+            }
+
 
             //xử lý thêm nhiều danh mục vào 1 sản phẩm
             List<ChiTietDanhMuc> listCTDM = new ArrayList<>();
@@ -81,7 +107,7 @@ public class SanPhamController {
                             listCTDM.add(newCTDM);
                         }
                     } else {
-                        throw new RuntimeException("Mã danh mục không tồn tại trong db");
+                        strb.append("Mã danh mục không tồn tại trong db!<br/>");
                     }
                 }
             } else if(sp.get().getMaSanPham() != 0) {
@@ -92,7 +118,7 @@ public class SanPhamController {
                 }
             } else {
                 //Dành cho thêm mới: nếu user không chọn danh mục mới thì sẽ chọn "Nội Thất" làm mặc định
-                System.out.println("Vui lòng chọn ít nhất 1 danh mục");
+                strb.append("Vui lòng chọn ít nhất 1 danh mục!<br/>");
                 return "redirect:/admin/san-pham";
             }
             sanPham.setDanhMucs(listCTDM);
@@ -123,13 +149,19 @@ public class SanPhamController {
                 if(existAnhSP != null) {
                     listAnhSanPham = existAnhSP;
                 }
-            } else {
-                System.out.println("loz");
             }
             sanPham.setAnhSanPhams(listAnhSanPham);
             sanPham.setNguoiThem(nv);
             //kết thúc xử lý thêm nhiều ảnh vào 1 sản phẩm
 
+            if(strb.length() > 0) {
+                model.addAttribute("formError", strb.toString());
+                model.addAttribute("sanPham", sp.get());
+                model.addAttribute("listDM", danhMucService.findAll());
+                model.addAttribute("listTH", thuongHieuService.findAll());
+                model.addAttribute("listPN", phieuNhapHangService.findAll());
+                return "admin/product-form";
+            }
 
             //LƯU SẢN PHẨM VÀO DB
             sanPhamService.save(sp.get());
