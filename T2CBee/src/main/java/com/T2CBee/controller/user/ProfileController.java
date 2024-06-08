@@ -3,11 +3,11 @@ package com.T2CBee.controller.user;
 import com.T2CBee.entity.*;
 import com.T2CBee.repository.ChiTietGioHangRepository;
 import com.T2CBee.repository.GioHangRepository;
+import com.T2CBee.repository.SanPhamRepository;
 import com.T2CBee.repository.SanPhamYeuThichRepository;
 import com.T2CBee.service.KhachHangServiceImpl;
 import com.T2CBee.service.ProvinceService;
 import com.T2CBee.service.SessionService;
-import org.eclipse.tags.shaded.org.apache.xpath.objects.XString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,6 +36,8 @@ public class ProfileController {
     GioHangRepository gioHangRepository;
     @Autowired
     ChiTietGioHangRepository chiTietGioHangRepository;
+    @Autowired
+    SanPhamRepository sanPhamRepository;
 
 
     // Profile Page
@@ -237,6 +239,50 @@ public class ProfileController {
         khachHangServiceImplement.save(user);
 
         return "redirect:/so-dia-chi";
+    }
+
+
+    @GetMapping("/luu-san-pham-yeu-thich")
+    public String savefavorite(Model model,
+                               @RequestParam("productId") Integer productId){
+
+        boolean fillHeart = false;
+
+        KhachHang user = session.get("user");
+
+        if(user == null){
+            model.addAttribute("fillHeart", fillHeart);
+        }else{
+
+
+            SanPhamYeuThich sanPhamYeuThich = sanPhamYeuThichRepository.findByKhachHangEqualsAndSanPhamEquals(user,sanPhamRepository.findById(productId));
+
+            if(sanPhamYeuThich != null){
+
+                sanPhamYeuThichRepository.delete(sanPhamYeuThich);
+
+                fillHeart = false;
+
+
+            }else {
+
+                SanPhamYeuThich sanPhamYeuThich2 = new SanPhamYeuThich();
+                sanPhamYeuThich2.setKhachHang(user);
+                sanPhamYeuThich2.setSanPham(sanPhamRepository.getOne(productId));
+                sanPhamYeuThichRepository.save(sanPhamYeuThich2);
+                fillHeart = true;
+
+            }
+
+            model.addAttribute("fillHeart", fillHeart);
+
+
+
+        }
+
+
+
+        return "redirect:/chi-tiet-san-pham/"+productId;
     }
 
 

@@ -1,9 +1,8 @@
 package com.T2CBee.controller.user;
 
-import com.T2CBee.entity.AnhSanPham;
-import com.T2CBee.entity.BinhLuan;
-import com.T2CBee.entity.DanhMuc;
-import com.T2CBee.entity.SanPham;
+import com.T2CBee.entity.*;
+import com.T2CBee.repository.SanPhamRepository;
+import com.T2CBee.repository.SanPhamYeuThichRepository;
 import com.T2CBee.service.ChiTietDanhMucService;
 import com.T2CBee.service.SanPhamService;
 import com.T2CBee.service.SessionService;
@@ -29,6 +28,15 @@ public class ProductsController {
 
     @Autowired
     SessionService sessionService;
+
+    @Autowired
+    SessionService session;
+
+    @Autowired
+    SanPhamRepository sanPhamRepository;
+
+    @Autowired
+    SanPhamYeuThichRepository sanPhamYeuThichRepository;
 
     Page<SanPham> lstProducts;
     // Product Details
@@ -79,6 +87,26 @@ public class ProductsController {
         BreadcrumbUtil.addBreadcrumb("Danh sách sản phẩm", "/danh-sach-san-pham/Tất Cả", lstBreadcrumb);
         BreadcrumbUtil.addBreadcrumb(sp.getTenSanPham(), "", lstBreadcrumb);
         model.addAttribute("breadcrumb", lstBreadcrumb);
+
+
+        boolean fillHeart = false;
+
+        KhachHang user = session.get("user");
+
+        if(user == null){
+            model.addAttribute("fillHeart", fillHeart);
+        }else{
+
+
+            SanPhamYeuThich sanPhamYeuThich = sanPhamYeuThichRepository.findByKhachHangEqualsAndSanPhamEquals(user,sanPhamRepository.findById(id));
+
+            if(sanPhamYeuThich != null)fillHeart = true;
+
+            model.addAttribute("fillHeart", fillHeart);
+        }
+
+
+
         return "index";
     }
 

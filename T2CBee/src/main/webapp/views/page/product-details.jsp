@@ -15,46 +15,45 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="img-main">
-                                <img src="${main_imgs[0].url}" alt="" id="mainImage">
+                            <img src="${main_imgs[0].url}" alt="" id="mainImage">
 
                         </div>
-                            <div class="slider-wrapper">
-                                <div id="demo" class="carousel slide" data-bs-ride="carousel">
-                                    <!-- The slideshow/carousel -->
-                                    <div class="carousel-inner">
-                                        <c:set var="counter" value="0"/>
-                                        <c:forEach var="img" items="${imgs }" varStatus="status">
-                                            <c:if test="${status.index % 4 == 0}">
-                                                <div class="carousel-item <c:if
-                                                    test='${status.index == 0}'>active</c:if>">
-                                                <div class="row">
-                                            </c:if>
+                        <div class="slider-wrapper">
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                <!-- The slideshow/carousel -->
+                                <div class="carousel-inner">
+                                    <c:set var="counter" value="0"/>
+                                    <c:forEach var="img" items="${imgs}" varStatus="status">
+                                        <c:if test="${status.index % 4 == 0}">
+                                            <div class="carousel-item <c:if
+                                                test='${status.index == 0}'>active</c:if>">
+                                            <div class="row">
+                                        </c:if>
 
-                                            <div class="col-3 ">
-                                                <img class="image-item" src="${img.url}" alt="img${status.index}"
-                                                     onclick="changeMainImage('${img.url}')"/>
+                                        <div class="col-3 ">
+                                            <img class="image-item" src="${img.url}" alt="img${status.index}"
+                                                 onclick="changeMainImage('${img.url}')"/>
+                                        </div>
+
+                                        <c:if test="${(status.index + 1) % 4 == 0 || status.last}">
                                             </div>
+                                            </div>
+                                        </c:if>
+                                    </c:forEach>
 
-                                            <c:if test="${(status.index + 1) % 4 == 0 || status.last}">
-                                                </div>
-                                                </div>
-                                            </c:if>
-                                        </c:forEach>
-
-                                    </div>
-
-                                    <!-- Left and right controls/icons -->
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#demo"
-                                            data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon bg-secondary rounded-circle"></span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#demo"
-                                            data-bs-slide="next">
-                                        <span class="carousel-control-next-icon bg-secondary rounded-circle "></span>
-                                    </button>
                                 </div>
-                            </div>
 
+                                <!-- Left and right controls/icons -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#demo"
+                                        data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon bg-secondary rounded-circle"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#demo"
+                                        data-bs-slide="next">
+                                    <span class="carousel-control-next-icon bg-secondary rounded-circle "></span>
+                                </button>
+                            </div>
+                        </div>
 
 
                     </div>
@@ -93,11 +92,12 @@
                         <div class="select-type-product mb-4 ">
 
                             <label for="type-select" class="fw-bold mb-3 ">Phân loại:</label> <select
-                                id="type-select" class="form-select rounded-0 w-50 " <c:if test="${!sp.hienThi}">disabled</c:if>
+                                id="type-select" class="form-select rounded-0 w-50 "
+                                <c:if test="${!sp.hienThi}">disabled</c:if>
                                 aria-label="Default select example">
                             <c:set var="selectedProductType" value="${param.productType}"/>
                             <option value="0"
-                                ${selectedProductType == null || selectedProductType == "0" ? "selected" : ""}>Chọn
+                            ${selectedProductType == null || selectedProductType == "0" ? "selected" : ""}>Chọn
                                 phân loại
                             </option>
                             <c:forEach var="chiTietLoai" items="${chiTietLoai}">
@@ -107,29 +107,49 @@
                         </select>
                         </div>
                         <c:if test="${sp.hienThi}">
-                        <div id="hide" class="hide">
-                            <p class="clear-selected">Làm mới</p>
-                            <div class="prod-type-price ">
+                            <div id="hide" class="hide">
+                                <p class="clear-selected">Làm mới</p>
+                                <div class="prod-type-price ">
 								<span class="price-after me-1 type-price fs-5">
 								<fmt:formatNumber value="${sp.giaBan }" type="currency"/>
 								</span>
+                                </div>
+                                <p class="inventory-quantity">Kho: ${sp.soLuong }</p>
                             </div>
-                            <p class="inventory-quantity">Kho: ${sp.soLuong }</p>
-                        </div>
                         </c:if>
                         <div class="group-submit mb-3 ">
-                            <input type="number" value="1" min="1" max="${sp.soLuong }"
+                            <input type="number" value="1" min="1" max="${sp.soLuong}"
                                    class="input-quantity p-3 me-3 text-center">
                             <c:if test="${sp.hienThi}">
-                            <button class="button-cart" >
-                                <i class="bi bi-basket3"></i>Thêm vào giỏ
-                            </button>
+                                <button class="button-cart">
+                                    <i class="bi bi-basket3"></i>Thêm vào giỏ
+                                </button>
                             </c:if>
                         </div>
                         <div class="group-like-compare">
-							<span class="prod-favorite"> <i class="bi bi-heart"></i>
+
+
+
+<%--                               lưu sản phẩm yêu thích                             --%>
+
+                            <a href="javascript:void(0);" onclick="addToFavorites(${sp.maSanPham}, this);">
+							<span class="prod-favorite">
+                                <c:if test="${!fillHeart}">
+                                <i class="bi bi-heart"></i>
+                                </c:if>
+
+                                <c:if test="${fillHeart}">
+                                <i class="bi bi-heart-fill text-danger"></i>
+                                </c:if>
+
 								Thêm vào yêu thích
-							</span> <span class="prod-compare"> <i
+							</span>
+                            </a>
+
+<%--                               !lưu sản phẩm yêu thích                             --%>
+
+
+                            <span class="prod-compare"> <i
                                 class="bi bi-arrow-left-right"></i> So sánh
 							</span>
                         </div>
@@ -299,6 +319,35 @@
 
     function changeMainImage(url) {
         document.getElementById('mainImage').src = url;
+    }
+</script>
+
+
+<script>
+    function addToFavorites(productId, element) {
+        const url = `../luu-san-pham-yeu-thich?productId=`+productId;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.text()) // hoặc response.json() nếu server trả về JSON
+            .then(data => {
+                const heartIcon = element.querySelector('.bi-heart, .bi-heart-fill');
+
+                if (heartIcon.classList.contains('bi-heart')) {
+                    heartIcon.classList.remove('bi-heart');
+                    heartIcon.classList.add('bi-heart-fill', 'text-danger');
+                } else {
+                    heartIcon.classList.remove('bi-heart-fill', 'text-danger');
+                    heartIcon.classList.add('bi-heart');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 </script>
 
