@@ -60,9 +60,13 @@ public class ProfileController {
         // Lọc giỏ hàng theo trạng thái nếu status không phải là "all"
         if (!status.equals("all")) {
             gioHangList = gioHangList.stream()
-                    .filter(gioHang -> status.equalsIgnoreCase(gioHang.getTrangThai().trim()))
+                    .filter(gioHang -> {
+                        String trangThai = gioHang.getTrangThai();
+                        return trangThai != null && status.equalsIgnoreCase(trangThai.trim());
+                    })
                     .collect(Collectors.toList());
         }
+
 
 
 
