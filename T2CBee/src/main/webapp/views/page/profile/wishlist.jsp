@@ -93,30 +93,33 @@
                 <%--                !Sản phẩm--%>
 
 
-                    <!-- Phân trang -->
-                    <nav aria-label="Page navigation" class="d-flex justify-content-center">
-                        <ul class="pagination">
-                            <c:if test="${currentPage > 0}">
-                                <li class="page-item">
-                                    <a class="page-link" href="?page=${currentPage - 1}&size=${3}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                            <c:forEach var="i" begin="0" end="${totalPages - 1}">
-                                <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                    <a class="page-link" href="?page=${i}&size=${3}">${i + 1}</a>
-                                </li>
-                            </c:forEach>
-                            <c:if test="${currentPage < totalPages - 1}">
-                                <li class="page-item">
-                                    <a class="page-link" href="?page=${currentPage + 1}&size=${3}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                        </ul>
-                    </nav>
+                    <c:if test="${totalPages > 0}">
+                        <!-- Phân trang -->
+                        <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                <c:if test="${currentPage > 0}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=${currentPage - 1}&size=${3}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="i" begin="0" end="${totalPages - 1}">
+                                    <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                        <a class="page-link" href="?page=${i}&size=${3}">${i + 1}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${currentPage < totalPages - 1}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=${currentPage + 1}&size=${3}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </nav>
+                    </c:if>
+
 
 
             </div>
