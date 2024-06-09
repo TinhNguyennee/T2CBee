@@ -290,4 +290,28 @@ public class ProfileController {
     }
 
 
+
+
+
+//    @GetMapping("/mo-modal-xoa")
+//    public String showModalDelete(Model model,
+//                               @RequestParam("gioHangID") Integer gioHangID){
+//        System.out.println(gioHangID);
+//        model.addAttribute("gioHangID",gioHangID);
+//
+//        return "redirect:/don-hang-cua-toi";
+//    }
+
+    @PostMapping("/xoa-gio-hang")
+    public String deleteGioHang(Model model,
+                                @RequestParam("gioHangID") Integer gioHangID){
+
+        GioHang gioHang = gioHangRepository.getOne(gioHangID);
+        gioHang.setTrangThai("HUY");
+        gioHangRepository.save(gioHang);
+
+        return "redirect:/don-hang-cua-toi";
+    }
+
+
 }

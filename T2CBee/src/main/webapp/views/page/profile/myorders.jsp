@@ -60,7 +60,23 @@
                     <c:if test="${not empty gioHang.trangThai}">
                         <div class="row border mb-3">
                             <div class="row card-text text-danger fs15px my-2">
-                                    ${fn:trim(gioHang.trangThai)}
+                                <c:choose>
+                                    <c:when test="${fn:trim(gioHang.trangThai) == 'CHO_XU_LY'}">
+                                        Chờ thanh toán
+                                    </c:when>
+                                    <c:when test="${fn:trim(gioHang.trangThai) == 'DANG_GIAO_HANG'}">
+                                        Chờ giao hàng
+                                    </c:when>
+                                    <c:when test="${fn:trim(gioHang.trangThai) == 'HOAN_THANH'}">
+                                        Hoàn thành
+                                    </c:when>
+                                    <c:when test="${fn:trim(gioHang.trangThai) == 'HUY'}">
+                                        Đã hủy
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${fn:trim(gioHang.trangThai)}
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <hr>
 
@@ -68,7 +84,8 @@
                                 <div class="row d-flex justify-content-center align-items-center mb-2">
                                     <div class="col-2">
                                         <c:if test="${not empty chiTiet.sanPham.anhSanPhams}">
-                                            <img src="${chiTiet.sanPham.anhSanPhams[0].url}" class="card-img-top w-75" alt="${chiTiet.sanPham.tenSanPham}">
+                                            <img src="${chiTiet.sanPham.anhSanPhams[0].url}" class="card-img-top w-75"
+                                                 alt="${chiTiet.sanPham.tenSanPham}">
                                         </c:if>
                                     </div>
                                     <div class="col-9">
@@ -79,7 +96,8 @@
                                         <c:if test="${chiTiet.sanPham.giaBan * chiTiet.soLuong != chiTiet.sanPham.giaBan * chiTiet.soLuong * (1 - chiTiet.maGiamGia.discount)}">
                                             <del class="text-muted">₫${chiTiet.sanPham.giaBan * chiTiet.soLuong}</del>
                                         </c:if>
-                                        <h4 class="card-text text-danger fs17px">₫<fmt:formatNumber type="number" value="${chiTiet.sanPham.giaBan * chiTiet.soLuong * (1 - chiTiet.maGiamGia.discount)}" /></h4>
+                                        <h4 class="card-text text-danger fs17px">₫<fmt:formatNumber type="number"
+                                                                                                    value="${chiTiet.sanPham.giaBan * chiTiet.soLuong * (1 - chiTiet.maGiamGia.discount)}"/></h4>
                                     </div>
                                 </div>
                                 <hr>
@@ -112,7 +130,9 @@
                                 >
                                     Thanh Toán
                                 </button>
-                                <button type="button" class="btn border-dark rounded-0 mx-2 col-2"
+                                <form action="xoa-gio-hang?gioHangID=${gioHang.id}" class="col-2" method="post">
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit"
+                                        class="btn border-dark rounded-0 mx-2 w-100"
                                         <c:choose>
                                             <c:when test="${fn:trim(gioHang.trangThai) == 'HOAN_THANH' || fn:trim(gioHang.trangThai) == 'DANG_GIAO_HANG' || fn:trim(gioHang.trangThai) == 'HUY'}">
                                                 disabled
@@ -121,11 +141,17 @@
                                 >
                                     Hủy
                                 </button>
+                                </form>
                             </div>
                         </div>
-                    </c:if>
-                </c:forEach>
 
+
+
+                    </c:if>
+
+
+
+                </c:forEach>
 
 
             </div>
@@ -135,3 +161,35 @@
     </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+<script>
+    function showModalDelete(gioHangID) {
+        const url = `/mo-modal-xoa?gioHangID=`+gioHangID;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.text()) // hoặc response.json() nếu server trả về JSON
+            .then(data => {
+
+
+
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
