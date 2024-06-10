@@ -111,22 +111,6 @@ public class ProductsController {
     }
 
 
-    // Check Out
-    @GetMapping("/thanh-toan")
-    public String checkout(Model model) {
-        model.addAttribute("path", "page/checkout");
-        lstBreadcrumb.removeAll(lstBreadcrumb);
-        BreadcrumbUtil.addBreadcrumb("Thanh toán", "/thanh-toan", lstBreadcrumb);
-        model.addAttribute("breadcrumb", lstBreadcrumb);
-        return "index";
-    }
-
-    @GetMapping("/gio-hang")
-    public String cart(Model model) {
-        model.addAttribute("path", "page/cart");
-        return "index";
-    }
-
     @GetMapping("/danh-sach-san-pham/{danh-muc}")
     public String danhMucSort(
             @RequestParam("p") Optional<Integer> p,
@@ -162,7 +146,7 @@ public class ProductsController {
         Double maxPrice = (Double) sessionService.get("maxPrice");
 
         if (minPrice == null || maxPrice == null) {
-            minPrice = 1000000.0;
+            minPrice = 0.0;
             maxPrice = 5000000.0;
             sessionService.set("minPrice", minPrice);
             sessionService.set("maxPrice", maxPrice);

@@ -107,7 +107,7 @@
 																class="card-img-top" alt="...">
 															<div
 																class="add-to-cart-btn d-flex justify-content-center p-2 border position-absolute start-50 translate-middle">
-																<a href=""
+																<a href="/gio-hang/them/${sanPham.maSanPham}"
 																	class="text-decoration-none text-dark fw-medium me-3 w-100">Add
 																	to cart</a>
 																<a href=""><i class="bi bi-suit-heart"></i></a>
@@ -216,7 +216,9 @@
 						</div> -->
 					</div>
 				</div>
+			</div>
 		</section>
+
 
 		<section class="container pb-4 border-top">
 			<h4 class="py-3 fw-bold">Sản Phẩm Nổi Bật</h4>
@@ -234,7 +236,7 @@
 												class="card-img-top" alt="...">
 											<div
 												class="add-to-cart-btn d-flex justify-content-center p-2 border position-absolute start-50 translate-middle">
-												<a href=""
+												<a href="/gio-hang/them/${sanPham.maSanPham}"
 													class="text-decoration-none text-dark fw-medium me-3 w-100">Add
 													to cart</a>
 												<a href=""><i class="bi bi-suit-heart"></i></a>
@@ -313,7 +315,7 @@
 												class="card-img-top" alt="...">
 											<div
 												class="add-to-cart-btn d-flex justify-content-center p-2 border position-absolute start-50 translate-middle">
-												<a href=""
+												<a href="/gio-hang/them/${sanPham.maSanPham}"
 													class="text-decoration-none text-dark fw-medium me-3 w-100">Add
 													to cart</a>
 												<a href=""><i class="bi bi-suit-heart"></i></a>

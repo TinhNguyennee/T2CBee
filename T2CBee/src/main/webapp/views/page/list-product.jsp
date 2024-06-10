@@ -3,10 +3,7 @@
 		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 			<!-- Content -->
 
-
 			<div class="wrapper-product-detail position-relative" style="padding-top: 195px">
-
-
 
 				<jsp:include page="../component/banner.jsp"></jsp:include>
 
@@ -70,9 +67,9 @@
 										<form action="/danh-sach-san-pham/${danhMuc}" method="post">
 											<div class="sliders_control">
 												<input name="min" value="${minPrice}" id="fromSlider" type="range"
-													min="1000000" max="10000000" />
+													min="0" max="10000000" />
 												<input name="max" value="${maxPrice}" id="toSlider" type="range"
-													min="1000000" max="10000000" />
+													min="0" max="10000000" />
 											</div>
 											<button class="p-2 my-4 w-100">LỌC</button>
 											<div class="form_control">
@@ -80,13 +77,13 @@
 													<div class="form_control_container__time">Thấp nhất</div>
 													<input class="form_control_container__time__input w-100"
 														type="number" name="min" value="${minPrice}" id="fromInput"
-														min="1000000" max="10000000" />
+														min="0" max="10000000" />
 												</div>
 												<div class="form_control_container">
 													<div class="form_control_container__time">Cao nhất</div>
 													<input class="form_control_container__time__input w-100"
 														type="number" name="max" value="${maxPrice}" id="toInput"
-														min="1000000" max="10000000" />
+														min="0" max="10000000" />
 												</div>
 											</div>
 										</form>
@@ -125,7 +122,7 @@
 																<c:when test="${sanPham.hienThi}">
 																	<div
 																		class="add-to-cart-btn d-flex justify-content-center p-2 border position-absolute start-50 translate-middle">
-																		<a href=""
+																		<a href="/gio-hang/them/${sanPham.maSanPham}"
 																			class="text-decoration-none text-dark fw-medium me-3 w-100">Add
 																			to cart</a>
 																		<a href=""><i class="bi bi-suit-heart"></i></a>

@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-
+<fmt:setLocale value="vi_VN"/>
+<fmt:setBundle basename="java.text.resources"/>
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"/>
 <div class="wrapper-product-detail" style="padding-top: 195px">
@@ -23,7 +22,7 @@
                                 <!-- The slideshow/carousel -->
                                 <div class="carousel-inner">
                                     <c:set var="counter" value="0"/>
-                                    <c:forEach var="img" items="${imgs}" varStatus="status">
+                                    <c:forEach var="img" items="${imgs }" varStatus="status">
                                         <c:if test="${status.index % 4 == 0}">
                                             <div class="carousel-item <c:if
                                                 test='${status.index == 0}'>active</c:if>">
@@ -56,11 +55,12 @@
                         </div>
 
 
+
                     </div>
                     <div class="col-6">
                         <div class="prod-info">
                             <div class="prod-tittle fw-bold mb-3 text-uppercase">${sp.tenSanPham} <c:if
-                                    test="${!sp.hienThi}"><span class="alert-danger fs-3">(Hết hàng)</span></c:if></div>
+                                    test="${!sp.hienThi or sp.soLuong == 0}"><span class="alert-danger fs-3">(Hết hàng)</span></c:if></div>
 
                         </div>
                         <div class="prod-star mb-3">
@@ -79,8 +79,7 @@
                             </c:choose>
 
                         </div>
-                        <fmt:setLocale value="vi_VN"/>
-                        <fmt:setBundle basename="java.text.resources"/>
+
                         <div class="prod-price  mb-3">
                             <fmt:formatNumber value="${min_max_giaBan[0]}" type="currency"/>
                             <c:if test="${min_max_giaBan[1] != null}">- <fmt:formatNumber
@@ -92,8 +91,7 @@
                         <div class="select-type-product mb-4 ">
 
                             <label for="type-select" class="fw-bold mb-3 ">Phân loại:</label> <select
-                                id="type-select" class="form-select rounded-0 w-50 "
-                                <c:if test="${!sp.hienThi}">disabled</c:if>
+                                id="type-select" class="form-select rounded-0 w-50 " <c:if test="${!sp.hienThi or sp.soLuong == 0}">disabled</c:if>
                                 aria-label="Default select example">
                             <c:set var="selectedProductType" value="${param.productType}"/>
                             <option value="0"
@@ -118,18 +116,17 @@
                             </div>
                         </c:if>
                         <div class="group-submit mb-3 ">
-                            <input type="number" value="1" min="1" max="${sp.soLuong}"
-                                   class="input-quantity p-3 me-3 text-center">
-                            <c:if test="${sp.hienThi}">
-                                <button class="button-cart">
-                                    <i class="bi bi-basket3"></i>Thêm vào giỏ
-                                </button>
-                            </c:if>
+                            <form action="<c:url value='/gio-hang/them/${sp.maSanPham}' />" method="post">
+                                <input type="number" value="1" min="1" max="${sp.soLuong != 0? sp.soLuong : 1}"
+                                       name="soLuong"  class="input-quantity p-3 me-3 text-center">
+                                <c:if test="${sp.hienThi and sp.soLuong != 0}">
+                                    <button class="button-cart" submit>
+                                        <i class="bi bi-basket3"></i> Thêm vào giỏ
+                                    </button>
+                                </c:if>
+                            </form>
                         </div>
                         <div class="group-like-compare">
-
-
-
 <%--                               lưu sản phẩm yêu thích                             --%>
 
                             <a href="javascript:void(0);" onclick="addToFavorites(${sp.maSanPham}, this);">

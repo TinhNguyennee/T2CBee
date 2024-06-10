@@ -54,4 +54,7 @@ public interface SanPhamService{
     int countAllSanPham();
 
     List<AnhSanPham> findPictureBySanPhamId( Integer id);
+
+
+
 }

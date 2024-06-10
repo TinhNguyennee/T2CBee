@@ -46,7 +46,7 @@ public class SanPham {
     @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<ChiTietDanhMuc> danhMucs;
 
-    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sanPham", fetch = FetchType.EAGER)
     private List<AnhSanPham> anhSanPhams;
 
     @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)

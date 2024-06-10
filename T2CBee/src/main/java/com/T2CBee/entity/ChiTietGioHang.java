@@ -1,10 +1,7 @@
 package com.T2CBee.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ChiTietGioHang {
 
     @Id
@@ -34,4 +32,9 @@ public class ChiTietGioHang {
     @ManyToOne
     @JoinColumn(name = "ma_giam_gia")
     private MaGiamGia maGiamGia;
+
+    @Override
+    public String toString() {
+        return id + " " + gioHang.getId() + " " + sanPham.getTenSanPham();
+    }
 }

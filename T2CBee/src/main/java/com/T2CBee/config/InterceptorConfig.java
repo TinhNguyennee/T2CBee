@@ -22,7 +22,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/dang-nhap", "/admin/quen-mat-khau", "/admin/thay-doi-mat-khau", "/admin/dang-nhap/google");
         registry.addInterceptor(userAuth)
-                .addPathPatterns("/thong-tin","/don-hang-cua-toi","/danh-sach-yeu-thich","/tai-khoan-chi-tiet","/so-dia-chi")
+                .addPathPatterns("/thong-tin","/don-hang-cua-toi","/danh-sach-yeu-thich","/tai-khoan-chi-tiet","/so-dia-chi","/thanh-toan")
                 .excludePathPatterns("/admin/dang-nhap", "/admin/quen-mat-khau");
     }
 }

@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-
     <div class="container-fluid p-0 position-fixed start-50 translate-middle-x z-2">
         <header id="header1">
             <nav class="navbar navbar-expand-sm navbar-light bg-white">
@@ -23,7 +22,7 @@
                                 <a class="nav-link" href="/trang-chu">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle pb-4" href="#" id="navbarDropdownMenuLink"
+                                <a class="nav-link dropdown-toggle pb-4" href="#" id="navbarDropdownMenuLink1"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     SẢN PHẨM
                                 </a>
@@ -89,51 +88,45 @@
                         </div>
                         <i class="bi bi-bag pe-3 position-relative pb-3">
                             <div class="cart-page position-absolute top-100 end-0 p-3 bg-white z-2">
+                                <c:if test="${!not empty sessionScope.cartItem }">TRống</c:if>
+                                <c:if test="${not empty sessionScope.cartItem }">
+
                                 <table class="table">
                                     <tr>
                                         <td></td>
                                         <td class="fw-bold fs-6">Sản Phẩm</td>
                                         <td class="fw-bold fs-6">Số Lượng</td>
                                     </tr>
+                                    <c:forEach var="item" items="${ sessionScope.cartItem}">
                                     <tr>
                                         <td class="align-middle"><input type="checkbox"
                                                 style="width: 20px; height: 20px;"></td>
                                         <td class="cart-info d-flex align-items-center align-middle">
-                                            <img src="../../images/product01.jpg" alt="" width="80"
+                                            <img src="${item.sanPham.anhSanPhams[0].url}" alt="" width="80"
                                                 class="m-0 img-fluid">
                                             <div>
-                                                <p>Bình hoa trắng cao cấp</p>
-                                                <small class="text-danger">1000000Đ</small>
+                                                <p>${item.sanPham.tenSanPham}</p>
+                                                <small class="text-danger">${item.sanPham.giaBan}</small>
                                                 <br>
-                                                <a href="" class="fw-bold"">Xóa</a>
+                                                <a href="/gio-hang/xoa/${item.sanPham.maSanPham}" class="fw-bold">Xóa</a>
                                                 </div>
                                             </td>
                                             <!-- <td class=" text-end"><input type="number" ng-model="p.quantity">
                                         </td> -->
-                                        <td class="align-middle"><input type="number" max="10" value="1"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle"><input type="checkbox"
-                                                style="width: 20px; height: 20px;"></td>
-                                        <td class="cart-info d-flex align-items-center align-middle">
-                                            <img src="../../images/product01.jpg" alt="" width="80"
-                                                class="m-0 img-fluid">
-                                            <div>
-                                                <p>Bình hoa trắng cao cấp</p>
-                                                <small class="text-danger">1000000Đ</small>
-                                                <br>
-                                                <a href="" class="fw-bold"">Xóa</a>
-                                                </div>
-                                            </td>
-                                            <!-- <td class=" text-end"><input type="number" ng-model="p.quantity">
-                                        </td> -->
-                                        <td class="align-middle"><input type="number" max="10" value="1"></td>
-                                    </tr>
+                                        <td class="align-middle"><input type="text" onblur="this.form.submit()"
+                                                                        readonly max="${item.sanPham.soLuong}" min="1"
+                                                                        name="soLuong" value="${item.soLuong}"
+                                                                        style="border: none; outline: none;"></td>
 
+                                    </tr>
+                                        <c:set var="subtotal" value="${item.sanPham.giaBan * item.soLuong}" />
+                                        <c:set var="totalPrice" value="${totalPrice + subtotal}" />
+    </c:forEach>
                                 </table>
+</c:if>
                                 <div class="total d-flex justify-content-between align-items-center">
                                     <div class="total-price p-2">
-                                        <p class="fw-bold m-0">Tổng Tiền: <span class="text-danger">1000000Đ</span>
+                                        <p class="fw-bold m-0">Tổng Tiền: <span class="text-danger">${totalPrice}</span>
                                         </p>
                                     </div>
                                     <div class="go-to-cart p-2">
@@ -157,7 +150,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-center position-relative"
                         id="navbarNavDropdown">
-                        <ul class="navbar-nav fw-bold text-black ps-lg-0" style="padding-left: 0.15rem"">
+                        <ul class="navbar-nav fw-bold text-black ps-lg-0" style="padding-left: 0.15rem">
                         <li class=" nav-item">
                             <a class="nav-link" href="/trang-chu">TRANG CHỦ</a>
                             </li>

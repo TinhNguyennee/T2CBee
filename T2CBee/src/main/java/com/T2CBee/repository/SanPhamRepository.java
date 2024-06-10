@@ -20,10 +20,24 @@ public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
     @Query("SELECT sp FROM SanPham sp JOIN sp.danhMucs ctdm JOIN ctdm.danhMuc dm WHERE dm.tenDanhMuc = :danhMuc")
     Page<SanPham> findByDanhMuc(String danhMuc, Pageable pageable);
 
-    @Query("SELECT sp FROM SanPham sp WHERE sp.giaBan BETWEEN :giaMin AND :giaMax")
+    @Query("SELECT sp FROM SanPham sp WHERE sp.giaBan BETWEEN :giaMin AND :giaMax " +
+            "AND sp.maSanPham IN (SELECT MIN(sp2.maSanPham) FROM SanPham sp2 WHERE sp2.giaBan BETWEEN :giaMin AND :giaMax GROUP BY sp2.groupId)")
     Page<SanPham> findByGiaBanBetween(double giaMin, double giaMax, Pageable pageable);
 
-    @Query("SELECT sp FROM SanPham sp JOIN sp.danhMucs ctdm JOIN ctdm.danhMuc dm WHERE dm.tenDanhMuc = :danhMuc AND sp.giaBan BETWEEN :giaMin AND :giaMax")
+    @Query("SELECT sp FROM SanPham sp " +
+            "JOIN sp.danhMucs ctdm " +
+            "JOIN ctdm.danhMuc dm " +
+            "WHERE dm.tenDanhMuc = :danhMuc " +
+            "AND sp.giaBan BETWEEN :giaMin AND :giaMax " +
+            "AND sp.maSanPham IN (" +
+            "    SELECT MIN(sp2.maSanPham) " +
+            "    FROM SanPham sp2 " +
+            "    JOIN sp2.danhMucs ctdm2 " +
+            "    JOIN ctdm2.danhMuc dm2 " +
+            "    WHERE dm2.tenDanhMuc = :danhMuc " +
+            "    AND sp2.giaBan BETWEEN :giaMin AND :giaMax " +
+            "    GROUP BY sp2.groupId" +
+            ")")
     Page<SanPham> findByDanhMucAndGiaBanBetween(String danhMuc, double giaMin, double giaMax, Pageable pageable);
 
     @Query("SELECT e FROM SanPham e WHERE " +
@@ -78,4 +92,6 @@ public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
 
     @Query("SELECT COUNT(sp) FROM SanPham sp")
     int countAllSanPham();
+
+
 }
